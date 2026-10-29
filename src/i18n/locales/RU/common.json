@@ -1,0 +1,112 @@
+{
+    "brand": {
+        "name": "Folio",
+        "tagline": "Книжный дом"
+    },
+    "nav": {
+        "home": "Главная",
+        "books": "Книги",
+        "authors": "Авторы",
+        "favorites": "Избранное",
+        "categories": "Категории",
+        "cart": "Корзина",
+        "checkout": "Оформление"
+    },
+    "categories": {
+        "philosophy": "Философия",
+        "history": "История",
+        "psychology": "Психология",
+        "literature": "Литература"
+    },
+    "bookCount_one": "{{count}} книга",
+    "bookCount_few": "{{count}} книги",
+    "bookCount_many": "{{count}} книг",
+    "bookCount_other": "{{count}} книги",
+    "header": {
+        "search": "Поиск",
+        "openMenu": "Открыть меню",
+        "cart": "Корзина",
+        "favorites": "Избранное",
+        "chooseLanguage": "Язык"
+    },
+    "search": {
+        "title": "Поиск книг и авторов",
+        "placeholder": "Название или автор…",
+        "hint": "Например: Ницше, Одиссея, стоицизм",
+        "empty": "По запросу «{{query}}» ничего не найдено.",
+        "allResults": "Все результаты",
+        "books": "Книги",
+        "authors": "Авторы"
+    },
+    "sidebar": {
+        "groups": {
+            "store": "Магазин",
+            "categories": "Категории"
+        },
+        "cartEmpty": "Корзина пуста",
+        "cartItems_one": "В корзине {{count}} книга",
+        "cartItems_few": "В корзине {{count}} книги",
+        "cartItems_many": "В корзине {{count}} книг",
+        "cartItems_other": "В корзине {{count}} книги"
+    },
+    "footer": {
+        "about": "Классика философии, истории, психологии и литературы в переплётах классических изданий.",
+        "store": "Магазин",
+        "delivery": "Бесплатная доставка по Баку при заказе от 40 ₼",
+        "note": "Портфолио-проект. Заказы не настоящие.",
+        "rights": "© {{year}} Книжный дом Folio",
+        "aiNote": "Бюсты авторов созданы с помощью ИИ.",
+        "newsletterTitle": "Цитата недели",
+        "newsletterText": "Каждый понедельник — строка из классики и новые поступления.",
+        "emailPlaceholder": "ваш e-mail",
+        "subscribe": "Подписаться",
+        "subscribed": "Вы подписаны (демо, письма не отправляются)",
+        "invalidEmail": "Проверьте адрес почты",
+        "contact": "Контакты",
+        "address": "Ичеришехер, Баку",
+        "hours": "Ежедневно 10:00–20:00",
+        "backToTop": "Наверх"
+    },
+    "actions": {
+        "addToCart": "В корзину",
+        "added": "«{{title}}» добавлена в корзину",
+        "outOfStock": "Нет в наличии",
+        "addFavorite": "Добавить в избранное",
+        "removeFavorite": "Убрать из избранного",
+        "viewAll": "Смотреть все",
+        "retry": "Повторить",
+        "openCart": "Перейти в корзину"
+    },
+    "stock": {
+        "in": "В наличии",
+        "low_one": "Последний экземпляр",
+        "low_few": "Последние {{count}} экземпляра",
+        "low_many": "Последние {{count}} экземпляров",
+        "low_other": "Последние {{count}} экземпляра",
+        "out": "Нет в наличии"
+    },
+    "tags": {
+        "bestseller": "Бестселлер",
+        "new": "Новинка"
+    },
+    "discount": "−{{percent}}%",
+    "years": {
+        "bce": "{{year}} до н. э.",
+        "bceRange": "{{from}} — {{to}} до н. э.",
+        "approx": "ок. {{value}}"
+    },
+    "errors": {
+        "load": "Не удалось загрузить. Попробуйте чуть позже.",
+        "generic": "Что-то пошло не так"
+    },
+    "notFound": {
+        "quote": "Я знаю, что ничего не знаю.",
+        "cite": "Сократ",
+        "title": "Страница не найдена",
+        "description": "Возможно, ссылка устарела или набрана с ошибкой. Продолжите поиск в каталоге.",
+        "home": "Главная",
+        "catalog": "В каталог"
+    },
+    "loading": "Загрузка",
+    "skipToContent": "Перейти к содержанию"
+}

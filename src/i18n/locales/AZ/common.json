@@ -1,0 +1,106 @@
+{
+    "brand": {
+        "name": "Folio",
+        "tagline": "Kitab evi"
+    },
+    "nav": {
+        "home": "Ana səhifə",
+        "books": "Kitablar",
+        "authors": "Müəlliflər",
+        "favorites": "Seçilmişlər",
+        "categories": "Kateqoriyalar",
+        "cart": "Səbət",
+        "checkout": "Sifariş"
+    },
+    "categories": {
+        "philosophy": "Fəlsəfə",
+        "history": "Tarix",
+        "psychology": "Psixologiya",
+        "literature": "Ədəbiyyat"
+    },
+    "bookCount_one": "{{count}} kitab",
+    "bookCount_other": "{{count}} kitab",
+    "header": {
+        "search": "Axtar",
+        "openMenu": "Menyunu aç",
+        "cart": "Səbət",
+        "favorites": "Seçilmişlər",
+        "chooseLanguage": "Dil seçimi"
+    },
+    "search": {
+        "title": "Kitab və müəllif axtarışı",
+        "placeholder": "Kitab adı və ya müəllif…",
+        "hint": "Məsələn: Nitsşe, Odisseya, stoisizm",
+        "empty": "«{{query}}» üzrə heç nə tapılmadı.",
+        "allResults": "Bütün nəticələrə bax",
+        "books": "Kitablar",
+        "authors": "Müəlliflər"
+    },
+    "sidebar": {
+        "groups": {
+            "store": "Mağaza",
+            "categories": "Kateqoriyalar"
+        },
+        "cartEmpty": "Səbət boşdur",
+        "cartItems_one": "Səbətdə {{count}} kitab",
+        "cartItems_other": "Səbətdə {{count}} kitab"
+    },
+    "footer": {
+        "about": "Fəlsəfə, tarix, psixologiya və ədəbiyyatın klassik əsərləri, klassik nəşr cildlərində.",
+        "store": "Mağaza",
+        "delivery": "40 ₼-dan yuxarı sifarişlərdə Bakı üzrə pulsuz çatdırılma",
+        "note": "Portfolio layihəsi. Sifarişlər real deyil.",
+        "rights": "© {{year}} Folio Kitab Evi",
+        "aiNote": "Müəllif büstləri süni intellektlə yaradılıb.",
+        "newsletterTitle": "Həftənin sitatı",
+        "newsletterText": "Hər bazar ertəsi bir klassikdən bir sətir və yeni gələn kitablar.",
+        "emailPlaceholder": "e-poçt ünvanınız",
+        "subscribe": "Abunə ol",
+        "subscribed": "Abunə oldunuz (demo, məktub göndərilmir)",
+        "invalidEmail": "E-poçt ünvanını yoxlayın",
+        "contact": "Əlaqə",
+        "address": "İçərişəhər, Bakı",
+        "hours": "Hər gün 10:00–20:00",
+        "backToTop": "Yuxarı qayıt"
+    },
+    "actions": {
+        "addToCart": "Səbətə at",
+        "added": "«{{title}}» səbətə əlavə olundu",
+        "outOfStock": "Bitib",
+        "addFavorite": "Seçilmişlərə əlavə et",
+        "removeFavorite": "Seçilmişlərdən çıxar",
+        "viewAll": "Hamısına bax",
+        "retry": "Yenidən cəhd et",
+        "openCart": "Səbətə keç"
+    },
+    "stock": {
+        "in": "Stokda var",
+        "low_one": "Son nüsxə",
+        "low_other": "Son {{count}} nüsxə",
+        "out": "Stokda yoxdur"
+    },
+    "tags": {
+        "bestseller": "Bestseller",
+        "new": "Yeni"
+    },
+    "discount": "−{{percent}}%",
+    "years": {
+        "bce": "e.ə. {{year}}",
+        "bceRange": "e.ə. {{from}} — {{to}}",
+        "approx": "t. {{value}}"
+    },
+    "errors": {
+        "load": "Məlumat yüklənmədi. Bir az sonra yenidən cəhd edin.",
+        "generic": "Nəsə səhv getdi"
+    },
+    "notFound": {
+        "quote": "Bildiyim tək şey heç nə bilmədiyimdir.",
+        "cite": "Sokrat",
+        "title": "Bu səhifə tapılmadı",
+        "description": "Ola bilər ki, link köhnəlib və ya səhv yazılıb. Kataloqdan axtarmağa davam edin.",
+        "home": "Ana səhifə",
+        "catalog": "Kataloqa keç"
+    },
+    "loading": "Yüklənir",
+    "skipToContent": "Məzmuna keç"
+}

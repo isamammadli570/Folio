@@ -1,0 +1,21 @@
+{
+    "eyebrow": "Authors",
+    "title": "The classics of thought",
+    "description": "Forty-five authors from Plato to Camus: their lives, their schools and their words in the language they wrote.",
+    "all": "All",
+    "works": "Works",
+    "quote": "Quote",
+    "original": "Original",
+    "notFound": "Author not found",
+    "lived_one": "{{count}} year",
+    "lived_other": "{{count}} years",
+    "statLived": "Lifespan",
+    "statWorks": "On our shelves",
+    "statMovement": "School",
+    "timeline": "Works on the timeline",
+    "life": "Life",
+    "contemporaries": "Contemporaries",
+    "contemporariesText": "Authors whose lives overlapped with {{name}}",
+    "overlap_one": "{{count}} year together",
+    "overlap_other": "{{count}} years together"
+}

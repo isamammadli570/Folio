@@ -1,0 +1,96 @@
+{
+    "title": "Səbət",
+    "close": "Bağla",
+    "empty": {
+        "quote": "Kitabsız otaq ruhsuz bədən kimidir.",
+        "cite": "Siseron",
+        "title": "Səbətiniz hələ boşdur",
+        "action": "Kataloqa keç"
+    },
+    "remove": "Səbətdən çıxar",
+    "increase": "Artır",
+    "decrease": "Azalt",
+    "subtotal": "Ara cəm",
+    "shipping": "Çatdırılma",
+    "free": "Pulsuz",
+    "total": "Cəmi",
+    "checkoutAction": "Sifarişi rəsmiləşdir",
+    "freeShippingLeft": "Pulsuz çatdırılmaya {{amount}} qaldı",
+    "freeShippingReached": "Çatdırılma pulsuzdur",
+    "favorites": {
+        "eyebrow": "Seçilmişlər",
+        "title": "Rəfiniz",
+        "empty": "Hələ heç bir kitab seçməmisiniz",
+        "emptyDescription": "Bəyəndiyiniz kitabın üz qabığındakı ürəyə toxunun, o burada qalacaq.",
+        "action": "Kitablara bax",
+        "statBooks": "Kitab",
+        "statValue": "Rəfin dəyəri",
+        "statSpan": "Əsrlər boyu",
+        "statSections": "Bölmələr",
+        "addAll": "Hamısını səbətə at",
+        "addedAll_one": "{{count}} kitab səbətə əlavə olundu",
+        "addedAll_other": "{{count}} kitab səbətə əlavə olundu",
+        "shelf": "Sizin rəfiniz",
+        "grid": "Bütün seçilmişlər",
+        "remove": "Rəfdən götür"
+    },
+    "checkout": {
+        "eyebrow": "Sifariş",
+        "title": "Sifarişin rəsmiləşdirilməsi",
+        "steps": {
+            "contact": "Əlaqə",
+            "delivery": "Çatdırılma",
+            "confirm": "Təsdiq"
+        },
+        "step": "{{total}} addımdan {{current}}",
+        "fields": {
+            "firstName": "Ad",
+            "lastName": "Soyad",
+            "email": "E-poçt",
+            "phone": "Telefon",
+            "city": "Şəhər",
+            "address": "Ünvan",
+            "note": "Kuryer üçün qeyd"
+        },
+        "placeholders": {
+            "firstName": "Leyla",
+            "lastName": "Məmmədova",
+            "email": "leyla@example.com",
+            "phone": "+994 50 123 45 67",
+            "city": "Bakı",
+            "address": "Nizami küç. 12, mənzil 4",
+            "note": "Qapı kodu, mərtəbə…"
+        },
+        "validation": {
+            "required": "Bu xananı doldurun",
+            "email": "E-poçt ünvanını yoxlayın",
+            "phone": "Telefon nömrəsini +994 formatında yazın"
+        },
+        "method": "Çatdırılma üsulu",
+        "methods": {
+            "courier": "Kuryer",
+            "courierHint": "Bakı üzrə 1–2 iş günü",
+            "pickup": "Mağazadan götürmə",
+            "pickupHint": "İçərişəhər, hər gün 10:00–20:00"
+        },
+        "payment": "Ödəniş",
+        "payments": {
+            "cash": "Qapıda nağd",
+            "card": "Qapıda kartla"
+        },
+        "demoNote": "Bu portfolio layihəsidir: sifariş real olaraq göndərilmir və ödəniş alınmır.",
+        "review": "Məlumatları yoxlayın",
+        "edit": "Dəyişdir",
+        "next": "Davam et",
+        "back": "Geri",
+        "place": "Sifarişi təsdiqlə",
+        "summary": "Sifarişiniz",
+        "emptyCart": "Sifariş üçün səbətə kitab əlavə edin.",
+        "success": {
+            "title": "Sifarişiniz qəbul olundu",
+            "description": "Sifariş nömrəniz: {{number}}. Təsdiq məktubunu {{email}} ünvanına göndərdik.",
+            "note": "Demo rejim: məktub və çatdırılma real deyil.",
+            "continue": "Alış-verişə davam et"
+        }
+    }
+}

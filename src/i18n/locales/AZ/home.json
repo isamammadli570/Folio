@@ -1,0 +1,43 @@
+{
+    "spotlight": {
+        "label": "Seçilmiş müəlliflər",
+        "prev": "Əvvəlki müəllif",
+        "next": "Növbəti müəllif",
+        "show": "{{name}} haqqında"
+    },
+    "works": {
+        "eyebrow": "Müəllifin əsərləri",
+        "more": "Müəllif səhifəsi"
+    },
+    "categories": {
+        "eyebrow": "Kolleksiya",
+        "title": "Dörd bölmə, altmış əsər"
+    },
+    "shelf": {
+        "eyebrow": "Rəf",
+        "title": "Seçilmiş kitablar",
+        "all": "Hamısı"
+    },
+    "quotes": {
+        "eyebrow": "Kitablar haqqında",
+        "items": [
+            {
+                "text": "Kitabsız otaq ruhsuz bədən kimidir.",
+                "cite": "Mark Tulli Siseron"
+            },
+            {
+                "text": "Bütün yaxşı kitabları oxumaq keçmiş əsrlərin ən layiqli insanları ilə söhbət etmək kimidir.",
+                "cite": "Rene Dekart · Metod haqqında mühakimə"
+            },
+            {
+                "text": "Kitabların çoxluğu insanı dağıdır.",
+                "cite": "Seneka · Lusiliyə məktublar"
+            },
+            {
+                "text": "Cənnəti həmişə bir kitabxana kimi təsəvvür etmişəm.",
+                "cite": "Xorxe Luis Borxes"
+            }
+        ],
+        "show": "Sitat {{index}}"
+    }
+}

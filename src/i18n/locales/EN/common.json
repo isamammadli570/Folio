@@ -1,0 +1,106 @@
+{
+    "brand": {
+        "name": "Folio",
+        "tagline": "Book house"
+    },
+    "nav": {
+        "home": "Home",
+        "books": "Books",
+        "authors": "Authors",
+        "favorites": "Favourites",
+        "categories": "Categories",
+        "cart": "Cart",
+        "checkout": "Checkout"
+    },
+    "categories": {
+        "philosophy": "Philosophy",
+        "history": "History",
+        "psychology": "Psychology",
+        "literature": "Literature"
+    },
+    "bookCount_one": "{{count}} book",
+    "bookCount_other": "{{count}} books",
+    "header": {
+        "search": "Search",
+        "openMenu": "Open menu",
+        "cart": "Cart",
+        "favorites": "Favourites",
+        "chooseLanguage": "Language"
+    },
+    "search": {
+        "title": "Search books and authors",
+        "placeholder": "Title or author…",
+        "hint": "Try: Nietzsche, Odyssey, Stoicism",
+        "empty": "Nothing found for “{{query}}”.",
+        "allResults": "See all results",
+        "books": "Books",
+        "authors": "Authors"
+    },
+    "sidebar": {
+        "groups": {
+            "store": "Store",
+            "categories": "Categories"
+        },
+        "cartEmpty": "Your cart is empty",
+        "cartItems_one": "{{count}} book in your cart",
+        "cartItems_other": "{{count}} books in your cart"
+    },
+    "footer": {
+        "about": "The classics of philosophy, history, psychology and literature, bound as classic editions.",
+        "store": "Store",
+        "delivery": "Free delivery in Baku on orders over 40 ₼",
+        "note": "A portfolio project. Orders are not real.",
+        "rights": "© {{year}} Folio Book House",
+        "aiNote": "Author busts are AI-generated.",
+        "newsletterTitle": "Quote of the week",
+        "newsletterText": "Every Monday, one line from a classic and the latest arrivals.",
+        "emailPlaceholder": "your email",
+        "subscribe": "Subscribe",
+        "subscribed": "Subscribed (demo, no email is sent)",
+        "invalidEmail": "Check the email address",
+        "contact": "Contact",
+        "address": "Old City, Baku",
+        "hours": "Daily 10:00–20:00",
+        "backToTop": "Back to top"
+    },
+    "actions": {
+        "addToCart": "Add to cart",
+        "added": "“{{title}}” added to your cart",
+        "outOfStock": "Sold out",
+        "addFavorite": "Add to favourites",
+        "removeFavorite": "Remove from favourites",
+        "viewAll": "View all",
+        "retry": "Try again",
+        "openCart": "Go to cart"
+    },
+    "stock": {
+        "in": "In stock",
+        "low_one": "Last copy",
+        "low_other": "Last {{count}} copies",
+        "out": "Out of stock"
+    },
+    "tags": {
+        "bestseller": "Bestseller",
+        "new": "New"
+    },
+    "discount": "−{{percent}}%",
+    "years": {
+        "bce": "{{year}} BC",
+        "bceRange": "{{from}} — {{to}} BC",
+        "approx": "c. {{value}}"
+    },
+    "errors": {
+        "load": "Couldn't load this. Try again in a moment.",
+        "generic": "Something went wrong"
+    },
+    "notFound": {
+        "quote": "I know that I know nothing.",
+        "cite": "Socrates",
+        "title": "This page wasn't found",
+        "description": "The link may be old or mistyped. Keep looking in the catalogue.",
+        "home": "Home",
+        "catalog": "Browse the catalogue"
+    },
+    "loading": "Loading",
+    "skipToContent": "Skip to content"
+}

@@ -1,0 +1,96 @@
+{
+    "title": "Cart",
+    "close": "Close",
+    "empty": {
+        "quote": "A room without books is like a body without a soul.",
+        "cite": "Cicero",
+        "title": "Your cart is empty",
+        "action": "Browse the catalogue"
+    },
+    "remove": "Remove from cart",
+    "increase": "Increase",
+    "decrease": "Decrease",
+    "subtotal": "Subtotal",
+    "shipping": "Delivery",
+    "free": "Free",
+    "total": "Total",
+    "checkoutAction": "Check out",
+    "freeShippingLeft": "{{amount}} more for free delivery",
+    "freeShippingReached": "Delivery is free",
+    "favorites": {
+        "eyebrow": "Favourites",
+        "title": "Your shelf",
+        "empty": "You haven't saved any books yet",
+        "emptyDescription": "Tap the heart on a cover you like and the book will wait for you here.",
+        "action": "Browse books",
+        "statBooks": "Books",
+        "statValue": "Shelf value",
+        "statSpan": "Across the ages",
+        "statSections": "Sections",
+        "addAll": "Add all to cart",
+        "addedAll_one": "{{count}} book added to your cart",
+        "addedAll_other": "{{count}} books added to your cart",
+        "shelf": "Your shelf",
+        "grid": "All favourites",
+        "remove": "Take off the shelf"
+    },
+    "checkout": {
+        "eyebrow": "Checkout",
+        "title": "Complete your order",
+        "steps": {
+            "contact": "Contact",
+            "delivery": "Delivery",
+            "confirm": "Confirm"
+        },
+        "step": "Step {{current}} of {{total}}",
+        "fields": {
+            "firstName": "First name",
+            "lastName": "Last name",
+            "email": "Email",
+            "phone": "Phone",
+            "city": "City",
+            "address": "Address",
+            "note": "Note for the courier"
+        },
+        "placeholders": {
+            "firstName": "Leyla",
+            "lastName": "Mammadova",
+            "email": "leyla@example.com",
+            "phone": "+994 50 123 45 67",
+            "city": "Baku",
+            "address": "12 Nizami St, flat 4",
+            "note": "Door code, floor…"
+        },
+        "validation": {
+            "required": "Fill in this field",
+            "email": "Check the email address",
+            "phone": "Enter the phone number in +994 format"
+        },
+        "method": "Delivery method",
+        "methods": {
+            "courier": "Courier",
+            "courierHint": "1–2 working days in Baku",
+            "pickup": "Pick up in store",
+            "pickupHint": "Old City, daily 10:00–20:00"
+        },
+        "payment": "Payment",
+        "payments": {
+            "cash": "Cash on delivery",
+            "card": "Card on delivery"
+        },
+        "demoNote": "This is a portfolio project: the order isn't actually sent and no payment is taken.",
+        "review": "Review your details",
+        "edit": "Edit",
+        "next": "Continue",
+        "back": "Back",
+        "place": "Place order",
+        "summary": "Your order",
+        "emptyCart": "Add books to your cart to place an order.",
+        "success": {
+            "title": "Your order is in",
+            "description": "Order number: {{number}}. We've sent a confirmation to {{email}}.",
+            "note": "Demo mode: no email or delivery actually happens.",
+            "continue": "Continue shopping"
+        }
+    }
+}

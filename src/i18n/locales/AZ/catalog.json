@@ -1,0 +1,70 @@
+{
+    "eyebrow": "Kataloq",
+    "title": "Bütün kitablar",
+    "results_one": "{{count}} kitab",
+    "results_other": "{{count}} kitab",
+    "searchPlaceholder": "Kitab və ya müəllif axtar…",
+    "clearSearch": "Axtarışı təmizlə",
+    "sort": {
+        "label": "Sırala",
+        "featured": "Tövsiyə olunan",
+        "price-asc": "Əvvəlcə ucuz",
+        "price-desc": "Əvvəlcə bahalı",
+        "title": "Ada görə (A–Z)",
+        "oldest": "Ən qədim əsərlər",
+        "newest": "Ən yeni əsərlər"
+    },
+    "filters": {
+        "title": "Filtrlər",
+        "open": "Filtrləri aç",
+        "category": "Kateqoriya",
+        "all": "Hamısı",
+        "period": "Dövr",
+        "periods": {
+            "ancient": "Antik dövr",
+            "medieval": "Orta əsrlər",
+            "modern": "Yeni dövr",
+            "contemporary": "XX əsr"
+        },
+        "price": "Qiymət",
+        "upTo": "{{price}}-dək",
+        "inStock": "Yalnız stokda olanlar",
+        "reset": "Filtrləri sıfırla",
+        "show_one": "{{count}} kitabı göstər",
+        "show_other": "{{count}} kitabı göstər"
+    },
+    "empty": {
+        "title": "Bu filtrlərə uyğun kitab yoxdur",
+        "description": "Filtrləri dəyişin və ya axtarışı sadələşdirin."
+    },
+    "loadMore": "Daha çox göstər",
+    "shown": "{{total}} kitabdan {{shown}}",
+    "book": {
+        "breadcrumb": "Kitablar",
+        "by": "Müəllif",
+        "details": "Nəşr haqqında",
+        "year": "İlk nəşr",
+        "pages": "Səhifə",
+        "pagesValue": "{{count}} səh.",
+        "category": "Bölmə",
+        "edition": "Nəşr",
+        "editionValue": "Folio Klassik, sərt cild",
+        "description": "Kitab haqqında",
+        "quantity": "Say",
+        "increase": "Artır",
+        "decrease": "Azalt",
+        "freeShipping": "40 ₼-dan yuxarı sifarişlərdə pulsuz çatdırılma",
+        "delivery": "Bakı üzrə 1–2 iş günündə çatdırılma",
+        "aboutAuthor": "Müəllif haqqında",
+        "moreByAuthor": "Müəllifin digər kitabları",
+        "related": "Bu bölmədən",
+        "authorPage": "Bütün əsərləri",
+        "readingTime_one": "≈ {{count}} saat oxu",
+        "readingTime_other": "≈ {{count}} saat oxu",
+        "readingLabel": "Oxu müddəti",
+        "timeline": "Zaman xəttində",
+        "timelineWork": "Əsər",
+        "timelineLife": "Müəllifin ömrü",
+        "rotateHint": "Kitabı fırlatmaq üçün siçanı üzərində gəzdirin"
+    }
+}

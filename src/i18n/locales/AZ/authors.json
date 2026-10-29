@@ -1,0 +1,21 @@
+{
+    "eyebrow": "Müəlliflər",
+    "title": "Düşüncənin klassikləri",
+    "description": "Platondan Kamyuyadək qırx beş müəllif: həyatları, cərəyanları və öz dillərindəki sözləri.",
+    "all": "Hamısı",
+    "works": "Əsərləri",
+    "quote": "Sitat",
+    "original": "Orijinal",
+    "notFound": "Müəllif tapılmadı",
+    "lived_one": "{{count}} il",
+    "lived_other": "{{count}} il",
+    "statLived": "Ömür",
+    "statWorks": "Rəfimizdə",
+    "statMovement": "Cərəyan",
+    "timeline": "Əsərləri zaman xəttində",
+    "life": "Ömrü",
+    "contemporaries": "Müasirləri",
+    "contemporariesText": "Ömürləri {{name}} ilə kəsişən müəlliflər",
+    "overlap_one": "{{count}} il birlikdə",
+    "overlap_other": "{{count}} il birlikdə"
+}

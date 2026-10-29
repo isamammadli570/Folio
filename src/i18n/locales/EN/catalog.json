@@ -1,0 +1,70 @@
+{
+    "eyebrow": "Catalogue",
+    "title": "All books",
+    "results_one": "{{count}} book",
+    "results_other": "{{count}} books",
+    "searchPlaceholder": "Search books or authors…",
+    "clearSearch": "Clear search",
+    "sort": {
+        "label": "Sort",
+        "featured": "Recommended",
+        "price-asc": "Price: low to high",
+        "price-desc": "Price: high to low",
+        "title": "Title (A–Z)",
+        "oldest": "Oldest works first",
+        "newest": "Newest works first"
+    },
+    "filters": {
+        "title": "Filters",
+        "open": "Open filters",
+        "category": "Category",
+        "all": "All",
+        "period": "Period",
+        "periods": {
+            "ancient": "Antiquity",
+            "medieval": "Middle Ages",
+            "modern": "Modern era",
+            "contemporary": "20th century"
+        },
+        "price": "Price",
+        "upTo": "Up to {{price}}",
+        "inStock": "In stock only",
+        "reset": "Reset filters",
+        "show_one": "Show {{count}} book",
+        "show_other": "Show {{count}} books"
+    },
+    "empty": {
+        "title": "No books match these filters",
+        "description": "Change the filters or simplify your search."
+    },
+    "loadMore": "Show more",
+    "shown": "{{shown}} of {{total}} books",
+    "book": {
+        "breadcrumb": "Books",
+        "by": "Author",
+        "details": "About this edition",
+        "year": "First published",
+        "pages": "Pages",
+        "pagesValue": "{{count}} pp.",
+        "category": "Section",
+        "edition": "Edition",
+        "editionValue": "Folio Classics, hardcover",
+        "description": "About the book",
+        "quantity": "Quantity",
+        "increase": "Increase",
+        "decrease": "Decrease",
+        "freeShipping": "Free delivery on orders over 40 ₼",
+        "delivery": "Delivered in Baku within 1–2 working days",
+        "aboutAuthor": "About the author",
+        "moreByAuthor": "More by this author",
+        "related": "From this section",
+        "authorPage": "All works",
+        "readingTime_one": "≈ {{count}} hour of reading",
+        "readingTime_other": "≈ {{count}} hours of reading",
+        "readingLabel": "Reading time",
+        "timeline": "On the timeline",
+        "timelineWork": "The work",
+        "timelineLife": "The author’s life",
+        "rotateHint": "Move the pointer over the book to turn it"
+    }
+}

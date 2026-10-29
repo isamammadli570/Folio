@@ -1,0 +1,43 @@
+{
+    "spotlight": {
+        "label": "Featured authors",
+        "prev": "Previous author",
+        "next": "Next author",
+        "show": "About {{name}}"
+    },
+    "works": {
+        "eyebrow": "Works by the author",
+        "more": "Author page"
+    },
+    "categories": {
+        "eyebrow": "The collection",
+        "title": "Four sections, sixty works"
+    },
+    "shelf": {
+        "eyebrow": "The shelf",
+        "title": "Selected books",
+        "all": "All"
+    },
+    "quotes": {
+        "eyebrow": "On books",
+        "items": [
+            {
+                "text": "A room without books is like a body without a soul.",
+                "cite": "Marcus Tullius Cicero"
+            },
+            {
+                "text": "The reading of all good books is like a conversation with the finest people of past centuries.",
+                "cite": "René Descartes · Discourse on the Method"
+            },
+            {
+                "text": "The abundance of books is a distraction.",
+                "cite": "Seneca · Letters to Lucilius"
+            },
+            {
+                "text": "I have always imagined that Paradise will be a kind of library.",
+                "cite": "Jorge Luis Borges"
+            }
+        ],
+        "show": "Quote {{index}}"
+    }
+}
