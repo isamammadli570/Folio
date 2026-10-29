@@ -19,6 +19,7 @@ export const STORAGE_KEYS = {
     CART: "folio.cart",
     FAVORITES: "folio.favorites",
     LANGUAGE: "lang",
+    THEME: "folio.theme",
 } as const;
 
 /** Query-key roots shared between hooks. */

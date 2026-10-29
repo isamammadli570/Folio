@@ -10,6 +10,7 @@ import {useAuth} from "@/hooks/useAuth";
 import {preloadRoute} from "@/router/preload";
 import {Logo} from "@/widgets/Logo";
 import {LanguageSwitcher} from "@/widgets/LanguageSwitcher";
+import {ThemeToggle} from "@/widgets/ThemeToggle";
 import {CART_TARGET_ATTRIBUTE} from "@/lib/flyTo";
 import {MOD_KEY} from "@/lib/platform";
 import {cn} from "@/lib/utils";
@@ -79,6 +80,7 @@ export const Header = ({onOpenMenu, onOpenSearch}: HeaderProps) => {
                             <Search/>
                         </button>
                         <LanguageSwitcher className="hidden h-10 sm:inline-flex"/>
+                        <ThemeToggle className="hidden sm:flex"/>
                         <Link
                             to={accountTo}
                             onPointerEnter={() => preloadRoute(accountTo)}

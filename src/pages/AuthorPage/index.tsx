@@ -73,7 +73,7 @@ export const AuthorPage = () => {
                         <div className="relative mx-auto aspect-[4/5] w-[min(460px,82vw)] md:order-none md:w-full md:max-w-[480px]">
                             <div aria-hidden className="absolute inset-x-[8%] top-[6%] aspect-square rounded-full bg-[radial-gradient(circle,color-mix(in_srgb,var(--accent)_16%,transparent),transparent_65%)] blur-2xl"/>
                             {isLoading || !author ? <Skeleton className="mx-auto mt-[10%] aspect-square w-[80%] rounded-full"/> : author.portrait ? (
-                                <div className="absolute inset-0 drop-shadow-[0_24px_40px_rgb(0_0_0/0.55)]">
+                                <div className="absolute inset-0 drop-shadow-[0_24px_40px_rgb(var(--shade)/0.55)]">
                                     <Bust src={author.portrait} alt={name} priority className="animate-fade-up absolute inset-0 size-full"/>
                                 </div>
                             ) : (
@@ -88,7 +88,7 @@ export const AuthorPage = () => {
                                 <Reveal variant="stagger">
                                     <p className="eyebrow" style={{"--i": 0} as CSSProperties}>{formatLifespan(author.born, author.died, t, author.approx)} · {pick(author.movement)}</p>
                                     <h1 className="mt-4 font-display text-[clamp(52px,6.4vw,88px)] font-medium leading-[0.95] [text-wrap:balance]" style={{"--i": 1} as CSSProperties}>{name}</h1>
-                                    <p className="mt-6 max-w-[56ch] font-serif text-[20px] leading-relaxed [text-shadow:0_1px_14px_rgb(0_0_0/0.7)]" style={{"--i": 2} as CSSProperties}>{pick(author.bio)}</p>
+                                    <p className="mt-6 max-w-[56ch] font-serif text-[20px] leading-relaxed [text-shadow:0_1px_14px_var(--text-halo)]" style={{"--i": 2} as CSSProperties}>{pick(author.bio)}</p>
                                     {author.quote && (
                                         <figure className="mt-8 border-l border-accent/60 pl-6" style={{"--i": 3} as CSSProperties}>
                                             <blockquote lang={author.quote.lang} className="font-serif text-[clamp(21px,2vw,25px)] leading-snug">“{author.quote.text}”</blockquote>

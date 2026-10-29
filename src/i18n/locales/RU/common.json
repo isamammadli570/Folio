@@ -29,7 +29,9 @@
         "favorites": "Избранное",
         "chooseLanguage": "Язык",
         "account": "Кабинет",
-        "signIn": "Войти"
+        "signIn": "Войти",
+        "lightTheme": "Светлая тема",
+        "darkTheme": "Тёмная тема"
     },
     "search": {
         "title": "Поиск книг и авторов",

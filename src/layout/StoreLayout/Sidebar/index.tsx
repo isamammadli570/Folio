@@ -12,6 +12,7 @@ import {useAuth} from "@/hooks/useAuth";
 import {Logo} from "@/widgets/Logo";
 import {OrnamentDivider} from "@/widgets/OrnamentDivider";
 import {LanguageSwitcher} from "@/widgets/LanguageSwitcher";
+import {ThemeToggle} from "@/widgets/ThemeToggle";
 import {MOD_KEY} from "@/lib/platform";
 
 type SidebarProps = {
@@ -43,7 +44,10 @@ export const Sidebar = ({onOpenSearch, onNavigate}: SidebarProps) => {
             <div className="flex flex-col gap-4 p-4 pb-3">
                 <div className="flex items-center justify-between gap-3">
                     <Logo/>
-                    <LanguageSwitcher/>
+                    <span className="flex items-center gap-1">
+                        <LanguageSwitcher/>
+                        <ThemeToggle className="size-9"/>
+                    </span>
                 </div>
                 <button
                     type="button"

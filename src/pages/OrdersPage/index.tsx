@@ -51,7 +51,7 @@ const OrderCard = ({order, books, index}: {order: Order; books: BookWithAuthor[]
             <button type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} className="flex w-full cursor-pointer flex-wrap items-center gap-x-6 gap-y-4 p-5 text-left outline-none focus-visible:ring-2 focus-visible:ring-ring/40 sm:p-6">
                 <span className="flex -space-x-5">
                     {covers.map((book, coverIndex) => (
-                        <span key={book.id} className="w-11 shadow-[0_6px_14px_-6px_rgb(0_0_0/0.8)]" style={{zIndex: covers.length - coverIndex, transform: `rotate(${(coverIndex - 1) * 4}deg)`}}>
+                        <span key={book.id} className="w-11 shadow-[0_6px_14px_-6px_rgb(var(--shade)/0.8)]" style={{zIndex: covers.length - coverIndex, transform: `rotate(${(coverIndex - 1) * 4}deg)`}}>
                             <BookCover book={book} author={book.author}/>
                         </span>
                     ))}

@@ -2,47 +2,61 @@ import {memo, type CSSProperties} from "react";
 import {useTranslation} from "react-i18next";
 import type {Author, Book} from "@/api/types";
 import {CATEGORY_COLOR} from "@/constants/catalog";
+import {COVER_ART} from "@/constants/covers";
 import {useLanguage} from "@/hooks/useLanguage";
 import {surname, upper} from "@/helpers/format";
+import {CoverFrame, Fleuron} from "@/widgets/BookCover/CoverFrame";
 import {OrnamentIcon} from "@/widgets/BookCover/ornaments";
 import {cn} from "@/lib/utils";
 
+/** Long titles and long words are set smaller, so no word has to break across lines. */
+const titleLength = (title: string): "long" | "longer" | undefined => {
+    const longestWord = Math.max(...title.split(/\s+/).map((word) => word.length));
+    if (title.length > 26 || longestWord > 13) return "longer";
+    if (title.length > 15 || longestWord > 10) return "long";
+    return undefined;
+};
+
 type BookCoverProps = {
-    book: Pick<Book, "title" | "category" | "ornament" | "coverImage">;
+    book: Pick<Book, "id" | "title" | "category" | "ornament" | "coverImage">;
     author: Pick<Author, "name">;
     className?: string;
-    /** Above the fold: load a real cover image eagerly. */
+    /** Above the fold: load the painting eagerly. */
     priority?: boolean;
 };
 
 /**
- * A "Folio Classics" cover: cloth in the category colour, a double gold frame, the author's surname, an emblem and the
- * title in the current language. It is drawn, not an image, so it stays sharp at any size and follows the language.
- * A book that carries `coverImage` (a photo of a real edition) shows that instead.
+ * A "Folio Classics" binding: grained cloth in the category colour with a hinge by the spine, gilt fillets with
+ * concave corners, and the author, title and imprint stamped in gold foil. A book with a painting shows it as a plate
+ * in an arched window; the others carry their emblem in a gilt roundel. The lettering is drawn, not part of an image,
+ * so it stays sharp at any size and follows the language.
  */
 export const BookCover = memo(({book, author, className, priority = false}: BookCoverProps) => {
     const {t} = useTranslation();
     const {language, pick} = useLanguage();
     const title = pick(book.title);
-
-    if (book.coverImage) {
-        return (
-            <div className={cn("book-cover", className)}>
-                <img src={book.coverImage} alt={title} loading={priority ? "eager" : "lazy"} className="absolute inset-0 size-full object-cover"/>
-            </div>
-        );
-    }
+    const art = book.coverImage ?? COVER_ART[book.id];
 
     return (
         <div role="img" aria-label={title} className={cn("book-cover", className)} style={{"--cloth": CATEGORY_COLOR[book.category]} as CSSProperties}>
-            <div className="book-cover__frame">
-                <span className="book-cover__author">{upper(surname(pick(author.name)), language)}</span>
-                <span className="book-cover__middle">
-                    <OrnamentIcon name={book.ornament} className="book-cover__emblem"/>
-                    <span className="book-cover__title">{title}</span>
-                    <span className="book-cover__rule"/>
-                </span>
-                <span className="book-cover__imprint">{upper(t("brand.name"), language)} · {upper(t(`categories.${book.category}`), language)}</span>
+            <CoverFrame/>
+            <div className={cn("book-cover__frame", art && "book-cover__frame--art")}>
+                <span className="book-cover__author foil">{upper(surname(pick(author.name)), language)}</span>
+                {art ? (
+                    <>
+                        <span className="book-cover__window">
+                            <img src={art} alt="" loading={priority ? "eager" : "lazy"} decoding="async" draggable={false}/>
+                        </span>
+                        <span className="book-cover__title foil" data-length={titleLength(title)}>{title}</span>
+                    </>
+                ) : (
+                    <span className="book-cover__middle">
+                        <span className="book-cover__roundel"><OrnamentIcon name={book.ornament} className="book-cover__emblem"/></span>
+                        <span className="book-cover__title foil" data-length={titleLength(title)}>{title}</span>
+                        <Fleuron/>
+                    </span>
+                )}
+                <span className="book-cover__imprint foil">{upper(t("brand.name"), language)} · {upper(t(`categories.${book.category}`), language)}</span>
             </div>
         </div>
     );

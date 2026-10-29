@@ -15,7 +15,7 @@ type SceneArcProps = {
  */
 export const SceneArc = ({src, letter, isHidden = false}: SceneArcProps) => (
     <>
-        <div aria-hidden className="pointer-events-none absolute left-[-16rem] top-[38%] size-[min(780px,125vw)] -translate-y-1/2 overflow-hidden rounded-full lg:left-[calc(50%-1500px)] lg:top-1/2 lg:size-[1360px]">
+        <div aria-hidden className="scene-arc pointer-events-none absolute left-[-16rem] top-[38%] size-[min(780px,125vw)] -translate-y-1/2 overflow-hidden rounded-full lg:left-[calc(50%-1500px)] lg:top-1/2 lg:size-[1360px]">
             {src ? (
                 <img
                     src={src}

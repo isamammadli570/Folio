@@ -82,7 +82,7 @@ export const BookPage = () => {
 
             <div className="mt-10 grid items-start gap-12 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
                 <div className="relative md:sticky md:top-[calc(var(--header-h)+2rem)]" onPointerMove={onPointerMove} onPointerLeave={onPointerLeave}>
-                    <div aria-hidden className="absolute inset-x-[8%] -bottom-6 h-10 rounded-[50%] bg-black/60 blur-2xl"/>
+                    <div aria-hidden className="absolute inset-x-[8%] -bottom-6 h-10 rounded-[50%] bg-[rgb(var(--shade)/0.6)] blur-2xl"/>
                     <div aria-hidden className="absolute inset-[-12%] -z-10 rounded-full opacity-50 blur-3xl" style={{background: `radial-gradient(circle, color-mix(in srgb, ${CATEGORY_COLOR[book.category]} 70%, var(--accent)), transparent 65%)`} as CSSProperties}/>
                     {/* No filter on this wrapper: a filter here would flatten the 3D book in some browsers. */}
                     <div ref={tiltRef} className="mx-auto w-full max-w-[380px] py-6">

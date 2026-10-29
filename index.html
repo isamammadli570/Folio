@@ -7,6 +7,16 @@
     <meta name="theme-color" content="#0d0c0a"/>
     <meta name="description" content="Folio — fəlsəfə, tarix, psixologiya və ədəbiyyat klassikləri."/>
     <title>Folio Kitab Evi</title>
+    <!-- Applies a saved light theme before the first paint, so a light-theme visitor never sees a dark flash. Dark is the default. -->
+    <script>
+        try {
+            if (localStorage.getItem("folio.theme") === "light") {
+                document.documentElement.dataset.theme = "light";
+                document.documentElement.classList.remove("dark");
+                document.querySelector("meta[name=theme-color]").content = "#f3eee3";
+            }
+        } catch {}
+    </script>
 </head>
 <body>
 <div id="root"></div>

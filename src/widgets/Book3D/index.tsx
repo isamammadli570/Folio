@@ -7,7 +7,7 @@ import {BookCover} from "@/widgets/BookCover";
 import {cn} from "@/lib/utils";
 
 type Book3DProps = {
-    book: Pick<Book, "title" | "category" | "ornament" | "coverImage" | "pages">;
+    book: Pick<Book, "id" | "title" | "category" | "ornament" | "coverImage" | "pages">;
     author: Pick<Author, "name">;
     className?: string;
 };
@@ -19,10 +19,11 @@ type Book3DProps = {
  */
 export const Book3D = forwardRef<HTMLDivElement, Book3DProps>(({book, author, className}, ref) => {
     const {language, pick} = useLanguage();
-    const depth = Math.round(Math.min(64, Math.max(22, book.pages / 14)));
+    // As a share of the cover width, like a real book: a 250-page volume is about 14% as thick as it is wide.
+    const depth = Math.min(26, Math.max(12.5, book.pages / 18)).toFixed(1);
 
     return (
-        <div className={cn("book3d", className)} style={{"--depth": `${depth}px`, "--cloth": CATEGORY_COLOR[book.category]} as CSSProperties}>
+        <div className={cn("book3d", className)} style={{"--depth": `${depth}cqi`, "--cloth": CATEGORY_COLOR[book.category]} as CSSProperties}>
             <div className="book3d__body">
                 <div ref={ref} className="book3d__front">
                     <BookCover book={book} author={author} priority/>

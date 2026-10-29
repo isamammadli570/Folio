@@ -27,7 +27,9 @@
         "favorites": "Seçilmişlər",
         "chooseLanguage": "Dil seçimi",
         "account": "Kabinet",
-        "signIn": "Daxil ol"
+        "signIn": "Daxil ol",
+        "lightTheme": "İşıqlı rejim",
+        "darkTheme": "Qaranlıq rejim"
     },
     "search": {
         "title": "Kitab və müəllif axtarışı",

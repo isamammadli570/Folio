@@ -103,8 +103,8 @@ export const AuthorSpotlight = ({authors, isLoading, index, onIndexChange}: Auth
                 <div className={cn("transition-[opacity,transform,filter] duration-500 [grid-area:bio] lg:max-w-[300px] lg:self-end lg:pb-6", isLeaving && "-translate-x-3 opacity-0 blur-sm")}>
                     {author ? (
                         <>
-                            <p className="eyebrow mb-4 [text-shadow:0_1px_10px_rgb(0_0_0/0.85)]">{formatLifespan(author.born, author.died, t, author.approx)}</p>
-                            <p className="font-serif text-[18.5px] leading-relaxed [text-shadow:0_1px_14px_rgb(0_0_0/0.75)]">{pick(author.bio)}</p>
+                            <p className="eyebrow mb-4 [text-shadow:0_1px_10px_var(--text-halo)]">{formatLifespan(author.born, author.died, t, author.approx)}</p>
+                            <p className="font-serif text-[18.5px] leading-relaxed [text-shadow:0_1px_14px_var(--text-halo)]">{pick(author.bio)}</p>
                         </>
                     ) : isLoading && <><Skeleton className="mb-4 h-3 w-32"/><Skeleton className="h-24"/></>}
                 </div>
@@ -117,7 +117,7 @@ export const AuthorSpotlight = ({authors, isLoading, index, onIndexChange}: Auth
                             <textPath href="#spotlight-ring">{author ? `${upper(name, language)} · ${formatLifespan(author.born, author.died, t)} · ${upper(pick(author.movement), language)} · ${upper(t("common:brand.name"), language)} ·` : ""}</textPath>
                         </text>
                     </svg>
-                    <div ref={coinRef} className={cn("absolute inset-0 drop-shadow-[0_24px_40px_rgb(0_0_0/0.55)] transition-[transform,opacity,filter,translate] duration-500 ease-[var(--ease-out)] [transform:rotateY(var(--ry,0deg))_rotateX(var(--rx,0deg))]", isLeaving && "-translate-x-8 opacity-0 blur-md")}>
+                    <div ref={coinRef} className={cn("absolute inset-0 drop-shadow-[0_24px_40px_rgb(var(--shade)/0.55)] transition-[transform,opacity,filter,translate] duration-500 ease-[var(--ease-out)] [transform:rotateY(var(--ry,0deg))_rotateX(var(--rx,0deg))]", isLeaving && "-translate-x-8 opacity-0 blur-md")}>
                         {!author ? <Skeleton className="mx-auto mt-[10%] aspect-square w-[80%] rounded-full"/> : author.portrait ? (
                             <Bust src={author.portrait} alt={name} priority className="animate-[hover-float_9s_ease-in-out_infinite] absolute inset-x-0 bottom-0 mx-auto h-full w-full"/>
                         ) : (

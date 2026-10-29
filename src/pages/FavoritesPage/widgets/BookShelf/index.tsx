@@ -48,7 +48,7 @@ export const BookShelf = ({books}: BookShelfProps) => {
                     );
                 })}
             </div>
-            <div aria-hidden className="relative h-4 rounded-sm bg-gradient-to-b from-[#3a352b] to-[#1a1814] shadow-[0_18px_30px_-12px_rgb(0_0_0/0.9)]">
+            <div aria-hidden className="relative h-4 rounded-sm bg-gradient-to-b from-[#3a352b] to-[#1a1814] shadow-[0_18px_30px_-12px_rgb(var(--shade)/0.9)]">
                 <span className="absolute inset-x-0 top-0 h-px bg-accent/50"/>
             </div>
         </div>

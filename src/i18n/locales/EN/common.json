@@ -27,7 +27,9 @@
         "favorites": "Favourites",
         "chooseLanguage": "Language",
         "account": "Account",
-        "signIn": "Sign in"
+        "signIn": "Sign in",
+        "lightTheme": "Light theme",
+        "darkTheme": "Dark theme"
     },
     "search": {
         "title": "Search books and authors",

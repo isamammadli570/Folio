@@ -39,7 +39,7 @@ export const BookCard = memo(({book, index = 0, className}: BookCardProps) => {
                         ref={tiltRef}
                         className={cn(
                             "transition-[transform,box-shadow,filter] duration-500 ease-[var(--ease-out)] [transform:rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))]",
-                            "shadow-[0_18px_30px_-16px_rgb(0_0_0/0.85)] group-hover/book:shadow-[0_40px_50px_-22px_rgb(0_0_0/0.9),0_0_40px_-10px_color-mix(in_srgb,var(--accent)_22%,transparent)]",
+                            "shadow-[0_18px_30px_-16px_rgb(var(--shade)/0.85)] group-hover/book:shadow-[0_40px_50px_-22px_rgb(var(--shade)/0.9),0_0_40px_-10px_color-mix(in_srgb,var(--accent)_22%,transparent)]",
                             isSoldOut && "grayscale-[0.6]",
                         )}
                     >
@@ -57,7 +57,7 @@ export const BookCard = memo(({book, index = 0, className}: BookCardProps) => {
                     disabled={isSoldOut}
                     onClick={(event) => addToCart(book, event.currentTarget.parentElement?.querySelector<HTMLElement>(".book-cover"))}
                     className={cn(
-                        "absolute inset-x-[9%] bottom-[6%] z-[1] flex cursor-pointer items-center justify-center gap-2 rounded-sm px-3 py-2.5 text-[13px] font-medium shadow-[0_10px_20px_-8px_rgb(0_0_0/0.6)] outline-none transition-[opacity,transform,background-color] duration-300",
+                        "absolute inset-x-[9%] bottom-[6%] z-[1] flex cursor-pointer items-center justify-center gap-2 rounded-sm px-3 py-2.5 text-[13px] font-medium shadow-[0_10px_20px_-8px_rgb(var(--shade)/0.6)] outline-none transition-[opacity,transform,background-color] duration-300",
                         "max-sm:inset-x-auto max-sm:bottom-2.5 max-sm:right-2.5 max-sm:size-9 max-sm:rounded-full max-sm:p-0",
                         "bg-primary text-primary-foreground hover:bg-accent-bright focus-visible:ring-2 focus-visible:ring-ring/70",
                         "disabled:cursor-default disabled:bg-surface-raised disabled:text-muted-foreground",
