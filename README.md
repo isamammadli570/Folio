@@ -3,6 +3,8 @@
 A portfolio e-commerce site for the classics of philosophy, history, psychology and literature: sixty books, forty-five
 authors, three languages (Azerbaijani, English, Russian), in a dark "museum hall" design.
 
+**Live:** https://folio-mu-peach.vercel.app
+
 ## Features
 
 - **Author spotlight** — marble busts, a half-circle with an engraving from each author's world, the author's words in the
@@ -39,7 +41,7 @@ npm run lint
 
 ## Roadmap
 
-1. ✅ Front end with local data
+1. ✅ Front end with local data, deployed on Vercel
 2. Supabase: database, auth, orders, storage
 3. Admin panel
 
