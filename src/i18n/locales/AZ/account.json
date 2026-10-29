@@ -1,0 +1,135 @@
+{
+    "auth": {
+        "eyebrow": "Oxucu kabineti",
+        "quote": {"text": "Kitablar zamanın dənizində üzən gəmilərdir.", "cite": "Frensis Bekon"},
+        "login": {
+            "title": "Xoş gəlmisiniz",
+            "subtitle": "Sifarişləriniz, ünvanlarınız və seçdiyiniz kitablar hər cihazda sizinlə olsun.",
+            "submit": "Daxil ol",
+            "forgot": "Şifrəni unutmusunuz?",
+            "noAccount": "Hesabınız yoxdur?",
+            "register": "Qeydiyyatdan keçin",
+            "welcome": "Xoş gəldiniz, {{name}}"
+        },
+        "register": {
+            "title": "Kitabxanaya qoşulun",
+            "subtitle": "Bir hesab — səbət və seçilmişlər bütün cihazlarda, sifariş tarixçəsi bir yerdə.",
+            "submit": "Hesab yarat",
+            "hasAccount": "Artıq hesabınız var?",
+            "login": "Daxil olun",
+            "created": "Hesabınız yaradıldı",
+            "checkEmail": {
+                "title": "Poçtunuzu yoxlayın",
+                "description": "{{email}} ünvanına təsdiq linki göndərdik. Linkə keçdikdən sonra hesabınız aktiv olacaq.",
+                "back": "Girişə qayıt"
+            }
+        },
+        "forgot": {
+            "title": "Şifrəni bərpa edin",
+            "subtitle": "E-poçtunuzu yazın, yeni şifrə təyin etmək üçün link göndərək.",
+            "submit": "Link göndər",
+            "sent": "Əgər {{email}} ilə hesab varsa, bərpa linki artıq yoldadır.",
+            "back": "Girişə qayıt"
+        },
+        "reset": {
+            "title": "Yeni şifrə",
+            "subtitle": "Hesabınız üçün yeni şifrə seçin.",
+            "submit": "Şifrəni yenilə",
+            "done": "Şifrəniz yeniləndi",
+            "invalid": "Bu linkin vaxtı keçib və ya artıq istifadə olunub. Yeni link istəyin.",
+            "requestNew": "Yeni link istə"
+        },
+        "fields": {
+            "fullName": "Ad və soyad",
+            "email": "E-poçt",
+            "password": "Şifrə",
+            "newPassword": "Yeni şifrə",
+            "confirmPassword": "Şifrəni təkrarlayın"
+        },
+        "placeholders": {"fullName": "Leyla Məmmədova", "email": "leyla@example.com", "password": "••••••••"},
+        "showPassword": "Şifrəni göstər",
+        "hidePassword": "Şifrəni gizlət",
+        "validation": {
+            "required": "Bu xananı doldurun",
+            "email": "E-poçt ünvanını yoxlayın",
+            "passwordLength": "Ən azı {{count}} simvol",
+            "passwordMatch": "Şifrələr eyni deyil"
+        },
+        "errors": {
+            "invalid_credentials": "E-poçt və ya şifrə yanlışdır",
+            "user_already_exists": "Bu e-poçtla hesab artıq var",
+            "email_not_confirmed": "Əvvəlcə e-poçtunuzu təsdiqləyin",
+            "weak_password": "Şifrə çox zəifdir",
+            "same_password": "Yeni şifrə köhnəsindən fərqli olmalıdır",
+            "over_email_send_rate_limit": "Çox sayda məktub göndərildi. Bir neçə dəqiqə sonra yenidən cəhd edin",
+            "over_request_rate_limit": "Çox sayda cəhd. Bir az gözləyin",
+            "default": "Nəsə alınmadı. Yenidən cəhd edin"
+        }
+    },
+    "nav": {
+        "title": "Kabinet",
+        "greeting": "Salam, {{name}}",
+        "reader": "oxucu",
+        "orders": "Sifarişlər",
+        "addresses": "Ünvanlar",
+        "profile": "Profil",
+        "favorites": "Seçilmişlər",
+        "signOut": "Çıxış",
+        "signedOut": "Hesabdan çıxdınız"
+    },
+    "orders": {
+        "title": "Sifarişlər",
+        "subtitle": "Etdiyiniz hər sifariş və onun vəziyyəti.",
+        "empty": "Hələ sifarişiniz yoxdur.",
+        "emptyQuote": "Hər böyük kitabxana bir kitabla başlayır.",
+        "emptyAction": "Kataloqa bax",
+        "placedOn": "{{date}} tarixində",
+        "items_one": "{{count}} kitab",
+        "items_other": "{{count}} kitab",
+        "subtotal": "Kitablar",
+        "shipping": "Çatdırılma",
+        "free": "Pulsuz",
+        "total": "Cəmi",
+        "details": "Ətraflı",
+        "hide": "Gizlət",
+        "deliverTo": "Çatdırılma",
+        "payment": "Ödəniş",
+        "status": {
+            "new": "Qəbul olundu",
+            "processing": "Hazırlanır",
+            "shipped": "Yoldadır",
+            "delivered": "Çatdırıldı",
+            "cancelled": "Ləğv olundu"
+        }
+    },
+    "addresses": {
+        "title": "Ünvanlar",
+        "subtitle": "Sifariş zamanı əsas ünvan avtomatik doldurulur.",
+        "add": "Ünvan əlavə et",
+        "new": "Yeni ünvan",
+        "edit": "Düzəliş et",
+        "delete": "Sil",
+        "confirmDelete": "Silinsin?",
+        "default": "Əsas",
+        "makeDefault": "Əsas et",
+        "empty": "Hələ ünvan əlavə etməmisiniz.",
+        "save": "Yadda saxla",
+        "cancel": "Ləğv et",
+        "saved": "Ünvan yadda saxlanıldı",
+        "deleted": "Ünvan silindi",
+        "fields": {"label": "Ad", "city": "Şəhər", "line": "Ünvan", "note": "Kuryer üçün qeyd", "isDefault": "Əsas ünvan kimi istifadə et"},
+        "placeholders": {"label": "Ev, iş…", "city": "Bakı", "line": "Nizami küç. 12, mənzil 4", "note": "Qapı kodu, mərtəbə…"}
+    },
+    "profile": {
+        "title": "Profil",
+        "subtitle": "Sifarişdə istifadə olunan əlaqə məlumatları.",
+        "save": "Yadda saxla",
+        "saved": "Profil yeniləndi",
+        "emailHint": "E-poçt hesabınızın girişidir və dəyişdirilmir.",
+        "security": "Təhlükəsizlik",
+        "securityHint": "Yeni şifrə təyin edin. Digər cihazlarda sessiya açıq qalacaq.",
+        "changePassword": "Şifrəni dəyiş",
+        "passwordChanged": "Şifrə dəyişdirildi",
+        "memberSince": "{{date}} tarixindən oxucu"
+    }
+}

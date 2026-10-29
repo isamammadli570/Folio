@@ -54,3 +54,32 @@ export type Book = {
 };
 
 export type BookWithAuthor = Book & {author: Author};
+
+export type OrderStatus = "new" | "processing" | "shipped" | "delivered" | "cancelled";
+
+export type OrderItem = {bookId: string; title: Localized; unitPrice: number; quantity: number};
+
+export type Order = {
+    id: string;
+    number: string;
+    status: OrderStatus;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    deliveryMethod: "courier" | "pickup";
+    city: string;
+    address: string;
+    note: string;
+    paymentMethod: "cash" | "card";
+    subtotal: number;
+    shipping: number;
+    total: number;
+    /** ISO timestamp. */
+    createdAt: string;
+    items: OrderItem[];
+};
+
+export type Profile = {id: string; fullName: string; phone: string};
+
+export type Address = {id: string; label: string; city: string; line: string; note: string; isDefault: boolean};

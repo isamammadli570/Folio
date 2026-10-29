@@ -1,4 +1,4 @@
-import {BookOpen, Heart, Home, Landmark, Brain, Feather, Scroll, Users, type LucideIcon} from "lucide-react";
+import {BookOpen, Heart, Home, Landmark, Brain, Feather, MapPin, Package, Scroll, UserRound, Users, type LucideIcon} from "lucide-react";
 import {buildRoute, ROUTES} from "@/constants/routes";
 import type {CategoryId} from "@/constants/catalog";
 
@@ -46,3 +46,11 @@ export const HEADER_LINKS = [
     {labelKey: "nav.books", to: ROUTES.CATALOG},
     {labelKey: "nav.authors", to: ROUTES.AUTHORS},
 ] as const;
+
+/** Tabs of the account area. Keys are in the `account` namespace. */
+export const ACCOUNT_LINKS: NavItem[] = [
+    {labelKey: "account:nav.orders", to: ROUTES.ACCOUNT, icon: Package},
+    {labelKey: "account:nav.addresses", to: ROUTES.ACCOUNT_ADDRESSES, icon: MapPin},
+    {labelKey: "account:nav.profile", to: ROUTES.ACCOUNT_PROFILE, icon: UserRound},
+    {labelKey: "account:nav.favorites", to: ROUTES.FAVORITES, icon: Heart},
+];

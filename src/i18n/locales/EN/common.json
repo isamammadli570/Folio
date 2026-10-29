@@ -25,7 +25,9 @@
         "openMenu": "Open menu",
         "cart": "Cart",
         "favorites": "Favourites",
-        "chooseLanguage": "Language"
+        "chooseLanguage": "Language",
+        "account": "Account",
+        "signIn": "Sign in"
     },
     "search": {
         "title": "Search books and authors",

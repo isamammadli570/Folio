@@ -25,7 +25,9 @@
         "openMenu": "Menyunu aç",
         "cart": "Səbət",
         "favorites": "Seçilmişlər",
-        "chooseLanguage": "Dil seçimi"
+        "chooseLanguage": "Dil seçimi",
+        "account": "Kabinet",
+        "signIn": "Daxil ol"
     },
     "search": {
         "title": "Kitab və müəllif axtarışı",

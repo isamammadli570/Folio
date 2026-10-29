@@ -7,6 +7,7 @@ import {CartDrawer} from "@/layout/StoreLayout/CartDrawer";
 import {SearchDialog} from "@/layout/StoreLayout/SearchDialog";
 import {Sidebar} from "@/layout/StoreLayout/Sidebar";
 import {useHotkey} from "@/hooks/useHotkey";
+import {useShelfSync} from "@/hooks/useShelfSync";
 import {Sheet} from "@/widgets/Sheet";
 
 /** The storefront shell: header, the page, footer, and the overlays every page can open (menu, search, cart). */
@@ -20,6 +21,7 @@ export const StoreLayout = () => {
     const [searchOpen, setSearchOpen] = useState(false);
 
     useHotkey("k", () => setSearchOpen(true));
+    useShelfSync();
 
     return (
         <div className="flex min-h-dvh flex-col">

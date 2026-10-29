@@ -15,6 +15,8 @@ export const cartActions = {
     setQuantity: (bookId: string, quantity: number) => cartStore.set((lines) => setLineQuantity(lines, bookId, quantity)),
     remove: (bookId: string) => cartStore.set((lines) => setLineQuantity(lines, bookId, 0)),
     clear: () => cartStore.set(() => []),
+    /** Swaps the whole cart, e.g. for the merged one after signing in. */
+    replace: (lines: CartLine[]) => cartStore.set(() => lines),
     setDrawerOpen: (open: boolean) => {
         drawerOpen = open;
         drawerListeners.forEach((listener) => listener(open));
@@ -34,3 +36,6 @@ const subscribeDrawer = (listener: () => void) => {
 
 /** Whether the cart drawer is open; any button can open it through `cartActions.setDrawerOpen`. */
 export const useCartDrawer = () => useSyncExternalStore(subscribeDrawer, () => drawerOpen, () => false);
+
+/** The raw store, for the account sync that mirrors the cart to the server. */
+export const cartSource = {get: cartStore.get, subscribe: cartStore.subscribe};

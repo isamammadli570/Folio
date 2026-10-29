@@ -9,8 +9,11 @@ export const SPOTLIGHT_INTERVAL_MS = 9000;
 
 export const CATALOG_PAGE_SIZE = 12;
 
-/** Simulated latency of the local data layer, so loading states are real until Supabase replaces it. */
-export const LOCAL_API_DELAY_MS = 260;
+/** How long the fetched catalogue is reused before it is read again. */
+export const CATALOGUE_TTL_MS = 5 * 60_000;
+
+/** A signed-in reader's cart and favourites are written to the server this long after the last change. */
+export const SHELF_SYNC_DELAY_MS = 700;
 
 export const STORAGE_KEYS = {
     CART: "folio.cart",
@@ -25,4 +28,7 @@ export const QUERY_KEYS = {
     AUTHORS: "authors",
     AUTHOR: "author",
     CATEGORY_COUNTS: "categoryCounts",
+    ORDERS: "orders",
+    PROFILE: "profile",
+    ADDRESSES: "addresses",
 } as const;

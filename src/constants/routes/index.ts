@@ -6,6 +6,13 @@ export const ROUTES = {
     AUTHOR: "/authors/:authorId",
     FAVORITES: "/favorites",
     CHECKOUT: "/checkout",
+    LOGIN: "/login",
+    REGISTER: "/register",
+    FORGOT_PASSWORD: "/forgot-password",
+    RESET_PASSWORD: "/reset-password",
+    ACCOUNT: "/account",
+    ACCOUNT_ADDRESSES: "/account/addresses",
+    ACCOUNT_PROFILE: "/account/profile",
 } as const;
 
 /** Builders for the routes that carry a parameter. */
@@ -18,3 +25,6 @@ export const buildRoute = {
         return query ? `${ROUTES.CATALOG}?${query}` : ROUTES.CATALOG;
     },
 };
+
+/** Where a sign-in page sends the reader afterwards: the `next` it was given, if it is a path on this site. */
+export const safeNext = (next: string | null): string => (next && next.startsWith("/") && !next.startsWith("//") ? next : ROUTES.ACCOUNT);

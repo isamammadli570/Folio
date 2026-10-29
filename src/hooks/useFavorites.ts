@@ -9,6 +9,7 @@ const favoritesStore = createPersistentStore<string[]>(STORAGE_KEYS.FAVORITES, [
 export const favoriteActions = {
     toggle: (bookId: string) =>
         favoritesStore.set((ids) => (ids.includes(bookId) ? ids.filter((id) => id !== bookId) : [bookId, ...ids])),
+    replace: (ids: string[]) => favoritesStore.set(() => ids),
 };
 
 /** Book ids the visitor has saved, newest first. */
@@ -16,3 +17,6 @@ export const useFavorites = () => {
     const ids = useSyncExternalStore(favoritesStore.subscribe, favoritesStore.get, favoritesStore.get);
     return {ids, isFavorite: (bookId: string) => ids.includes(bookId)};
 };
+
+/** The raw store, for the account sync that mirrors favourites to the server. */
+export const favoritesSource = {get: favoritesStore.get, subscribe: favoritesStore.subscribe};

@@ -26,3 +26,7 @@ export const upper = (value: string, language: Language): string => value.toLoca
 
 /** The surname, used on book spines and covers: the last word of the name. */
 export const surname = (name: string): string => name.trim().split(/\s+/).at(-1) ?? name;
+
+/** "29 October 2026" in the site language. */
+export const formatDate = (iso: string, language: Language): string =>
+    new Intl.DateTimeFormat(LOCALE[language], {day: "numeric", month: "long", year: "numeric"}).format(new Date(iso));

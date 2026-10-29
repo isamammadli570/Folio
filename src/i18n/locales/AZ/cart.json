@@ -91,6 +91,20 @@
             "description": "Sifariş nömrəniz: {{number}}. Təsdiq məktubunu {{email}} ünvanına göndərdik.",
             "note": "Demo rejim: məktub və çatdırılma real deyil.",
             "continue": "Alış-verişə davam et"
+        },
+        "signedInAs": "{{email}} kimi sifariş edirsiniz",
+        "signInHint": "Sifarişləri izləmək üçün",
+        "signInLink": "daxil olun",
+        "savedNote": "Sifariş bazada saxlanılır və kabinetinizdə görünür. Ödəniş demo rejimdədir — pul alınmır.",
+        "placing": "Göndərilir…",
+        "savedTo": "Sifarişi kabinetinizdə izləyə bilərsiniz.",
+        "viewOrders": "Sifarişlərimə bax",
+        "errors": {
+            "OUT_OF_STOCK": "«{{title}}» kitabından kifayət qədər nüsxə qalmayıb. Səbəti yeniləyin.",
+            "EMPTY_CART": "Səbət boşdur.",
+            "INVALID_INPUT": "Məlumatları yoxlayın.",
+            "UNKNOWN_BOOK": "Səbətdəki kitablardan biri artıq kataloqda yoxdur.",
+            "default": "Sifariş göndərilmədi. Bir az sonra yenidən cəhd edin."
         }
     }
 }

@@ -27,7 +27,9 @@
         "openMenu": "Открыть меню",
         "cart": "Корзина",
         "favorites": "Избранное",
-        "chooseLanguage": "Язык"
+        "chooseLanguage": "Язык",
+        "account": "Кабинет",
+        "signIn": "Войти"
     },
     "search": {
         "title": "Поиск книг и авторов",

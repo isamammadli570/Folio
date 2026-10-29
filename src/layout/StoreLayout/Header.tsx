@@ -1,11 +1,12 @@
 import {Link, useLocation} from "react-router";
-import {Heart, Menu, Search, ShoppingBag} from "lucide-react";
+import {Heart, Menu, Search, ShoppingBag, UserRound} from "lucide-react";
 import {useTranslation} from "react-i18next";
 import {Kbd} from "@/components/ui/kbd";
 import {HEADER_LINKS} from "@/constants/sidebar";
 import {ROUTES} from "@/constants/routes";
 import {cartActions, useCart} from "@/hooks/useCart";
 import {useFavorites} from "@/hooks/useFavorites";
+import {useAuth} from "@/hooks/useAuth";
 import {preloadRoute} from "@/router/preload";
 import {Logo} from "@/widgets/Logo";
 import {LanguageSwitcher} from "@/widgets/LanguageSwitcher";
@@ -31,6 +32,8 @@ export const Header = ({onOpenMenu, onOpenSearch}: HeaderProps) => {
     const {count} = useCart();
     const {ids: favoriteIds} = useFavorites();
     const {pathname} = useLocation();
+    const {user} = useAuth();
+    const accountTo = user ? ROUTES.ACCOUNT : ROUTES.LOGIN;
 
     return (
         <>
@@ -76,6 +79,15 @@ export const Header = ({onOpenMenu, onOpenSearch}: HeaderProps) => {
                             <Search/>
                         </button>
                         <LanguageSwitcher className="hidden h-10 sm:inline-flex"/>
+                        <Link
+                            to={accountTo}
+                            onPointerEnter={() => preloadRoute(accountTo)}
+                            aria-label={t(user ? "header.account" : "header.signIn")}
+                            className={cn(iconButton, "max-[420px]:hidden", user && "border-accent/60 text-accent-bright")}
+                        >
+                            <UserRound/>
+                            {user && <span aria-hidden className="absolute -bottom-0.5 -right-0.5 size-2.5 rounded-full border-2 border-background bg-accent"/>}
+                        </Link>
                         <Link to={ROUTES.FAVORITES} aria-label={t("header.favorites")} className={cn(iconButton, "max-[380px]:hidden")}>
                             <Heart/>
                             <Count value={favoriteIds.length}/>

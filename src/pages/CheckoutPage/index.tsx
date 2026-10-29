@@ -1,7 +1,7 @@
-import {useState, type ReactNode} from "react";
+import {useEffect, useRef, useState, type ReactNode} from "react";
 import {Link} from "react-router";
 import {useForm, useWatch, type FieldPath} from "react-hook-form";
-import {ArrowLeft, ArrowRight, Check, Info, PackageCheck, Store, Truck} from "lucide-react";
+import {AlertCircle, ArrowLeft, ArrowRight, Check, Info, PackageCheck, Store, Truck, UserRound} from "lucide-react";
 import {useTranslation} from "react-i18next";
 import {Button} from "@/components/ui/button";
 import {Skeleton} from "@/components/ui/skeleton";
@@ -10,6 +10,10 @@ import {FormTextarea} from "@/components/form/FormTextarea";
 import {ROUTES} from "@/constants/routes";
 import {AZ_PHONE_PATTERN, EMAIL_PATTERN} from "@/constants/validation";
 import {cartActions} from "@/hooks/useCart";
+import {useGetAddresses, useGetProfile, usePlaceOrder} from "@/hooks/account";
+import {useAuth} from "@/hooks/useAuth";
+import {useLanguage} from "@/hooks/useLanguage";
+import {splitErrorCode} from "@/helpers/apiError";
 import {useCartSummary} from "@/hooks/useCartSummary";
 import {OrderSummary} from "@/pages/CheckoutPage/widgets/OrderSummary";
 import {EmptyState} from "@/widgets/EmptyState";
@@ -37,9 +41,6 @@ const STEP_FIELDS: FieldPath<CheckoutForm>[][] = [
     [],
 ];
 
-/** A demo order number in the shop's format: FL-2026-48213. */
-const makeOrderNumber = (): string => `FL-${new Date().getFullYear()}-${String(Math.floor(10000 + Math.random() * 90000))}`;
-
 type ChoiceCardProps = {
     checked: boolean;
     icon: ReactNode;
@@ -62,29 +63,80 @@ const ChoiceCard = ({checked, icon, title, hint, children}: ChoiceCardProps) => 
     </label>
 );
 
-/** Three steps (contact, delivery, confirm) beside the order summary. A demo: nothing is sent and no money is taken. */
+/**
+ * Three steps (contact, delivery, confirm) beside the order summary. The order is written to the database by
+ * `place_order`, which checks prices and stock; payment stays a demo. A signed-in reader finds the form filled from
+ * their profile and default address.
+ */
 export const CheckoutPage = () => {
     const {t} = useTranslation(["cart", "common"]);
-    const {rows, totals, isLoading} = useCartSummary();
+    const {language} = useLanguage();
+    const {lines, rows, totals, isLoading} = useCartSummary();
+    const {user} = useAuth();
+    const {data: profile} = useGetProfile();
+    const {items: addresses, isFetched: addressesFetched} = useGetAddresses();
+    const order = usePlaceOrder();
     const [step, setStep] = useState(0);
     const [placed, setPlaced] = useState<{number: string; email: string} | null>(null);
+    const prefilled = useRef(false);
 
-    const {register, handleSubmit, trigger, control, formState: {errors}} = useForm<CheckoutForm>({
+    const {register, handleSubmit, trigger, control, reset, getValues, formState: {errors, isDirty}} = useForm<CheckoutForm>({
         mode: "onTouched",
         defaultValues: {firstName: "", lastName: "", email: "", phone: "+994 ", method: "courier", city: t("checkout.placeholders.city"), address: "", note: "", payment: "cash"},
     });
     const values = useWatch({control}) as CheckoutForm;
     const required = {required: t("checkout.validation.required")};
 
+    // Fill in what the account knows, once it has loaded, unless the reader already started typing.
+    useEffect(() => {
+        if (!user || !profile || !addressesFetched || isDirty || prefilled.current) return;
+        prefilled.current = true;
+        const [firstName = "", ...rest] = profile.fullName.split(/\s+/).filter(Boolean);
+        const address = addresses.find((item) => item.isDefault) ?? addresses[0];
+        const current = getValues();
+        reset({
+            ...current,
+            firstName,
+            lastName: rest.join(" "),
+            email: user.email ?? "",
+            phone: profile.phone || current.phone,
+            ...(address && {city: address.city, address: address.line, note: address.note}),
+        });
+    }, [user, profile, addresses, addressesFetched, isDirty, reset, getValues]);
+
     const next = async () => {
         if (await trigger(STEP_FIELDS[step])) setStep((current) => Math.min(current + 1, STEPS.length - 1));
     };
 
     const placeOrder = handleSubmit((form) => {
-        setPlaced({number: makeOrderNumber(), email: form.email});
-        cartActions.clear();
-        window.scrollTo({top: 0, behavior: "smooth"});
+        order.mutate(
+            {
+                items: lines.map((line) => ({bookId: line.bookId, quantity: line.quantity})),
+                firstName: form.firstName,
+                lastName: form.lastName,
+                email: form.email,
+                phone: form.phone,
+                deliveryMethod: form.method,
+                city: form.method === "courier" ? form.city : "",
+                address: form.method === "courier" ? form.address : "",
+                note: form.method === "courier" ? form.note : "",
+                paymentMethod: form.payment,
+            },
+            {
+                onSuccess: ({number}) => {
+                    setPlaced({number, email: form.email});
+                    cartActions.clear();
+                    window.scrollTo({top: 0, behavior: "smooth"});
+                },
+            },
+        );
     });
+
+    const [failureCode, failureDetail] = order.error ? splitErrorCode(order.error) : ["", ""];
+    const failedBook = rows.find((row) => row.book.id === failureDetail)?.book;
+    const failure = order.error
+        ? t(`checkout.errors.${failureCode}`, {title: failedBook?.title[language] ?? "", defaultValue: t("checkout.errors.default")})
+        : null;
 
     if (placed) {
         return (
@@ -96,8 +148,11 @@ export const CheckoutPage = () => {
                 <p className="eyebrow mt-10">{t("checkout.eyebrow")}</p>
                 <h1 className="mt-4 font-display text-[clamp(44px,6vw,72px)] font-medium leading-none">{t("checkout.success.title")}</h1>
                 <p className="mt-6 max-w-lg font-serif text-xl text-muted-foreground">{t("checkout.success.description", {number: placed.number, email: placed.email})}</p>
-                <p className="mt-3 text-xs text-faint-foreground">{t("checkout.success.note")}</p>
-                <Button asChild variant="accent" size="lg" className="mt-10 rounded-full"><Link to={ROUTES.CATALOG}>{t("checkout.success.continue")}<ArrowRight/></Link></Button>
+                <p className="mt-3 text-xs text-faint-foreground">{user ? t("checkout.savedTo") : t("checkout.success.note")}</p>
+                <div className="mt-10 flex flex-wrap justify-center gap-3">
+                    {user && <Button asChild variant="outline" size="lg" className="rounded-full"><Link to={ROUTES.ACCOUNT}>{t("checkout.viewOrders")}</Link></Button>}
+                    <Button asChild variant="accent" size="lg" className="rounded-full"><Link to={ROUTES.CATALOG}>{t("checkout.success.continue")}<ArrowRight/></Link></Button>
+                </div>
             </Page>
         );
     }
@@ -127,6 +182,11 @@ export const CheckoutPage = () => {
     return (
         <Page>
             <PageTitle eyebrow={t("checkout.eyebrow")} title={t("checkout.title")}/>
+
+            <p className="animate-fade-in mt-6 flex items-center gap-2.5 text-sm text-muted-foreground">
+                <UserRound className="size-4 shrink-0 stroke-[1.5] text-accent"/>
+                {user ? t("checkout.signedInAs", {email: user.email}) : <span>{t("checkout.signInHint")} <Link to={`${ROUTES.LOGIN}?next=${encodeURIComponent(ROUTES.CHECKOUT)}`} className="text-accent underline-offset-4 hover:text-accent-bright hover:underline">{t("checkout.signInLink")}</Link></span>}
+            </p>
 
             <ol className="mt-10 flex items-center gap-3" aria-label={t("checkout.step", {current: step + 1, total: STEPS.length})}>
                 {STEPS.map((id, index) => (
@@ -197,14 +257,17 @@ export const CheckoutPage = () => {
                                         </div>
                                     ))}
                                 </dl>
-                                <p className="mt-6 flex gap-2.5 text-[13px] leading-relaxed text-muted-foreground"><Info className="mt-0.5 size-4 shrink-0 text-accent"/>{t("checkout.demoNote")}</p>
+                                <p className="mt-6 flex gap-2.5 text-[13px] leading-relaxed text-muted-foreground"><Info className="mt-0.5 size-4 shrink-0 text-accent"/>{t("checkout.savedNote")}</p>
                             </div>
                         )}
                     </div>
 
+                    {failure && (
+                        <p role="alert" className="animate-fade-in mt-6 flex gap-2.5 border border-danger/40 bg-danger/10 px-4 py-3 text-sm text-danger"><AlertCircle className="mt-0.5 size-4 shrink-0"/>{failure}</p>
+                    )}
                     <div className="mt-6 flex items-center justify-between gap-3">
                         {step > 0 ? <Button type="button" variant="ghost" size="lg" onClick={() => setStep((current) => current - 1)}><ArrowLeft/>{t("checkout.back")}</Button> : <span/>}
-                        <Button type="submit" variant="accent" size="lg" className="rounded-full px-8">
+                        <Button type="submit" variant="accent" size="lg" loading={order.isPending} className="rounded-full px-8">
                             {step === STEPS.length - 1 ? t("checkout.place") : t("checkout.next")}
                             <ArrowRight/>
                         </Button>

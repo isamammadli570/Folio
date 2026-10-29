@@ -1,4 +1,4 @@
-import {Search} from "lucide-react";
+import {LogIn, Search, UserRound} from "lucide-react";
 import {useLocation} from "react-router";
 import {useTranslation} from "react-i18next";
 import {Kbd} from "@/components/ui/kbd";
@@ -8,6 +8,7 @@ import {CartStatusCard} from "@/layout/StoreLayout/Sidebar/CartStatusCard";
 import {NAV_GROUPS} from "@/constants/sidebar";
 import {ROUTES} from "@/constants/routes";
 import {useGetCategoryCounts} from "@/hooks/books";
+import {useAuth} from "@/hooks/useAuth";
 import {Logo} from "@/widgets/Logo";
 import {OrnamentDivider} from "@/widgets/OrnamentDivider";
 import {LanguageSwitcher} from "@/widgets/LanguageSwitcher";
@@ -32,6 +33,10 @@ export const Sidebar = ({onOpenSearch, onNavigate}: SidebarProps) => {
     const {t} = useTranslation();
     const {pathname, search} = useLocation();
     const {data: counts} = useGetCategoryCounts();
+    const {user} = useAuth();
+    const accountItem = user
+        ? {labelKey: "header.account", to: ROUTES.ACCOUNT, icon: UserRound}
+        : {labelKey: "header.signIn", to: ROUTES.LOGIN, icon: LogIn};
 
     return (
         <div className="flex h-full min-h-0 flex-col">
@@ -68,6 +73,9 @@ export const Sidebar = ({onOpenSearch, onNavigate}: SidebarProps) => {
                         ))}
                     </NavGroupSection>
                 ))}
+                <ul className="mt-2 border-t border-sidebar-border pt-3">
+                    <NavItemLink item={accountItem} index={0} isActive={isActiveLink(accountItem.to, pathname, search)} onNavigate={onNavigate}/>
+                </ul>
             </nav>
 
             <CartStatusCard onOpen={onNavigate}/>

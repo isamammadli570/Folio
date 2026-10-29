@@ -91,6 +91,20 @@
             "description": "Order number: {{number}}. We've sent a confirmation to {{email}}.",
             "note": "Demo mode: no email or delivery actually happens.",
             "continue": "Continue shopping"
+        },
+        "signedInAs": "Ordering as {{email}}",
+        "signInHint": "To track your orders,",
+        "signInLink": "sign in",
+        "savedNote": "The order is saved to the database and appears in your account. Payment is a demo — no money is taken.",
+        "placing": "Placing…",
+        "savedTo": "You can follow it in your account.",
+        "viewOrders": "View my orders",
+        "errors": {
+            "OUT_OF_STOCK": "Not enough copies of “{{title}}” are left. Please update your cart.",
+            "EMPTY_CART": "Your cart is empty.",
+            "INVALID_INPUT": "Please check your details.",
+            "UNKNOWN_BOOK": "One of the books in your cart is no longer in the catalogue.",
+            "default": "The order was not sent. Please try again shortly."
         }
     }
 }

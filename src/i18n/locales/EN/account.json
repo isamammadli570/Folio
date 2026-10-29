@@ -1,0 +1,135 @@
+{
+    "auth": {
+        "eyebrow": "Reader’s room",
+        "quote": {"text": "Books are the ships of thought, wandering through the sea of time.", "cite": "Francis Bacon"},
+        "login": {
+            "title": "Welcome back",
+            "subtitle": "Your orders, addresses and saved books, with you on every device.",
+            "submit": "Sign in",
+            "forgot": "Forgot your password?",
+            "noAccount": "No account yet?",
+            "register": "Create one",
+            "welcome": "Welcome, {{name}}"
+        },
+        "register": {
+            "title": "Join the library",
+            "subtitle": "One account — your cart and favourites on every device, your orders in one place.",
+            "submit": "Create account",
+            "hasAccount": "Already have an account?",
+            "login": "Sign in",
+            "created": "Your account is ready",
+            "checkEmail": {
+                "title": "Check your inbox",
+                "description": "We sent a confirmation link to {{email}}. Your account is active once you open it.",
+                "back": "Back to sign in"
+            }
+        },
+        "forgot": {
+            "title": "Reset your password",
+            "subtitle": "Enter your email and we will send a link to set a new password.",
+            "submit": "Send link",
+            "sent": "If an account exists for {{email}}, a reset link is on its way.",
+            "back": "Back to sign in"
+        },
+        "reset": {
+            "title": "New password",
+            "subtitle": "Choose a new password for your account.",
+            "submit": "Update password",
+            "done": "Your password has been updated",
+            "invalid": "This link has expired or was already used. Ask for a new one.",
+            "requestNew": "Request a new link"
+        },
+        "fields": {
+            "fullName": "Full name",
+            "email": "Email",
+            "password": "Password",
+            "newPassword": "New password",
+            "confirmPassword": "Repeat password"
+        },
+        "placeholders": {"fullName": "Jane Austen", "email": "jane@example.com", "password": "••••••••"},
+        "showPassword": "Show password",
+        "hidePassword": "Hide password",
+        "validation": {
+            "required": "Please fill this in",
+            "email": "Check the email address",
+            "passwordLength": "At least {{count}} characters",
+            "passwordMatch": "Passwords do not match"
+        },
+        "errors": {
+            "invalid_credentials": "Wrong email or password",
+            "user_already_exists": "An account with this email already exists",
+            "email_not_confirmed": "Please confirm your email first",
+            "weak_password": "This password is too weak",
+            "same_password": "The new password must differ from the old one",
+            "over_email_send_rate_limit": "Too many emails sent. Try again in a few minutes",
+            "over_request_rate_limit": "Too many attempts. Please wait a moment",
+            "default": "Something went wrong. Please try again"
+        }
+    },
+    "nav": {
+        "title": "Account",
+        "greeting": "Hello, {{name}}",
+        "reader": "reader",
+        "orders": "Orders",
+        "addresses": "Addresses",
+        "profile": "Profile",
+        "favorites": "Favourites",
+        "signOut": "Sign out",
+        "signedOut": "You are signed out"
+    },
+    "orders": {
+        "title": "Orders",
+        "subtitle": "Every order you placed and where it stands.",
+        "empty": "No orders yet.",
+        "emptyQuote": "Every great library begins with a single book.",
+        "emptyAction": "Browse the catalogue",
+        "placedOn": "Placed on {{date}}",
+        "items_one": "{{count}} book",
+        "items_other": "{{count}} books",
+        "subtotal": "Books",
+        "shipping": "Delivery",
+        "free": "Free",
+        "total": "Total",
+        "details": "Details",
+        "hide": "Hide",
+        "deliverTo": "Delivery",
+        "payment": "Payment",
+        "status": {
+            "new": "Received",
+            "processing": "Preparing",
+            "shipped": "On the way",
+            "delivered": "Delivered",
+            "cancelled": "Cancelled"
+        }
+    },
+    "addresses": {
+        "title": "Addresses",
+        "subtitle": "Your default address fills in at checkout.",
+        "add": "Add address",
+        "new": "New address",
+        "edit": "Edit",
+        "delete": "Delete",
+        "confirmDelete": "Delete it?",
+        "default": "Default",
+        "makeDefault": "Make default",
+        "empty": "You have not added an address yet.",
+        "save": "Save",
+        "cancel": "Cancel",
+        "saved": "Address saved",
+        "deleted": "Address deleted",
+        "fields": {"label": "Name", "city": "City", "line": "Address", "note": "Note for the courier", "isDefault": "Use as my default address"},
+        "placeholders": {"label": "Home, work…", "city": "Baku", "line": "12 Nizami St, apt 4", "note": "Door code, floor…"}
+    },
+    "profile": {
+        "title": "Profile",
+        "subtitle": "Contact details used for your orders.",
+        "save": "Save",
+        "saved": "Profile updated",
+        "emailHint": "Your email is your sign-in and cannot be changed.",
+        "security": "Security",
+        "securityHint": "Set a new password. Sessions on other devices stay open.",
+        "changePassword": "Change password",
+        "passwordChanged": "Password changed",
+        "memberSince": "Reader since {{date}}"
+    }
+}
