@@ -9,7 +9,8 @@ import {SPOTLIGHT_INTERVAL_MS} from "@/constants/other";
 import {useLanguage} from "@/hooks/useLanguage";
 import {usePrefersReducedMotion} from "@/hooks/usePrefersReducedMotion";
 import {formatLifespan, surname, upper} from "@/helpers/format";
-import {FlowingLines} from "@/widgets/FlowingLines";
+import {Astrolabe} from "@/widgets/Astrolabe";
+import {GoldDust} from "@/widgets/GoldDust";
 import {SceneArc} from "@/widgets/SceneArc";
 import {Bust} from "@/widgets/Bust";
 import {Medallion} from "@/widgets/Medallion";
@@ -95,8 +96,8 @@ export const AuthorSpotlight = ({authors, isLoading, index, onIndexChange}: Auth
             <SceneArc src={author?.scene} letter={letter} isHidden={isLeaving}/>
             <div aria-hidden className="pointer-events-none absolute left-[6%] top-[-150px] size-[820px] rounded-full border border-accent/20"/>
             <div aria-hidden className="pointer-events-none absolute left-[14%] top-[-250px] size-[980px] rounded-full border border-accent/10"/>
-            <FlowingLines className="absolute -right-16 -top-10 w-[min(560px,80vw)] opacity-55 [animation:drift_18s_ease-in-out_infinite]"/>
-            <FlowingLines phase={2} className="absolute -bottom-16 -right-20 w-[min(480px,70vw)] -scale-y-100 opacity-40"/>
+            <Astrolabe className="-right-48 -top-48 w-[min(680px,95vw)] max-lg:opacity-60"/>
+            <GoldDust className="absolute bottom-0 right-0 h-3/5 w-3/5" count={22}/>
 
             <div className="px-gutter relative mx-auto grid max-w-[1240px] items-center gap-10 pb-12 pt-20 [grid-template-areas:'medal'_'info'_'bio'] md:pb-16 md:pt-24 lg:h-[800px] lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.25fr)_minmax(0,1.15fr)] lg:gap-6 lg:[grid-template-areas:'bio_medal_info']">
                 <div className={cn("transition-[opacity,transform,filter] duration-500 [grid-area:bio] lg:max-w-[300px] lg:self-end lg:pb-6", isLeaving && "-translate-x-3 opacity-0 blur-sm")}>

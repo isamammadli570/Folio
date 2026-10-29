@@ -11,7 +11,8 @@ import {formatLifespan, surname} from "@/helpers/format";
 import {RouteErrorPage} from "@/router/RouteErrorPage";
 import {BookGrid, BookGridSkeleton} from "@/widgets/BookGrid";
 import {Bust} from "@/widgets/Bust";
-import {FlowingLines} from "@/widgets/FlowingLines";
+import {Astrolabe} from "@/widgets/Astrolabe";
+import {GoldDust} from "@/widgets/GoldDust";
 import {Medallion} from "@/widgets/Medallion";
 import {Reveal} from "@/widgets/Reveal";
 import {SceneArc} from "@/widgets/SceneArc";
@@ -58,7 +59,8 @@ export const AuthorPage = () => {
         <div className="page-enter">
             <section className="relative isolate overflow-hidden border-b border-border bg-[radial-gradient(60%_70%_at_18%_45%,var(--hero-glow),transparent_70%),radial-gradient(50%_60%_at_55%_55%,var(--hero-glow-soft),transparent_70%)]">
                 <SceneArc src={author?.scene} letter={letter}/>
-                <FlowingLines className="absolute -right-16 -top-10 w-[min(560px,80vw)] opacity-50 [animation:drift_18s_ease-in-out_infinite]"/>
+                <Astrolabe className="-right-48 -top-48 w-[min(680px,95vw)] max-lg:opacity-60"/>
+                <GoldDust className="absolute bottom-0 right-0 h-3/5 w-3/5" count={16} seed={11}/>
 
                 <div className="px-gutter relative mx-auto max-w-[1240px] pb-0 pt-10">
                     <nav aria-label="breadcrumb" className="flex items-center gap-1.5 text-xs text-muted-foreground">

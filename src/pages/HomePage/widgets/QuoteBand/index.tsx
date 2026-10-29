@@ -1,7 +1,7 @@
 import {Fragment, useEffect, useState, type CSSProperties} from "react";
 import {useTranslation} from "react-i18next";
 import {usePrefersReducedMotion} from "@/hooks/usePrefersReducedMotion";
-import {FlowingLines} from "@/widgets/FlowingLines";
+import {GoldDust} from "@/widgets/GoldDust";
 import {Reveal} from "@/widgets/Reveal";
 import {cn} from "@/lib/utils";
 
@@ -37,7 +37,7 @@ export const QuoteBand = () => {
             <span aria-hidden className="pointer-events-none absolute -left-6 -top-24 font-display text-[clamp(320px,40vw,560px)] leading-none text-transparent [-webkit-text-stroke:1px_color-mix(in_srgb,var(--accent)_22%,transparent)]">“</span>
             <div aria-hidden className="halftone pointer-events-none absolute -right-40 top-1/2 size-[640px] -translate-y-1/2 rounded-full opacity-60"/>
             <div aria-hidden className="pointer-events-none absolute -right-24 top-1/2 size-[520px] -translate-y-1/2 rounded-full border border-accent/15"/>
-            <FlowingLines phase={4} className="absolute -bottom-24 -left-20 w-[min(520px,80vw)] opacity-30"/>
+            <GoldDust className="absolute inset-0" count={20} seed={23}/>
 
             <Reveal className="px-gutter relative mx-auto flex max-w-[980px] flex-col items-center py-24 text-center md:py-32">
                 <div aria-hidden className="flex items-center gap-3">

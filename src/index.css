@@ -190,9 +190,6 @@
 @keyframes shimmer {
     to { transform: translateX(100%); }
 }
-@keyframes drift {
-    50% { transform: translate(-14px, 10px) rotate(-2deg); }
-}
 @keyframes glint {
     0%, 60% { background-position: 120% 0; }
     100% { background-position: -60% 0; }
@@ -206,6 +203,16 @@
 }
 @keyframes book-arrive {
     from { opacity: 0; transform: rotateX(8deg) rotateY(70deg) translateY(30px); }
+}
+@keyframes twinkle {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 1; }
+}
+@keyframes mote-rise {
+    0% { opacity: 0; transform: translate3d(0, 0, 0); }
+    15% { opacity: 0.8; }
+    85% { opacity: 0.5; }
+    100% { opacity: 0; transform: translate3d(var(--drift, 0px), -220px, 0); }
 }
 @keyframes reveal-up {
     from { opacity: 0; transform: translateY(28px); }
@@ -694,6 +701,38 @@
     .timeline-mark { opacity: 0; transform: translateY(-10px); transition: opacity 600ms 900ms var(--ease-out), transform 600ms 900ms var(--ease-spring); }
     [data-visible] .timeline-life { transform: scaleX(1); }
     [data-visible] .timeline-mark { opacity: 1; transform: none; }
+
+    /* ── Astrolabe ── stacked hairline layers; the scale and the rete turn in opposite directions, stars twinkle.
+       The mask dissolves every edge into the page, so no box outline ever shows. */
+    .astrolabe {
+        position: absolute;
+        aspect-ratio: 1;
+        color: color-mix(in srgb, var(--accent) 38%, transparent);
+        mask-image: radial-gradient(circle, #000 38%, transparent 70%);
+    }
+    .astrolabe__layer { position: absolute; inset: 0; width: 100%; height: 100%; will-change: transform; }
+    .astrolabe__scale { animation: spin 180s linear infinite; }
+    .astrolabe__rete { animation: spin 120s linear infinite reverse; }
+    .astrolabe__star {
+        position: absolute;
+        border-radius: 9999px;
+        translate: -50% -50%;
+        background: var(--accent-bright);
+        box-shadow: 0 0 8px 1px color-mix(in srgb, var(--accent) 55%, transparent);
+        animation: twinkle 4.5s ease-in-out infinite;
+        animation-delay: calc(var(--i, 0) * -0.7s);
+    }
+
+    /* ── Gold dust ── each mote rises and fades on its own clock. */
+    .gold-mote {
+        position: absolute;
+        border-radius: 9999px;
+        background: var(--accent-bright);
+        box-shadow: 0 0 6px 1px color-mix(in srgb, var(--accent) 60%, transparent);
+        opacity: 0;
+        animation: mote-rise linear infinite;
+        will-change: transform, opacity;
+    }
 
     /* ── Logo ── lines draw in, the flame lights and breathes, a page turns on hover. */
     .logo__draw {
