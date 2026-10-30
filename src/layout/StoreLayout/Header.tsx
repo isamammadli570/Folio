@@ -1,16 +1,14 @@
 import {Link, useLocation} from "react-router";
-import {Heart, Menu, Search, ShoppingBag, UserRound} from "lucide-react";
+import {Heart, Menu, Search, ShoppingBag} from "lucide-react";
 import {useTranslation} from "react-i18next";
 import {Kbd} from "@/components/ui/kbd";
 import {HEADER_LINKS} from "@/constants/sidebar";
 import {ROUTES} from "@/constants/routes";
 import {cartActions, useCart} from "@/hooks/useCart";
 import {useFavorites} from "@/hooks/useFavorites";
-import {useAuth} from "@/hooks/useAuth";
 import {preloadRoute} from "@/router/preload";
 import {Logo} from "@/widgets/Logo";
-import {LanguageSwitcher} from "@/widgets/LanguageSwitcher";
-import {ThemeToggle} from "@/widgets/ThemeToggle";
+import {AccountMenu} from "@/layout/StoreLayout/AccountMenu";
 import {CART_TARGET_ATTRIBUTE} from "@/lib/flyTo";
 import {MOD_KEY} from "@/lib/platform";
 import {cn} from "@/lib/utils";
@@ -27,14 +25,12 @@ const Count = ({value}: {value: number}) =>
         <span key={value} className="tabular animate-bump absolute -right-1 -top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-accent px-1 text-[10.5px] font-semibold text-accent-ink">{value}</span>
     ) : null;
 
-/** The glass bar on top of every page: logo, sections, search, language, favourites and the cart. */
+/** The glass bar on top of every page: logo, sections, search, favourites, the cart and the account menu (theme and language live there). */
 export const Header = ({onOpenMenu, onOpenSearch}: HeaderProps) => {
     const {t} = useTranslation();
     const {count} = useCart();
     const {ids: favoriteIds} = useFavorites();
     const {pathname} = useLocation();
-    const {user} = useAuth();
-    const accountTo = user ? ROUTES.ACCOUNT : ROUTES.LOGIN;
 
     return (
         <>
@@ -79,17 +75,6 @@ export const Header = ({onOpenMenu, onOpenSearch}: HeaderProps) => {
                         <button type="button" onClick={onOpenSearch} aria-label={t("header.search")} className={cn(iconButton, "md:hidden")}>
                             <Search/>
                         </button>
-                        <LanguageSwitcher className="hidden h-10 sm:inline-flex"/>
-                        <ThemeToggle className="hidden sm:flex"/>
-                        <Link
-                            to={accountTo}
-                            onPointerEnter={() => preloadRoute(accountTo)}
-                            aria-label={t(user ? "header.account" : "header.signIn")}
-                            className={cn(iconButton, "max-[420px]:hidden", user && "border-accent/60 text-accent-bright")}
-                        >
-                            <UserRound/>
-                            {user && <span aria-hidden className="absolute -bottom-0.5 -right-0.5 size-2.5 rounded-full border-2 border-background bg-accent"/>}
-                        </Link>
                         <Link to={ROUTES.FAVORITES} aria-label={t("header.favorites")} className={cn(iconButton, "max-[380px]:hidden")}>
                             <Heart/>
                             <Count value={favoriteIds.length}/>
@@ -104,6 +89,7 @@ export const Header = ({onOpenMenu, onOpenSearch}: HeaderProps) => {
                             <ShoppingBag/>
                             <Count value={count}/>
                         </button>
+                        <AccountMenu buttonClassName={iconButton}/>
                     </div>
                 </div>
             </header>

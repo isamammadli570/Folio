@@ -7,15 +7,19 @@ import {cn} from "@/lib/utils";
 type NavGroupSectionProps = {
     group: NavGroup;
     children: ReactNode;
+    /** In the icon rail the caption gives way to a short rule and the group stays open. */
+    collapsed?: boolean;
 };
 
 /** A titled block of tabs. The title is a small dotted caption in spaced capitals; click it to fold the group. */
-export const NavGroupSection = ({group, children}: NavGroupSectionProps) => {
+export const NavGroupSection = ({group, children, collapsed = false}: NavGroupSectionProps) => {
     const {t} = useTranslation();
-    const [isOpen, setIsOpen] = useState(true);
+    const [isGroupOpen, setIsOpen] = useState(true);
+    const isOpen = collapsed || isGroupOpen;
 
     return (
         <section className="flex flex-col">
+            {collapsed ? <span aria-hidden className="mx-auto my-3 h-px w-6 bg-sidebar-border"/> : (
             <button
                 type="button"
                 onClick={() => setIsOpen((open) => !open)}
@@ -26,6 +30,7 @@ export const NavGroupSection = ({group, children}: NavGroupSectionProps) => {
                 <span className="flex-1 text-[10.5px] font-medium uppercase tracking-[0.2em] text-sidebar-muted transition-colors group-hover/header:text-brand-ink">{t(group.labelKey as never)}</span>
                 <ChevronDown className={cn("size-3.5 text-sidebar-muted/70 transition-transform duration-300 ease-out", !isOpen && "-rotate-90")}/>
             </button>
+            )}
             <div className={cn("grid transition-[grid-template-rows] duration-300 ease-out", isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
                 <div className="min-h-0 overflow-hidden">
                     <ul className="stagger flex flex-col gap-1 pb-3 pt-0.5">{children}</ul>

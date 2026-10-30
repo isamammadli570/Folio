@@ -14,6 +14,7 @@ import {EMAIL_PATTERN, PASSWORD_MIN_LENGTH} from "@/constants/validation";
 import {errorCode} from "@/helpers/apiError";
 import {AuthFrame} from "@/widgets/AuthFrame";
 import {FormAlert} from "@/widgets/AuthFrame/FormAlert";
+import {GoogleButton} from "@/widgets/AuthFrame/GoogleButton";
 
 type RegisterForm = {fullName: string; email: string; password: string};
 
@@ -58,6 +59,8 @@ export const RegisterPage = () => {
             subtitle={t("auth.register.subtitle")}
             footer={<>{t("auth.register.hasAccount")} <Link to={next ? `${ROUTES.LOGIN}?next=${encodeURIComponent(next)}` : ROUTES.LOGIN} className="text-accent underline-offset-4 hover:text-accent-bright hover:underline">{t("auth.register.login")}</Link></>}
         >
+            <GoogleButton next={safeNext(next)}/>
+            <div className="h-5"/>
             <form onSubmit={handleSubmit((form) => create.mutate(form))} noValidate className="flex flex-col gap-5">
                 <FormInput label={t("auth.fields.fullName")} required autoComplete="name" placeholder={t("auth.placeholders.fullName")} error={errors.fullName?.message} {...register("fullName", {validate: (value) => value.trim().length > 0 || t("auth.validation.required")})}/>
                 <FormInput label={t("auth.fields.email")} required type="email" autoComplete="email" placeholder={t("auth.placeholders.email")} error={errors.email?.message} {...register("email", {...required, pattern: {value: EMAIL_PATTERN, message: t("auth.validation.email")}})}/>

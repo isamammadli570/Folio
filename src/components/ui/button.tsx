@@ -14,6 +14,7 @@ const buttonVariants = cva(
                 outline: "border-border bg-surface text-foreground hover:border-border-strong hover:bg-muted",
                 ghost: "text-muted-foreground hover:bg-muted hover:text-foreground",
                 accent: "overflow-hidden bg-accent text-accent-ink hover:bg-accent-bright before:pointer-events-none before:absolute before:inset-0 before:-translate-x-full before:skew-x-[-20deg] before:bg-gradient-to-r before:from-transparent before:via-white/40 before:to-transparent before:transition-transform before:duration-700 hover:before:translate-x-full",
+                danger: "bg-danger text-background hover:bg-danger/85",
                 "destructive-ghost": "text-muted-foreground hover:bg-danger-soft hover:text-danger",
                 link: "h-auto rounded-none p-0 text-foreground underline-offset-4 hover:underline",
             },

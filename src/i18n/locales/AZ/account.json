@@ -1,7 +1,10 @@
 {
     "auth": {
         "eyebrow": "Oxucu kabineti",
-        "quote": {"text": "Kitablar zamanın dənizində üzən gəmilərdir.", "cite": "Frensis Bekon"},
+        "quote": {
+            "text": "Kitablar zamanın dənizində üzən gəmilərdir.",
+            "cite": "Frensis Bekon"
+        },
         "login": {
             "title": "Xoş gəlmisiniz",
             "subtitle": "Sifarişləriniz, ünvanlarınız və seçdiyiniz kitablar hər cihazda sizinlə olsun.",
@@ -46,7 +49,11 @@
             "newPassword": "Yeni şifrə",
             "confirmPassword": "Şifrəni təkrarlayın"
         },
-        "placeholders": {"fullName": "Leyla Məmmədova", "email": "leyla@example.com", "password": "••••••••"},
+        "placeholders": {
+            "fullName": "Leyla Məmmədova",
+            "email": "leyla@example.com",
+            "password": "••••••••"
+        },
         "showPassword": "Şifrəni göstər",
         "hidePassword": "Şifrəni gizlət",
         "validation": {
@@ -63,8 +70,12 @@
             "same_password": "Yeni şifrə köhnəsindən fərqli olmalıdır",
             "over_email_send_rate_limit": "Çox sayda məktub göndərildi. Bir neçə dəqiqə sonra yenidən cəhd edin",
             "over_request_rate_limit": "Çox sayda cəhd. Bir az gözləyin",
-            "default": "Nəsə alınmadı. Yenidən cəhd edin"
-        }
+            "default": "Nəsə alınmadı. Yenidən cəhd edin",
+            "provider_disabled": "Google ilə giriş hələ aktiv deyil",
+            "validation_failed": "Google ilə giriş hələ aktiv deyil"
+        },
+        "google": "Google ilə davam et",
+        "or": "və ya"
     },
     "nav": {
         "title": "Kabinet",
@@ -117,8 +128,19 @@
         "cancel": "Ləğv et",
         "saved": "Ünvan yadda saxlanıldı",
         "deleted": "Ünvan silindi",
-        "fields": {"label": "Ad", "city": "Şəhər", "line": "Ünvan", "note": "Kuryer üçün qeyd", "isDefault": "Əsas ünvan kimi istifadə et"},
-        "placeholders": {"label": "Ev, iş…", "city": "Bakı", "line": "Nizami küç. 12, mənzil 4", "note": "Qapı kodu, mərtəbə…"}
+        "fields": {
+            "label": "Ad",
+            "city": "Şəhər",
+            "line": "Ünvan",
+            "note": "Kuryer üçün qeyd",
+            "isDefault": "Əsas ünvan kimi istifadə et"
+        },
+        "placeholders": {
+            "label": "Ev, iş…",
+            "city": "Bakı",
+            "line": "Nizami küç. 12, mənzil 4",
+            "note": "Qapı kodu, mərtəbə…"
+        }
     },
     "profile": {
         "title": "Profil",

@@ -117,13 +117,14 @@
     --text-halo: rgb(243 238 227 / 0.9);
 }
 
-/* While the theme switches, colours cross-fade instead of snapping (useTheme adds the class for a moment). */
-.theme-switching,
-.theme-switching *,
-.theme-switching *::before,
-.theme-switching *::after {
-    transition: background-color 400ms ease, border-color 400ms ease, color 400ms ease, fill 400ms ease, stroke 400ms ease !important;
+/* The theme reveal (useTheme): the new page snapshot opens out as a circle over the old one, so nothing else may fade. */
+.theme-reveal::view-transition-old(root),
+.theme-reveal::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
 }
+.theme-reveal::view-transition-old(root) { z-index: 1; }
+.theme-reveal::view-transition-new(root) { z-index: 2; }
 
 @theme inline {
     --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -193,6 +194,9 @@
 @utility animate-spin-slow {
     animation: spin 60s linear infinite;
 }
+@utility animate-grow-bar {
+    animation: grow-bar 700ms var(--ease-out) both;
+}
 @utility animate-hover-float {
     animation: hover-float 7s ease-in-out infinite;
 }
@@ -222,6 +226,9 @@
 }
 @keyframes bump {
     40% { transform: scale(1.4); }
+}
+@keyframes grow-bar {
+    from { transform: scaleY(0); }
 }
 @keyframes hover-float {
     50% { transform: translateY(-12px); }

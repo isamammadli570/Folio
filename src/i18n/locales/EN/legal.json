@@ -1,0 +1,51 @@
+{
+    "privacy": {
+        "eyebrow": "Privacy",
+        "title": "Privacy policy",
+        "updated": "Last updated: {{date}}",
+        "intro": "Folio is a portfolio project: a working example of a book shop. Orders are not really shipped and no money is taken. This page explains what the site stores and why.",
+        "sections": [
+            {
+                "title": "What we store",
+                "items": [
+                    "Account: your name, email and password (the password is only ever stored hashed). If you sign in with Google, we receive only your name, email and profile photo from Google.",
+                    "Orders: first and last name, email, phone, delivery address and note, and the books you ordered.",
+                    "Your account area: the addresses you add, your cart and your favourites.",
+                    "No payment details are stored — the site never asks for card data."
+                ]
+            },
+            {
+                "title": "Why we use it",
+                "items": [
+                    "To recognise you and sign you in.",
+                    "To place your order and show it in your account.",
+                    "To keep your cart and favourites across devices.",
+                    "We do not sell your data, use it for advertising or share it with third parties."
+                ]
+            },
+            {
+                "title": "Where it is kept",
+                "items": [
+                    "Data is stored in a Supabase database; each user can read only their own records.",
+                    "The site is hosted on Vercel. Google sign-in happens on Google's own page; your Google password never reaches us."
+                ]
+            },
+            {
+                "title": "In your browser",
+                "items": [
+                    "Your language, theme (dark/light), cart and favourites are kept in the browser's storage (localStorage).",
+                    "No tracking or advertising cookies are used."
+                ]
+            },
+            {
+                "title": "Your rights",
+                "items": [
+                    "You can change or remove your profile and addresses in your account at any time.",
+                    "To have your account and all your data deleted, write to {{email}} — it will be removed within a few days."
+                ]
+            }
+        ],
+        "contact": "Questions: {{email}}",
+        "link": "Privacy"
+    }
+}

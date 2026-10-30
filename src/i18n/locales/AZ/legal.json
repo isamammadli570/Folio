@@ -1,0 +1,51 @@
+{
+    "privacy": {
+        "eyebrow": "Məxfilik",
+        "title": "Məxfilik siyasəti",
+        "updated": "Son yenilənmə: {{date}}",
+        "intro": "Folio portfolio layihəsidir: kitab mağazasının işləyən nümunəsi. Sifarişlər real göndərilmir və pul alınmır. Bu səhifə saytın hansı məlumatı, nə üçün saxladığını izah edir.",
+        "sections": [
+            {
+                "title": "Hansı məlumatı saxlayırıq",
+                "items": [
+                    "Hesab: ad, e-poçt və şifrə (şifrə yalnız şifrələnmiş şəkildə saxlanılır). Google ilə daxil olsanız, Google-dan yalnız adınızı, e-poçtunuzu və profil şəklinizi alırıq.",
+                    "Sifarişlər: ad, soyad, e-poçt, telefon, çatdırılma ünvanı və qeyd, sifariş etdiyiniz kitablar.",
+                    "Kabinet: əlavə etdiyiniz ünvanlar, səbət və seçilmiş kitablar.",
+                    "Ödəniş məlumatı saxlanılmır — sayt kart məlumatı soruşmur."
+                ]
+            },
+            {
+                "title": "Nə üçün istifadə edirik",
+                "items": [
+                    "Sizi tanımaq və hesabınıza daxil etmək.",
+                    "Sifarişi rəsmiləşdirmək və kabinetdə göstərmək.",
+                    "Səbəti və seçilmişləri cihazlar arasında saxlamaq.",
+                    "Məlumatlarınızı satmırıq, reklam üçün istifadə etmirik və üçüncü tərəflərə vermirik."
+                ]
+            },
+            {
+                "title": "Harada saxlanılır",
+                "items": [
+                    "Məlumatlar Supabase verilənlər bazasında saxlanılır; hər istifadəçi yalnız öz məlumatını görə bilər.",
+                    "Sayt Vercel-də yerləşir. Google girişi Google-un öz səhifəsində baş verir; şifrəniz bizə ötürülmür."
+                ]
+            },
+            {
+                "title": "Brauzerinizdə",
+                "items": [
+                    "Dil, rejim (tünd/işıqlı), səbət və seçilmişlər brauzerin yaddaşında (localStorage) saxlanılır.",
+                    "İzləmə və ya reklam kukiləri istifadə olunmur."
+                ]
+            },
+            {
+                "title": "Hüquqlarınız",
+                "items": [
+                    "Profil və ünvanları kabinetdə istənilən vaxt dəyişə və ya silə bilərsiniz.",
+                    "Hesabınızın və bütün məlumatlarınızın silinməsini istəsəniz, {{email}} ünvanına yazın — bir neçə gün ərzində silinəcək."
+                ]
+            }
+        ],
+        "contact": "Suallar üçün: {{email}}",
+        "link": "Məxfilik"
+    }
+}

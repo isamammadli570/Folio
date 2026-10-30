@@ -1,4 +1,4 @@
-import {LogIn, Search, UserRound} from "lucide-react";
+import {LayoutDashboard, LogIn, Search, UserRound} from "lucide-react";
 import {useLocation} from "react-router";
 import {useTranslation} from "react-i18next";
 import {Kbd} from "@/components/ui/kbd";
@@ -9,6 +9,7 @@ import {NAV_GROUPS} from "@/constants/sidebar";
 import {ROUTES} from "@/constants/routes";
 import {useGetCategoryCounts} from "@/hooks/books";
 import {useAuth} from "@/hooks/useAuth";
+import {useIsAdmin} from "@/hooks/admin";
 import {Logo} from "@/widgets/Logo";
 import {OrnamentDivider} from "@/widgets/OrnamentDivider";
 import {LanguageSwitcher} from "@/widgets/LanguageSwitcher";
@@ -35,6 +36,7 @@ export const Sidebar = ({onOpenSearch, onNavigate}: SidebarProps) => {
     const {pathname, search} = useLocation();
     const {data: counts} = useGetCategoryCounts();
     const {user} = useAuth();
+    const {isAdmin} = useIsAdmin();
     const accountItem = user
         ? {labelKey: "header.account", to: ROUTES.ACCOUNT, icon: UserRound}
         : {labelKey: "header.signIn", to: ROUTES.LOGIN, icon: LogIn};
@@ -79,6 +81,7 @@ export const Sidebar = ({onOpenSearch, onNavigate}: SidebarProps) => {
                 ))}
                 <ul className="mt-2 border-t border-sidebar-border pt-3">
                     <NavItemLink item={accountItem} index={0} isActive={isActiveLink(accountItem.to, pathname, search)} onNavigate={onNavigate}/>
+                    {isAdmin && <NavItemLink item={{labelKey: "admin:nav.panel", to: ROUTES.ADMIN, icon: LayoutDashboard}} index={1} isActive={false} onNavigate={onNavigate}/>}
                 </ul>
             </nav>
 

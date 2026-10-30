@@ -105,7 +105,7 @@ export const Footer = () => {
             <div className="relative border-t border-border bg-[var(--night)]">
                 <div className="px-gutter mx-auto flex max-w-[1240px] flex-col gap-4 py-6 text-xs leading-relaxed text-faint-foreground sm:flex-row sm:items-center sm:justify-between">
                     <div className="space-y-1">
-                        <p>{t("footer.rights", {year: new Date().getFullYear()})} · {t("footer.delivery")}</p>
+                        <p>{t("footer.rights", {year: new Date().getFullYear()})} · {t("footer.delivery")} · <Link to={ROUTES.PRIVACY} className="underline-offset-4 hover:text-accent-bright hover:underline">{t("legal:privacy.link")}</Link></p>
                         <p>{t("footer.note")} {t("footer.aiNote")}</p>
                     </div>
                     <button

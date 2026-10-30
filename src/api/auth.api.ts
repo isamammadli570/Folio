@@ -43,3 +43,15 @@ export const signOut = async () => {
     const {error} = await supabase.auth.signOut();
     if (error) fail(error);
 };
+
+/**
+ * Leaves for Google's sign-in page; Supabase brings the reader back to `next` on this site already signed in.
+ * A Google account with the same email as an existing Folio account is joined to it by Supabase.
+ */
+export const signInWithGoogle = async (next: string) => {
+    const {error} = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {redirectTo: absolute(next), queryParams: {prompt: "select_account"}},
+    });
+    if (error) fail(error);
+};

@@ -11,8 +11,10 @@ import {FormPassword} from "@/components/form/FormPassword";
 import {ROUTES, safeNext} from "@/constants/routes";
 import {EMAIL_PATTERN} from "@/constants/validation";
 import {errorCode} from "@/helpers/apiError";
+import {userIdentity} from "@/helpers/user";
 import {AuthFrame} from "@/widgets/AuthFrame";
 import {FormAlert} from "@/widgets/AuthFrame/FormAlert";
+import {GoogleButton} from "@/widgets/AuthFrame/GoogleButton";
 
 type LoginForm = {email: string; password: string};
 
@@ -28,7 +30,7 @@ export const LoginPage = () => {
         mutationFn: signIn,
         meta: {suppressGlobalError: true},
         onSuccess: ({user}) => {
-            const name = (user?.user_metadata as {full_name?: string} | undefined)?.full_name?.split(" ")[0] ?? "";
+            const name = userIdentity(user).name.split(" ")[0];
             toast.success(t("auth.login.welcome", {name}));
             navigate(safeNext(next), {replace: true});
         },
@@ -41,6 +43,8 @@ export const LoginPage = () => {
             subtitle={t("auth.login.subtitle")}
             footer={<>{t("auth.login.noAccount")} <Link to={withNext(ROUTES.REGISTER)} className="text-accent underline-offset-4 hover:text-accent-bright hover:underline">{t("auth.login.register")}</Link></>}
         >
+            <GoogleButton next={safeNext(next)}/>
+            <div className="h-5"/>
             <form onSubmit={handleSubmit((form) => login.mutate(form))} noValidate className="flex flex-col gap-5">
                 <FormInput label={t("auth.fields.email")} required type="email" autoComplete="email" placeholder={t("auth.placeholders.email")} error={errors.email?.message} {...register("email", {...required, pattern: {value: EMAIL_PATTERN, message: t("auth.validation.email")}})}/>
                 <div>

@@ -1,7 +1,10 @@
 {
     "auth": {
         "eyebrow": "Reader’s room",
-        "quote": {"text": "Books are the ships of thought, wandering through the sea of time.", "cite": "Francis Bacon"},
+        "quote": {
+            "text": "Books are the ships of thought, wandering through the sea of time.",
+            "cite": "Francis Bacon"
+        },
         "login": {
             "title": "Welcome back",
             "subtitle": "Your orders, addresses and saved books, with you on every device.",
@@ -46,7 +49,11 @@
             "newPassword": "New password",
             "confirmPassword": "Repeat password"
         },
-        "placeholders": {"fullName": "Jane Austen", "email": "jane@example.com", "password": "••••••••"},
+        "placeholders": {
+            "fullName": "Jane Austen",
+            "email": "jane@example.com",
+            "password": "••••••••"
+        },
         "showPassword": "Show password",
         "hidePassword": "Hide password",
         "validation": {
@@ -63,8 +70,12 @@
             "same_password": "The new password must differ from the old one",
             "over_email_send_rate_limit": "Too many emails sent. Try again in a few minutes",
             "over_request_rate_limit": "Too many attempts. Please wait a moment",
-            "default": "Something went wrong. Please try again"
-        }
+            "default": "Something went wrong. Please try again",
+            "provider_disabled": "Google sign-in is not enabled yet",
+            "validation_failed": "Google sign-in is not enabled yet"
+        },
+        "google": "Continue with Google",
+        "or": "or"
     },
     "nav": {
         "title": "Account",
@@ -117,8 +128,19 @@
         "cancel": "Cancel",
         "saved": "Address saved",
         "deleted": "Address deleted",
-        "fields": {"label": "Name", "city": "City", "line": "Address", "note": "Note for the courier", "isDefault": "Use as my default address"},
-        "placeholders": {"label": "Home, work…", "city": "Baku", "line": "12 Nizami St, apt 4", "note": "Door code, floor…"}
+        "fields": {
+            "label": "Name",
+            "city": "City",
+            "line": "Address",
+            "note": "Note for the courier",
+            "isDefault": "Use as my default address"
+        },
+        "placeholders": {
+            "label": "Home, work…",
+            "city": "Baku",
+            "line": "12 Nizami St, apt 4",
+            "note": "Door code, floor…"
+        }
     },
     "profile": {
         "title": "Profile",

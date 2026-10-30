@@ -27,6 +27,20 @@ export const upper = (value: string, language: Language): string => value.toLoca
 /** The surname, used on book spines and covers: the last word of the name. */
 export const surname = (name: string): string => name.trim().split(/\s+/).at(-1) ?? name;
 
-/** "29 October 2026" in the site language. */
-export const formatDate = (iso: string, language: Language): string =>
-    new Intl.DateTimeFormat(LOCALE[language], {day: "numeric", month: "long", year: "numeric"}).format(new Date(iso));
+/** Azerbaijani month names. Many browsers ship no Azerbaijani calendar data and would print "M10", so they are spelled here. */
+const AZ_MONTHS = ["yanvar", "fevral", "mart", "aprel", "may", "iyun", "iyul", "avqust", "sentyabr", "oktyabr", "noyabr", "dekabr"];
+const AZ_MONTHS_SHORT = ["yan", "fev", "mar", "apr", "may", "iyn", "iyl", "avq", "sen", "okt", "noy", "dek"];
+
+/** "29 oktyabr 2026" / "29 October 2026" / "29 октября 2026 г.". */
+export const formatDate = (value: string | Date, language: Language): string => {
+    const date = new Date(value);
+    if (language === "az") return `${date.getDate()} ${AZ_MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+    return new Intl.DateTimeFormat(LOCALE[language], {day: "numeric", month: "long", year: "numeric"}).format(date);
+};
+
+/** A day without the year, for chart axes: "3 okt" / "3 Oct" / "3 окт.". */
+export const formatDay = (value: string | Date, language: Language): string => {
+    const date = new Date(value);
+    if (language === "az") return `${date.getDate()} ${AZ_MONTHS_SHORT[date.getMonth()]}`;
+    return new Intl.DateTimeFormat(LOCALE[language], {day: "numeric", month: "short"}).format(date);
+};

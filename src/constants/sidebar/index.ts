@@ -1,4 +1,4 @@
-import {BookOpen, Heart, Home, Landmark, Brain, Feather, MapPin, Package, Scroll, UserRound, Users, type LucideIcon} from "lucide-react";
+import {BookOpen, BookMarked, LayoutDashboard, ReceiptText, Store, UserRoundPen, Heart, Home, Landmark, Brain, Feather, MapPin, Package, Scroll, UserRound, Users, type LucideIcon} from "lucide-react";
 import {buildRoute, ROUTES} from "@/constants/routes";
 import type {CategoryId} from "@/constants/catalog";
 
@@ -53,4 +53,29 @@ export const ACCOUNT_LINKS: NavItem[] = [
     {labelKey: "account:nav.addresses", to: ROUTES.ACCOUNT_ADDRESSES, icon: MapPin},
     {labelKey: "account:nav.profile", to: ROUTES.ACCOUNT_PROFILE, icon: UserRound},
     {labelKey: "account:nav.favorites", to: ROUTES.FAVORITES, icon: Heart},
+];
+
+/** The admin sidebar. Keys are in the `admin` namespace. */
+export const ADMIN_NAV_GROUPS: NavGroup[] = [
+    {
+        id: "overview",
+        labelKey: "admin:nav.groups.overview",
+        items: [
+            {labelKey: "admin:nav.dashboard", to: ROUTES.ADMIN, icon: LayoutDashboard},
+            {labelKey: "admin:nav.orders", to: ROUTES.ADMIN_ORDERS, icon: ReceiptText},
+        ],
+    },
+    {
+        id: "catalogue",
+        labelKey: "admin:nav.groups.catalogue",
+        items: [
+            {labelKey: "admin:nav.books", to: ROUTES.ADMIN_BOOKS, icon: BookMarked},
+            {labelKey: "admin:nav.authors", to: ROUTES.ADMIN_AUTHORS, icon: UserRoundPen},
+        ],
+    },
+    {
+        id: "shop",
+        labelKey: "admin:nav.groups.shop",
+        items: [{labelKey: "admin:nav.storefront", to: ROUTES.HOME, icon: Store}],
+    },
 ];

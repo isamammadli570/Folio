@@ -32,4 +32,13 @@ export const QUERY_KEYS = {
     ORDERS: "orders",
     PROFILE: "profile",
     ADDRESSES: "addresses",
+    ROLE: "role",
+    ADMIN_ORDERS: "adminOrders",
+    CUSTOMERS: "customers",
 } as const;
+
+/** Where readers write about their data; the same address Google shows on its sign-in consent screen. */
+export const CONTACT_EMAIL = "isamammadlee@gmail.com";
+
+/** When the privacy policy last changed (ISO date). */
+export const PRIVACY_UPDATED = "2026-10-30T12:00:00";

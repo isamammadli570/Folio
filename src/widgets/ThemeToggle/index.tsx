@@ -1,6 +1,6 @@
 import {Moon, Sun} from "lucide-react";
 import {useTranslation} from "react-i18next";
-import {useTheme} from "@/hooks/useTheme";
+import {originOf, useTheme} from "@/hooks/useTheme";
 import {cn} from "@/lib/utils";
 
 type ThemeToggleProps = {
@@ -16,7 +16,7 @@ export const ThemeToggle = ({className}: ThemeToggleProps) => {
     return (
         <button
             type="button"
-            onClick={toggle}
+            onClick={(event) => toggle(originOf(event.currentTarget))}
             aria-label={t(isDark ? "header.lightTheme" : "header.darkTheme")}
             title={t(isDark ? "header.lightTheme" : "header.darkTheme")}
             className={cn(

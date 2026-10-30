@@ -1,16 +1,16 @@
-import {Navigate, Outlet, useLocation} from "react-router";
-import {LogOut} from "lucide-react";
+import {Link, Navigate, Outlet, useLocation} from "react-router";
+import {LayoutDashboard, LogOut} from "lucide-react";
 import {useTranslation} from "react-i18next";
 import {ACCOUNT_LINKS} from "@/constants/sidebar";
 import {ROUTES} from "@/constants/routes";
 import {useGetOrders, useSignOut} from "@/hooks/account";
+import {useIsAdmin} from "@/hooks/admin";
 import {useAuth} from "@/hooks/useAuth";
 import {useFavorites} from "@/hooks/useFavorites";
 import {NavItemLink} from "@/layout/StoreLayout/Sidebar/NavItemLink";
 import {Page} from "@/widgets/Page";
-
-const initials = (name: string, email: string): string =>
-    (name.trim() ? name.trim().split(/\s+/).slice(0, 2).map((part) => part[0]).join("") : email[0] ?? "?").toLocaleUpperCase();
+import {userIdentity} from "@/helpers/user";
+import {UserAvatar} from "@/widgets/UserAvatar";
 
 /**
  * The reader's own pages beside a compact sidebar: who is signed in, the tabs, and signing out. On phones the tabs become
@@ -23,22 +23,20 @@ export const AccountLayout = () => {
     const {ids: favoriteIds} = useFavorites();
     const {items: orders} = useGetOrders();
     const signOut = useSignOut();
+    const {isAdmin} = useIsAdmin();
 
     // Signing out in another tab (or here) leaves nothing to show.
     if (isReady && !user) return <Navigate to={`${ROUTES.LOGIN}?next=${encodeURIComponent(pathname)}`} replace/>;
 
-    const name = (user?.user_metadata as {full_name?: string} | undefined)?.full_name ?? "";
-    const email = user?.email ?? "";
+    const identity = userIdentity(user);
+    const {name, email} = identity;
     const badges: Record<string, number> = {[ROUTES.ACCOUNT]: orders.length, [ROUTES.FAVORITES]: favoriteIds.length};
 
     return (
         <Page className="grid items-start gap-8 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-14">
             <aside className="lg:sticky lg:top-[calc(var(--header-h)+2rem)]">
                 <div className="flex items-center gap-3.5 border-b border-border pb-6">
-                    <span className="relative flex size-12 shrink-0 items-center justify-center rounded-full border border-accent/60 font-serif text-lg text-accent-bright">
-                        <span aria-hidden className="absolute inset-1 rounded-full border border-accent/20"/>
-                        {initials(name, email)}
-                    </span>
+                    <UserAvatar identity={identity} className="size-12 text-lg"/>
                     <div className="min-w-0">
                         <p className="truncate font-serif text-xl leading-tight">{t("nav.greeting", {name: name.split(" ")[0] || t("nav.reader")})}</p>
                         <p className="truncate text-xs text-muted-foreground">{email}</p>
@@ -52,6 +50,13 @@ export const AccountLayout = () => {
                         ))}
                     </ul>
                 </nav>
+
+                {isAdmin && (
+                    <Link to={ROUTES.ADMIN} className="mt-4 flex items-center gap-3 rounded-xl border border-accent/40 bg-accent-soft/60 px-3 py-2.5 text-[14px] font-medium text-accent-bright outline-none transition-colors hover:border-accent focus-visible:ring-2 focus-visible:ring-ring/40">
+                        <LayoutDashboard className="size-[18px] stroke-[1.5]"/>
+                        {t("admin:nav.panel")}
+                    </Link>
+                )}
 
                 <button
                     type="button"
