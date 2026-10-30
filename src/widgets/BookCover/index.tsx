@@ -2,7 +2,6 @@ import {memo, type CSSProperties} from "react";
 import {useTranslation} from "react-i18next";
 import type {Author, Book} from "@/api/types";
 import {CATEGORY_COLOR} from "@/constants/catalog";
-import {COVER_ART} from "@/constants/covers";
 import {useLanguage} from "@/hooks/useLanguage";
 import {surname, upper} from "@/helpers/format";
 import {CoverFrame, Fleuron} from "@/widgets/BookCover/CoverFrame";
@@ -35,7 +34,7 @@ export const BookCover = memo(({book, author, className, priority = false}: Book
     const {t} = useTranslation();
     const {language, pick} = useLanguage();
     const title = pick(book.title);
-    const art = book.coverImage ?? COVER_ART[book.id];
+    const art = book.coverImage;
 
     return (
         <div role="img" aria-label={title} className={cn("book-cover", className)} style={{"--cloth": CATEGORY_COLOR[book.category]} as CSSProperties}>

@@ -3,9 +3,10 @@ import {l} from "@/data/localized";
 
 /**
  * The local stand-in for the `books` table: 60 titles, 15 in each category. Prices are in manat.
- * Phase 2 moves these rows to Supabase; the shape stays the same.
+ * Since Phase 2 this is the source of the Supabase seed (scripts/generate-seed.mjs). Every book has a painting for its
+ * cover plate in public/covers/<id>.webp; public/covers/CREDITS.md says where each one comes from.
  */
-export const BOOKS: Book[] = [
+const ROWS: Omit<Book, "coverImage">[] = [
     // ───────── Philosophy ─────────
     {
         id: "the-republic", authorId: "plato", category: "philosophy", price: 18.9, stock: 24, pages: 416, year: -375, approxYear: true, ornament: "column", tag: "bestseller",
@@ -554,3 +555,5 @@ export const BOOKS: Book[] = [
         ),
     },
 ];
+
+export const BOOKS: Book[] = ROWS.map((book) => ({...book, coverImage: `/covers/${book.id}.webp`}));
