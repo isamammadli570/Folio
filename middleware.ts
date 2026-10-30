@@ -2,7 +2,7 @@
 // runs on the server for book and author pages only: it fetches the built index.html, looks the book or author up in
 // Supabase and swaps the default share tags for the page's own title, text and preview image (public/og/…).
 // The page itself is unchanged; the SPA boots as usual. Any failure falls back to the default tags.
-import {replaceShareBlock, shareTags, type ShareInfo} from "./src/helpers/share";
+import {replaceShareBlock, shareTags, type ShareInfo} from "./src/helpers/share.js";
 
 export const config = {
     // Only clean ids: /authors/plato.webp and other files never reach this code.
