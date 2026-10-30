@@ -111,7 +111,14 @@
             "shipped": "Yoldadır",
             "delivered": "Çatdırıldı",
             "cancelled": "Ləğv olundu"
-        }
+        },
+        "discount": "Promo {{code}}",
+        "cancel": "Sifarişi ləğv et",
+        "cancelTitle": "{{number}} sifarişi ləğv edilsin?",
+        "cancelText": "Kitablar rəfə qayıdacaq. Bunu geri qaytarmaq olmur.",
+        "cancelled": "Sifariş ləğv edildi",
+        "cancelTooLate": "Bu sifariş artıq hazırlanır, onu ləğv etmək olmur.",
+        "cancelFailed": "Sifariş ləğv edilmədi. Yenidən cəhd edin."
     },
     "addresses": {
         "title": "Ünvanlar",

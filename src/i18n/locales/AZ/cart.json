@@ -88,8 +88,8 @@
         "emptyCart": "Sifariş üçün səbətə kitab əlavə edin.",
         "success": {
             "title": "Sifarişiniz qəbul olundu",
-            "description": "Sifariş nömrəniz: {{number}}. Təsdiq məktubunu {{email}} ünvanına göndərdik.",
-            "note": "Demo rejim: məktub və çatdırılma real deyil.",
+            "description": "Sifariş nömrəniz: {{number}}. Sifarişlə bağlı sizinlə {{email}} ünvanı və telefon vasitəsilə əlaqə saxlanılacaq.",
+            "note": "Demo rejim: ödəniş alınmır, kitablar göndərilmir və təsdiq məktubu yollanmır.",
             "continue": "Alış-verişə davam et"
         },
         "signedInAs": "{{email}} kimi sifariş edirsiniz",
@@ -102,12 +102,22 @@
             "EMPTY_CART": "Səbət boşdur.",
             "INVALID_INPUT": "Məlumatları yoxlayın.",
             "UNKNOWN_BOOK": "Səbətdəki kitablardan biri artıq kataloqda yoxdur.",
-            "default": "Sifariş göndərilmədi. Bir az sonra yenidən cəhd edin."
+            "default": "Sifariş göndərilmədi. Bir az sonra yenidən cəhd edin.",
+            "INVALID_PROMO": "Promo kod artıq işləmir, ona görə silindi. Məbləği yoxlayıb sifarişi yenidən verin."
         },
         "guestTitle": "Hesabınız var?",
         "guestText": "Daxil olsanız ünvanınız avtomatik dolacaq və sifarişi kabinetdə izləyə biləcəksiniz.",
         "guestContinue": "Qonaq kimi davam et",
         "summaryCount_one": "{{count}} kitab",
-        "summaryCount_other": "{{count}} kitab"
+        "summaryCount_other": "{{count}} kitab",
+        "promo": {
+            "label": "Promo kod",
+            "placeholder": "Varsa, daxil edin",
+            "apply": "Tətbiq et",
+            "applied": "{{code}} kitablardan {{percent}}% endirim edir.",
+            "remove": "Kodu sil",
+            "invalid": "Bu kod işləmir: ya tanınmır, ya vaxtı keçib, ya da limiti dolub.",
+            "discount": "Promo {{code}}"
+        }
     }
 }

@@ -1,21 +1,24 @@
 import {useEffect, useRef, useState, type ReactNode} from "react";
 import {Link} from "react-router";
 import {useForm, useWatch, type FieldPath} from "react-hook-form";
-import {AlertCircle, ArrowLeft, ArrowRight, Check, Copy, Info, PackageCheck, Store, Truck, UserRound} from "lucide-react";
+import {AlertCircle, ArrowLeft, ArrowRight, Check, Copy, Info, PackageCheck, Store, TicketPercent, Truck, UserRound, X} from "lucide-react";
 import {useTranslation} from "react-i18next";
 import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
 import {Skeleton} from "@/components/ui/skeleton";
 import {FormInput} from "@/components/form/FormInput";
 import {FormTextarea} from "@/components/form/FormTextarea";
 import {ROUTES} from "@/constants/routes";
 import {AZ_PHONE_PATTERN, EMAIL_PATTERN} from "@/constants/validation";
 import {cartActions} from "@/hooks/useCart";
-import {useGetAddresses, useGetProfile, usePlaceOrder} from "@/hooks/account";
+import {useCheckPromo, useGetAddresses, useGetProfile, usePlaceOrder} from "@/hooks/account";
+import {applyDiscount} from "@/helpers/cart";
 import {useAuth} from "@/hooks/useAuth";
 import {useLanguage} from "@/hooks/useLanguage";
 import {splitErrorCode} from "@/helpers/apiError";
 import {useCartSummary} from "@/hooks/useCartSummary";
 import {OrderSummary, OrderSummaryBar} from "@/pages/CheckoutPage/widgets/OrderSummary";
+import {useDocumentTitle} from "@/hooks/useDocumentTitle";
 import {EmptyState} from "@/widgets/EmptyState";
 import {Page} from "@/widgets/Page";
 import {PageTitle} from "@/widgets/PageTitle";
@@ -65,6 +68,60 @@ const ChoiceCard = ({checked, icon, title, hint, children}: ChoiceCardProps) => 
     </label>
 );
 
+type Promo = {code: string; percent: number};
+
+type PromoFieldProps = {
+    promo: Promo | null;
+    onChange: (promo: Promo | null) => void;
+};
+
+/** A promo code on the confirm step: checked with the shop at once, and checked again when the order is placed. */
+const PromoField = ({promo, onChange}: PromoFieldProps) => {
+    const {t} = useTranslation("cart");
+    const [code, setCode] = useState("");
+    const [isRejected, setIsRejected] = useState(false);
+    const check = useCheckPromo();
+
+    if (promo) {
+        return (
+            <p className="animate-fade-in mt-6 flex items-center gap-2.5 border border-success/40 bg-success/10 px-4 py-3 text-sm">
+                <TicketPercent className="size-4 shrink-0 text-success"/>
+                <span className="min-w-0 flex-1">{t("checkout.promo.applied", {code: promo.code, percent: promo.percent})}</span>
+                <button type="button" onClick={() => onChange(null)} aria-label={t("checkout.promo.remove")} title={t("checkout.promo.remove")} className="cursor-pointer rounded-full p-1 text-muted-foreground hover:text-foreground"><X className="size-4"/></button>
+            </p>
+        );
+    }
+
+    const apply = () => {
+        const value = code.trim().toUpperCase();
+        if (!value) return;
+        check.mutate(value, {
+            onSuccess: (percent) => (percent > 0 ? onChange({code: value, percent}) : setIsRejected(true)),
+            onError: () => setIsRejected(true),
+        });
+    };
+
+    return (
+        <div className="mt-6">
+            <label htmlFor="promo" className="text-[13px] font-medium">{t("checkout.promo.label")}</label>
+            <div className="mt-1.5 flex flex-wrap gap-2">
+                <Input
+                    id="promo"
+                    value={code}
+                    autoComplete="off"
+                    onChange={(event) => { setCode(event.target.value); setIsRejected(false); }}
+                    onKeyDown={(event) => { if (event.key === "Enter") { event.preventDefault(); apply(); } }}
+                    placeholder={t("checkout.promo.placeholder")}
+                    aria-invalid={isRejected || undefined}
+                    className="min-w-0 flex-1 basis-40 uppercase placeholder:normal-case"
+                />
+                <Button type="button" variant="outline" loading={check.isPending} disabled={!code.trim()} onClick={apply}>{t("checkout.promo.apply")}</Button>
+            </div>
+            {isRejected && <p role="alert" className="mt-2 text-xs text-danger">{t("checkout.promo.invalid")}</p>}
+        </div>
+    );
+};
+
 /**
  * Three steps (contact, delivery, confirm) beside the order summary. The order is written to the database by
  * `place_order`, which checks prices and stock; payment stays a demo. A signed-in reader finds the form filled from
@@ -80,8 +137,11 @@ export const CheckoutPage = () => {
     const order = usePlaceOrder();
     const [step, setStep] = useState(0);
     const [placed, setPlaced] = useState<{number: string; email: string} | null>(null);
+    useDocumentTitle(t("checkout.title"));
     const prefilled = useRef(false);
     const [asGuest, setAsGuest] = useState(false);
+    const [promo, setPromo] = useState<Promo | null>(null);
+    const priced = promo ? applyDiscount(totals, promo.percent) : totals;
 
     const {register, handleSubmit, trigger, control, reset, getValues, formState: {errors, isDirty}} = useForm<CheckoutForm>({
         mode: "onTouched",
@@ -124,8 +184,12 @@ export const CheckoutPage = () => {
                 address: form.method === "courier" ? form.address : "",
                 note: form.method === "courier" ? form.note : "",
                 paymentMethod: form.payment,
+                promoCode: promo?.code,
             },
             {
+                onError: (error) => {
+                    if (splitErrorCode(error)[0] === "INVALID_PROMO") setPromo(null);
+                },
                 onSuccess: ({number}) => {
                     setPlaced({number, email: form.email});
                     cartActions.clear();
@@ -159,7 +223,7 @@ export const CheckoutPage = () => {
                 >
                     {placed.number}<Copy className="size-4 stroke-[1.5] text-muted-foreground"/>
                 </button>
-                <p className="mt-3 text-xs text-faint-foreground">{user ? t("checkout.savedTo") : t("checkout.success.note")}</p>
+                <p className="mt-3 text-xs text-faint-foreground">{user && `${t("checkout.savedTo")} `}{t("checkout.success.note")}</p>
                 <div className="mt-10 flex flex-wrap justify-center gap-3">
                     {user && <Button asChild variant="outline" size="lg" className="rounded-full"><Link to={ROUTES.ACCOUNT}>{t("checkout.viewOrders")}</Link></Button>}
                     <Button asChild variant="accent" size="lg" className="rounded-full"><Link to={ROUTES.CATALOG}>{t("checkout.success.continue")}<ArrowRight/></Link></Button>
@@ -209,7 +273,7 @@ export const CheckoutPage = () => {
                 />
             )}
 
-            <OrderSummaryBar rows={rows} totals={totals} className="mt-6 lg:hidden"/>
+            <OrderSummaryBar rows={rows} totals={priced} promoCode={promo?.code} className="mt-6 lg:hidden"/>
 
             <ol className="mt-8 flex items-center gap-3 lg:mt-10" aria-label={t("checkout.step", {current: step + 1, total: STEPS.length})}>
                 {STEPS.map((id, index) => (
@@ -280,6 +344,7 @@ export const CheckoutPage = () => {
                                         </div>
                                     ))}
                                 </dl>
+                                <PromoField promo={promo} onChange={(next) => { setPromo(next); order.reset(); }}/>
                                 <p className="mt-6 flex gap-2.5 text-[13px] leading-relaxed text-muted-foreground"><Info className="mt-0.5 size-4 shrink-0 text-accent"/>{t("checkout.savedNote")}</p>
                             </div>
                         )}
@@ -297,7 +362,7 @@ export const CheckoutPage = () => {
                     </div>
                 </form>
 
-                <OrderSummary rows={rows} totals={totals} className="max-lg:hidden"/>
+                <OrderSummary rows={rows} totals={priced} promoCode={promo?.code} className="max-lg:hidden"/>
             </div>
         </Page>
     );

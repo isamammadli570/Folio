@@ -10,6 +10,7 @@ export const ROUTES = {
     FAVORITES: "/favorites",
     CHECKOUT: "/checkout",
     PRIVACY: "/privacy",
+    TERMS: "/terms",
     LOGIN: "/login",
     REGISTER: "/register",
     FORGOT_PASSWORD: "/forgot-password",
@@ -23,6 +24,10 @@ export const ROUTES = {
     ADMIN_AUTHORS: "/admin/authors",
     ADMIN_AUTHOR: "/admin/authors/:authorId",
     ADMIN_ORDERS: "/admin/orders",
+    ADMIN_NEWSLETTER: "/admin/newsletter",
+    ADMIN_CUSTOMERS: "/admin/customers",
+    ADMIN_PROMOS: "/admin/promos",
+    ADMIN_ALERTS: "/admin/alerts",
 } as const;
 
 /** Builders for the routes that carry a parameter. */

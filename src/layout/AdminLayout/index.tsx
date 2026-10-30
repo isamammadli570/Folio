@@ -6,6 +6,7 @@ import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {ADMIN_NAV_GROUPS} from "@/constants/sidebar";
 import {ROUTES} from "@/constants/routes";
 import {useIsMobile} from "@/hooks/_shared/useMediaQuery";
+import {useOrderFeed} from "@/hooks/admin";
 import {useAuth} from "@/hooks/useAuth";
 import {useHotkey} from "@/hooks/useHotkey";
 import {AdminSidebar} from "@/layout/AdminLayout/Sidebar";
@@ -37,6 +38,7 @@ export const AdminLayout = () => {
     const isDrawerOpen = drawerPath === pathname;
     const toggleCollapsed = () => collapsedStore.set((value) => !value);
 
+    useOrderFeed(Boolean(user));
     useHotkey("b", () => (isMobile ? setDrawerPath(isDrawerOpen ? null : pathname) : toggleCollapsed()));
 
     if (isReady && !user) return <Navigate to={ROUTES.HOME} replace/>;

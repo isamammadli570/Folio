@@ -21,6 +21,7 @@ export const STORAGE_KEYS = {
     LANGUAGE: "lang",
     THEME: "folio.theme",
     FAVORITE_HINT: "folio.favoriteHint",
+    RECENT: "folio.recent",
 } as const;
 
 /** Set in sessionStorage while the reader is away at Google, so the site can welcome them back. */
@@ -39,6 +40,14 @@ export const QUERY_KEYS = {
     ROLE: "role",
     ADMIN_ORDERS: "adminOrders",
     CUSTOMERS: "customers",
+    SUBSCRIBERS: "subscribers",
+    REVIEWS: "reviews",
+    RATINGS: "ratings",
+    CAN_REVIEW: "canReview",
+    STOCK_ALERTS: "stockAlerts",
+    PROMO_CODES: "promoCodes",
+    ADMIN_CUSTOMERS: "adminCustomers",
+    RECENT: "recent",
 } as const;
 
 /** Where readers write about their data; the same address Google shows on its sign-in consent screen. */
@@ -46,3 +55,6 @@ export const CONTACT_EMAIL = "isamammadlee@gmail.com";
 
 /** When the privacy policy last changed (ISO date). */
 export const PRIVACY_UPDATED = "2026-10-30T12:00:00";
+
+/** When the terms of use last changed (ISO date). */
+export const TERMS_UPDATED = "2026-10-30T12:00:00";

@@ -7,7 +7,8 @@ import {Button} from "@/components/ui/button";
 import {Skeleton} from "@/components/ui/skeleton";
 import {buildRoute, ROUTES} from "@/constants/routes";
 import {formatDate, formatPrice} from "@/helpers/format";
-import {useGetOrders} from "@/hooks/account";
+import {useCancelOrder, useGetOrders} from "@/hooks/account";
+import {ConfirmDialog} from "@/widgets/ConfirmDialog";
 import {useGetBooks} from "@/hooks/books";
 import {useLanguage} from "@/hooks/useLanguage";
 import {BookCover} from "@/widgets/BookCover";
@@ -43,6 +44,8 @@ const OrderCard = ({order, books, index}: {order: Order; books: BookWithAuthor[]
     const {t: tc} = useTranslation("cart");
     const {language} = useLanguage();
     const [open, setOpen] = useState(index === 0);
+    const [confirming, setConfirming] = useState(false);
+    const cancel = useCancelOrder();
     const count = order.items.reduce((sum, item) => sum + item.quantity, 0);
     const covers = order.items.flatMap((item) => books.filter((book) => book.id === item.bookId)).slice(0, 4);
 
@@ -78,16 +81,29 @@ const OrderCard = ({order, books, index}: {order: Order; books: BookWithAuthor[]
                         </ul>
                         <dl className="space-y-2 text-sm">
                             <div className="flex justify-between gap-4"><dt className="text-muted-foreground">{t("orders.subtotal")}</dt><dd className="tabular">{formatPrice(order.subtotal, language)}</dd></div>
+                            {order.discount > 0 && <div className="flex justify-between gap-4 text-success"><dt>{t("orders.discount", {code: order.promoCode})}</dt><dd className="tabular">−{formatPrice(order.discount, language)}</dd></div>}
                             <div className="flex justify-between gap-4"><dt className="text-muted-foreground">{t("orders.shipping")}</dt><dd className="tabular">{order.shipping === 0 ? t("orders.free") : formatPrice(order.shipping, language)}</dd></div>
                             <div className="flex justify-between gap-4 border-t border-border pt-2 font-medium"><dt>{t("orders.total")}</dt><dd className="tabular text-accent-bright">{formatPrice(order.total, language)}</dd></div>
                             <div className="pt-4 text-xs leading-relaxed text-muted-foreground">
                                 <p><span className="text-foreground">{t("orders.deliverTo")}:</span> {order.deliveryMethod === "courier" ? `${order.city}, ${order.address}` : tc("checkout.methods.pickupHint")}</p>
                                 <p className="mt-1"><span className="text-foreground">{t("orders.payment")}:</span> {tc(`checkout.payments.${order.paymentMethod}`)}</p>
                             </div>
+                            {order.status === "new" && (
+                                <Button type="button" variant="destructive-ghost" size="sm" className="mt-3 -ml-3" onClick={() => setConfirming(true)}>{t("orders.cancel")}</Button>
+                            )}
                         </dl>
                     </div>
                 </div>
             </div>
+            <ConfirmDialog
+                open={confirming}
+                onOpenChange={setConfirming}
+                title={t("orders.cancelTitle", {number: order.number})}
+                description={t("orders.cancelText")}
+                confirmLabel={t("orders.cancel")}
+                isPending={cancel.isPending}
+                onConfirm={() => cancel.mutate(order.id, {onSettled: () => setConfirming(false)})}
+            />
         </li>
     );
 };

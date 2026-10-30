@@ -66,5 +66,47 @@
         "timelineWork": "The work",
         "timelineLife": "The author’s life",
         "rotateHint": "Move the pointer over the book to turn it"
+    },
+    "reviews": {
+        "eyebrow": "Readers",
+        "title": "What readers say",
+        "count_one": "{{count}} review",
+        "count_other": "{{count}} reviews",
+        "none": "No reviews yet.",
+        "signIn": "Sign in",
+        "signInHint": "to review a book you bought.",
+        "write": "Write a review",
+        "buyersOnly": "Only readers who ordered this book can review it.",
+        "reader": "A reader",
+        "yours": "Yours",
+        "edit": "Edit",
+        "delete": "Delete",
+        "yourRating": "Your rating",
+        "yourReview": "Your review (optional)",
+        "placeholder": "What stayed with you?",
+        "update": "Save changes",
+        "publish": "Publish",
+        "cancel": "Cancel",
+        "saved": "Thank you, your review is up",
+        "saveFailed": "The review was not saved. Please try again.",
+        "deleted": "Review deleted",
+        "ratingLabel": "Rated {{value}} out of 5",
+        "stars_one": "{{count}} star",
+        "stars_other": "{{count}} stars"
+    },
+    "alert": {
+        "title": "Tell me when it is back",
+        "text": "Leave your email and we will write once new copies arrive.",
+        "placeholder": "Your email",
+        "submit": "Notify me",
+        "invalid": "Please enter a valid email.",
+        "done": "Done: we will write when it is back in stock.",
+        "added": "We will let you know",
+        "exists": "This email is already on the list",
+        "failed": "That did not work. Please try again."
+    },
+    "recent": {
+        "eyebrow": "Lately",
+        "title": "Recently viewed"
     }
 }

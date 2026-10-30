@@ -57,12 +57,14 @@ export type OrderRow = {
     subtotal: number | string;
     shipping: number | string;
     total: number | string;
+    discount: number | string;
+    promo_code: string | null;
     created_at: string;
     order_items: OrderItemRow[];
 };
 
 export const ORDER_COLUMNS =
-    "id, number, status, first_name, last_name, email, phone, delivery_method, city, address, note, payment_method, subtotal, shipping, total, created_at, order_items(book_id, title, unit_price, quantity)";
+    "id, number, status, first_name, last_name, email, phone, delivery_method, city, address, note, payment_method, subtotal, shipping, total, discount, promo_code, created_at, order_items(book_id, title, unit_price, quantity)";
 
 export type ProfileRow = {id: string; full_name: string | null; phone: string | null};
 

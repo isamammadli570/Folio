@@ -66,5 +66,47 @@
         "timelineWork": "Əsər",
         "timelineLife": "Müəllifin ömrü",
         "rotateHint": "Kitabı fırlatmaq üçün siçanı üzərində gəzdirin"
+    },
+    "reviews": {
+        "eyebrow": "Oxucular",
+        "title": "Oxucular nə deyir",
+        "count_one": "{{count}} rəy",
+        "count_other": "{{count}} rəy",
+        "none": "Hələ rəy yoxdur.",
+        "signIn": "Daxil olun",
+        "signInHint": "və aldığınız kitaba rəy yazın.",
+        "write": "Rəy yaz",
+        "buyersOnly": "Rəyi yalnız bu kitabı sifariş etmiş oxucular yaza bilər.",
+        "reader": "Oxucu",
+        "yours": "Sizin",
+        "edit": "Redaktə et",
+        "delete": "Sil",
+        "yourRating": "Qiymətiniz",
+        "yourReview": "Rəyiniz (istəyə bağlı)",
+        "placeholder": "Kitabdan yadda nə qaldı?",
+        "update": "Yadda saxla",
+        "publish": "Paylaş",
+        "cancel": "Ləğv et",
+        "saved": "Təşəkkürlər, rəyiniz paylaşıldı",
+        "saveFailed": "Rəy yadda saxlanmadı. Yenidən cəhd edin.",
+        "deleted": "Rəy silindi",
+        "ratingLabel": "5 üzərindən {{value}}",
+        "stars_one": "{{count}} ulduz",
+        "stars_other": "{{count}} ulduz"
+    },
+    "alert": {
+        "title": "Gələndə xəbər verin",
+        "text": "E-poçtunuzu qoyun, yeni nüsxələr gələn kimi yazaq.",
+        "placeholder": "E-poçtunuz",
+        "submit": "Xəbər ver",
+        "invalid": "Düzgün e-poçt daxil edin.",
+        "done": "Hazırdır: kitab gələndə sizə yazacağıq.",
+        "added": "Sizə xəbər verəcəyik",
+        "exists": "Bu e-poçt artıq siyahıdadır",
+        "failed": "Alınmadı. Yenidən cəhd edin."
+    },
+    "recent": {
+        "eyebrow": "Son vaxtlar",
+        "title": "Son baxdıqlarınız"
     }
 }

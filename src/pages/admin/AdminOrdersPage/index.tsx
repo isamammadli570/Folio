@@ -58,6 +58,7 @@ const OrderRow = ({order}: {order: Order}) => {
                         <div className="flex flex-col gap-3">
                             <dl className="space-y-1.5 text-sm">
                                 <div className="flex justify-between"><dt className="text-muted-foreground">{t("account:orders.subtotal")}</dt><dd className="tabular">{formatPrice(order.subtotal, language)}</dd></div>
+                                {order.discount > 0 && <div className="flex justify-between text-success"><dt>{t("account:orders.discount", {code: order.promoCode})}</dt><dd className="tabular">−{formatPrice(order.discount, language)}</dd></div>}
                                 <div className="flex justify-between"><dt className="text-muted-foreground">{t("account:orders.shipping")}</dt><dd className="tabular">{order.shipping === 0 ? t("account:orders.free") : formatPrice(order.shipping, language)}</dd></div>
                                 <div className="flex justify-between border-t border-border pt-1.5 font-medium"><dt>{t("account:orders.total")}</dt><dd className="tabular text-accent-bright">{formatPrice(order.total, language)}</dd></div>
                             </dl>

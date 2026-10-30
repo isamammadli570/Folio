@@ -12,7 +12,7 @@ import {formatLifespan, surname, upper} from "@/helpers/format";
 import {Astrolabe} from "@/widgets/Astrolabe";
 import {GoldDust} from "@/widgets/GoldDust";
 import {SceneArc} from "@/widgets/SceneArc";
-import {Bust} from "@/widgets/Bust";
+import {Bust, bustThumb} from "@/widgets/Bust";
 import {Medallion} from "@/widgets/Medallion";
 import {cn} from "@/lib/utils";
 
@@ -97,7 +97,7 @@ export const AuthorSpotlight = ({authors, isLoading, index, onIndexChange}: Auth
             <div aria-hidden className="pointer-events-none absolute left-[6%] top-[-150px] size-[820px] rounded-full border border-accent/20"/>
             <div aria-hidden className="pointer-events-none absolute left-[14%] top-[-250px] size-[980px] rounded-full border border-accent/10"/>
             <Astrolabe className="-right-48 -top-48 w-[min(680px,95vw)] max-lg:opacity-60"/>
-            <GoldDust className="absolute bottom-0 right-0 h-3/5 w-3/5" count={22}/>
+            <GoldDust className="absolute right-0 top-[16rem] h-[26rem] w-3/5 lg:bottom-0 lg:top-auto lg:h-3/5" count={22}/>
 
             <div className="px-gutter relative mx-auto grid grid-cols-[minmax(0,1fr)] max-w-[1240px] items-center gap-4 pb-10 pt-6 [grid-template-areas:'medal'_'info'_'bio'] md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-x-8 md:gap-y-6 md:pb-16 md:pt-14 md:[grid-template-areas:'medal_info'_'bio_info'] lg:h-[800px] lg:pt-24 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.25fr)_minmax(0,1.15fr)] lg:gap-6 lg:[grid-template-areas:'bio_medal_info']">
                 <div className={cn("transition-[opacity,transform,filter] duration-500 [grid-area:bio] max-md:hidden md:self-start lg:max-w-[300px] lg:self-end lg:pb-6", isLeaving && "-translate-x-3 opacity-0 blur-sm")}>
@@ -169,7 +169,7 @@ export const AuthorSpotlight = ({authors, isLoading, index, onIndexChange}: Auth
                                     >
                                         <span className={cn("flex h-[60px] w-full items-end justify-center transition-[filter] duration-300", !isActive && "brightness-[0.6] grayscale-[0.4] group-hover/thumb:brightness-100 group-hover/thumb:grayscale-0")}>
                                             {item.portrait
-                                                ? <Bust src={item.portrait} alt="" className="h-full w-auto"/>
+                                                ? <Bust src={bustThumb(item.portrait)} alt="" className="h-full w-auto"/>
                                                 : <Medallion letter={surname(itemName)[0]} className="w-[48px]"/>}
                                         </span>
                                         <span className="w-full truncate text-center text-[10px] font-medium tracking-wide text-muted-foreground">{surname(itemName)}</span>

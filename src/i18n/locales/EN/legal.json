@@ -1,8 +1,10 @@
 {
+    "updated": "Last updated: {{date}}",
+    "contact": "Questions: {{email}}",
+    "agree": "By creating an account you accept the <terms>terms of use</terms> and the <privacy>privacy policy</privacy>.",
     "privacy": {
         "eyebrow": "Privacy",
         "title": "Privacy policy",
-        "updated": "Last updated: {{date}}",
         "intro": "Folio is a portfolio project: a working example of a book shop. Orders are not really shipped and no money is taken. This page explains what the site stores and why.",
         "sections": [
             {
@@ -11,6 +13,8 @@
                     "Account: your name, email and password (the password is only ever stored hashed). If you sign in with Google, we receive only your name, email and profile photo from Google.",
                     "Orders: first and last name, email, phone, delivery address and note, and the books you ordered.",
                     "Your account area: the addresses you add, your cart and your favourites.",
+                    "Reviews: your rating and text, published under your first name.",
+                    "Newsletter and stock alerts: the email you leave and the language of the site, until you ask us to remove it.",
                     "No payment details are stored — the site never asks for card data."
                 ]
             },
@@ -45,7 +49,59 @@
                 ]
             }
         ],
-        "contact": "Questions: {{email}}",
         "link": "Privacy"
+    },
+    "terms": {
+        "eyebrow": "Terms",
+        "title": "Terms of use",
+        "link": "Terms",
+        "intro": "Folio is a portfolio project that works like a real book shop. By using the site you accept these terms.",
+        "sections": [
+            {
+                "title": "About the shop",
+                "items": [
+                    "Folio shows how an online book shop works from catalogue to order. Books are not really shipped and no money is taken.",
+                    "Prices, stock and delivery times are examples. They may change without notice."
+                ]
+            },
+            {
+                "title": "Your account",
+                "items": [
+                    "Give a real email and keep your password to yourself; you are responsible for what is done with your account.",
+                    "You may sign up with email and password or with Google. One person, one account.",
+                    "We may close accounts that are used to harm the site or other readers."
+                ]
+            },
+            {
+                "title": "Orders",
+                "items": [
+                    "An order is a request; it is confirmed when the shop changes its status. While it is still \"Received\" you can cancel it in your account.",
+                    "Promo codes take a percentage off the books, not the delivery. One code per order; codes can expire or run out.",
+                    "If a book runs out while you order, the order is not placed and you are told which book it was."
+                ]
+            },
+            {
+                "title": "Reviews",
+                "items": [
+                    "Only readers who ordered a book can review it. Reviews appear under your first name.",
+                    "Be fair and keep to the book: insults, advertising and other people's personal data are removed.",
+                    "You can edit or delete your review at any time."
+                ]
+            },
+            {
+                "title": "Content",
+                "items": [
+                    "Book descriptions, quotations and author biographies are given for introduction. The classic texts are in the public domain; the cover art was made for this site.",
+                    "Do not copy the site's design or code for commercial use without asking."
+                ]
+            },
+            {
+                "title": "Changes and contact",
+                "items": [
+                    "These terms may be updated; the date at the top shows the latest version.",
+                    "Questions or complaints: write to {{email}}."
+                ]
+            }
+        ]
     }
 }

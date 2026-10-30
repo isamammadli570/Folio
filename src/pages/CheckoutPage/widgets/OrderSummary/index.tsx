@@ -9,12 +9,14 @@ import {cn} from "@/lib/utils";
 
 type OrderSummaryProps = {
     rows: {book: BookWithAuthor; quantity: number}[];
-    totals: CartTotals;
+    totals: CartTotals & {discount?: number};
+    /** The promo code the discount comes from, shown beside it. */
+    promoCode?: string;
     className?: string;
 };
 
 /** The order on the side of checkout: covers with quantities, then subtotal, delivery and total. */
-export const OrderSummary = ({rows, totals, className}: OrderSummaryProps) => {
+export const OrderSummary = ({rows, totals, promoCode, className}: OrderSummaryProps) => {
     const {t} = useTranslation("cart");
     const {language, pick} = useLanguage();
 
@@ -38,6 +40,7 @@ export const OrderSummary = ({rows, totals, className}: OrderSummaryProps) => {
             </ul>
             <dl className="tabular mt-5 space-y-2.5 text-sm">
                 <div className="flex justify-between text-muted-foreground"><dt>{t("subtotal")}</dt><dd>{formatPrice(totals.subtotal, language)}</dd></div>
+                {!!totals.discount && <div className="flex justify-between text-success"><dt>{t("checkout.promo.discount", {code: promoCode})}</dt><dd>−{formatPrice(totals.discount, language)}</dd></div>}
                 <div className="flex justify-between text-muted-foreground"><dt>{t("shipping")}</dt><dd>{totals.shipping ? formatPrice(totals.shipping, language) : t("free")}</dd></div>
                 <div className="flex items-baseline justify-between border-t border-border pt-3 font-serif text-2xl"><dt>{t("total")}</dt><dd className="text-accent-bright">{formatPrice(totals.total, language)}</dd></div>
             </dl>
@@ -49,7 +52,7 @@ export const OrderSummary = ({rows, totals, className}: OrderSummaryProps) => {
  * The order folded into one line for phones, above the form: how many books and the total, so the price is never
  * three screens away. Tapping it opens the same list as the side summary.
  */
-export const OrderSummaryBar = ({rows, totals, className}: OrderSummaryProps) => {
+export const OrderSummaryBar = ({rows, totals, promoCode, className}: OrderSummaryProps) => {
     const {t} = useTranslation("cart");
     const {language, pick} = useLanguage();
     const count = rows.reduce((sum, row) => sum + row.quantity, 0);
@@ -78,6 +81,7 @@ export const OrderSummaryBar = ({rows, totals, className}: OrderSummaryProps) =>
                 </ul>
                 <dl className="tabular space-y-1.5 border-t border-border pt-3 text-sm text-muted-foreground">
                     <div className="flex justify-between"><dt>{t("subtotal")}</dt><dd>{formatPrice(totals.subtotal, language)}</dd></div>
+                    {!!totals.discount && <div className="flex justify-between text-success"><dt>{t("checkout.promo.discount", {code: promoCode})}</dt><dd>−{formatPrice(totals.discount, language)}</dd></div>}
                     <div className="flex justify-between"><dt>{t("shipping")}</dt><dd>{totals.shipping ? formatPrice(totals.shipping, language) : t("free")}</dd></div>
                 </dl>
             </div>

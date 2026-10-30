@@ -1,0 +1,12 @@
+# Folio — everything a reader can see is open to search engines; private and admin pages are not.
+User-agent: *
+Allow: /
+Disallow: /account
+Disallow: /admin
+Disallow: /checkout
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+
+Sitemap: https://folio-mu-peach.vercel.app/sitemap.xml

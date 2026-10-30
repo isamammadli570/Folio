@@ -34,3 +34,14 @@ export const cartTotals = (lines: CartLine[], books: Pick<Book, "id" | "price">[
     const shipping = subtotal === 0 || subtotal >= FREE_SHIPPING_FROM ? 0 : SHIPPING_FEE;
     return {subtotal, shipping, total: (subtotalQ + shipping * 100) / 100, toFreeShipping: Math.max(0, (FREE_SHIPPING_FROM * 100 - subtotalQ) / 100)};
 };
+
+export type DiscountedTotals = CartTotals & {discount: number; percent: number};
+
+/**
+ * Takes a promo percentage off the books (not the delivery), rounded to the qəpik, exactly as place_order() does on the
+ * server. Free delivery still depends on the price before the discount.
+ */
+export const applyDiscount = (totals: CartTotals, percent: number): DiscountedTotals => {
+    const discount = Math.round(totals.subtotal * percent) / 100;
+    return {...totals, percent, discount, total: Math.round((totals.subtotal - discount + totals.shipping) * 100) / 100};
+};

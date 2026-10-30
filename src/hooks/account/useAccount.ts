@@ -1,7 +1,7 @@
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {toast} from "sonner";
 import {deleteAddress, getAddresses, getProfile, saveAddress, updateProfile, type AddressInput} from "@/api/account.api";
-import {getMyOrders, placeOrder} from "@/api/orders.api";
+import {cancelOrder, checkPromo, getMyOrders, placeOrder} from "@/api/orders.api";
 import {signOut} from "@/api/auth.api";
 import type {Profile} from "@/api/types";
 import {QUERY_KEYS} from "@/constants/other";
@@ -94,6 +94,9 @@ export const usePlaceOrder = () => {
     });
 };
 
+/** Asks the shop what a promo code takes off; the checkout shows the answer beside the field. */
+export const useCheckPromo = () => useMutation({mutationFn: checkPromo, meta: {suppressGlobalError: true}});
+
 /** Signing out also empties this device's cart and favourites: they belong to the account now. */
 export const useSignOut = () => {
     const queryClient = useQueryClient();
@@ -104,6 +107,19 @@ export const useSignOut = () => {
             favoriteActions.replace([]);
             ACCOUNT_KEYS.forEach((key) => queryClient.removeQueries({queryKey: [key]}));
             toast.success(i18n.t("account:nav.signedOut"));
+        },
+    });
+};
+
+/** Cancels an order that is still "new"; its copies return to stock, so the catalogue is refreshed too. */
+export const useCancelOrder = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: cancelOrder,
+        meta: {onError: (error: unknown) => toast.error(i18n.t(error instanceof Error && error.message.startsWith("TOO_LATE") ? "account:orders.cancelTooLate" : "account:orders.cancelFailed"))},
+        onSuccess: () => {
+            [QUERY_KEYS.ORDERS, QUERY_KEYS.BOOKS, QUERY_KEYS.BOOK].forEach((key) => void queryClient.invalidateQueries({queryKey: [key]}));
+            toast.success(i18n.t("account:orders.cancelled"));
         },
     });
 };

@@ -1,4 +1,4 @@
-import {BookOpen, BookMarked, LayoutDashboard, ReceiptText, Store, UserRoundPen, Heart, Home, Landmark, Brain, Feather, MapPin, Package, Scroll, UserRound, Users, type LucideIcon} from "lucide-react";
+import {BellRing, Contact, TicketPercent, BookOpen, BookMarked, LayoutDashboard, Mails, ReceiptText, Store, UserRoundPen, Heart, Home, Landmark, Brain, Feather, MapPin, Package, Scroll, UserRound, Users, type LucideIcon} from "lucide-react";
 import {buildRoute, ROUTES} from "@/constants/routes";
 import type {CategoryId} from "@/constants/catalog";
 
@@ -63,6 +63,9 @@ export const ADMIN_NAV_GROUPS: NavGroup[] = [
         items: [
             {labelKey: "admin:nav.dashboard", to: ROUTES.ADMIN, icon: LayoutDashboard},
             {labelKey: "admin:nav.orders", to: ROUTES.ADMIN_ORDERS, icon: ReceiptText},
+            {labelKey: "admin:nav.customers", to: ROUTES.ADMIN_CUSTOMERS, icon: Contact},
+            {labelKey: "admin:nav.newsletter", to: ROUTES.ADMIN_NEWSLETTER, icon: Mails},
+            {labelKey: "admin:nav.promos", to: ROUTES.ADMIN_PROMOS, icon: TicketPercent},
         ],
     },
     {
@@ -71,6 +74,7 @@ export const ADMIN_NAV_GROUPS: NavGroup[] = [
         items: [
             {labelKey: "admin:nav.books", to: ROUTES.ADMIN_BOOKS, icon: BookMarked},
             {labelKey: "admin:nav.authors", to: ROUTES.ADMIN_AUTHORS, icon: UserRoundPen},
+            {labelKey: "admin:nav.alerts", to: ROUTES.ADMIN_ALERTS, icon: BellRing},
         ],
     },
     {

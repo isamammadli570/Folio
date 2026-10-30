@@ -41,7 +41,7 @@ export const Header = ({onOpenMenu, onOpenSearch}: HeaderProps) => {
                         <Menu/>
                     </button>
 
-                    <Link to={ROUTES.HOME} aria-label={t("nav.home")} className="rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/60">
+                    <Link to={ROUTES.HOME} aria-label={`${t("brand.name")} · ${t("nav.home")}`} className="rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/60">
                         <Logo className="max-sm:gap-2.5 max-sm:[&>span:nth-child(n+3)]:hidden max-[380px]:gap-2 max-[380px]:[&>span:nth-child(2)]:text-[24px] max-[380px]:[&_svg]:size-9"/>
                     </Link>
 

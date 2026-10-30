@@ -15,6 +15,7 @@ export type PlaceOrderInput = {
     address: string;
     note: string;
     paymentMethod: "cash" | "card";
+    promoCode?: string;
 };
 
 export type PlacedOrder = {id: string; number: string; total: number};
@@ -32,6 +33,7 @@ export const placeOrder = async (input: PlaceOrderInput): Promise<PlacedOrder> =
         address: input.address,
         note: input.note,
         payment_method: input.paymentMethod,
+        promo_code: input.promoCode?.trim() || null,
     });
     const [row] = unwrap(response as {data: {order_id: string; order_number: string; order_total: number | string}[] | null; error: typeof response.error});
     invalidateCatalogue();
@@ -42,4 +44,18 @@ export const placeOrder = async (input: PlaceOrderInput): Promise<PlacedOrder> =
 export const getMyOrders = async (): Promise<Order[]> => {
     const response = await supabase.from("orders").select(ORDER_COLUMNS).order("created_at", {ascending: false}).returns<OrderRow[]>();
     return unwrap(response).map(mapOrderRow);
+};
+
+/** The buyer cancels an order that is still "new"; the copies go back in stock. Fails with TOO_LATE once it is being prepared. */
+export const cancelOrder = async (orderId: string) => {
+    const {error} = await supabase.rpc("cancel_order", {p_order_id: orderId});
+    if (error) unwrap({data: null, error});
+    invalidateCatalogue();
+};
+
+/** The percentage a promo code takes off right now; 0 when it is unknown, switched off, expired or used up. */
+export const checkPromo = async (code: string): Promise<number> => {
+    const {data, error} = await supabase.rpc("check_promo", {p_code: code.trim()});
+    if (error) unwrap({data: null, error});
+    return typeof data === "number" ? data : 0;
 };

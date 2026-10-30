@@ -5,8 +5,21 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
     <meta name="theme-color" content="#0d0c0a"/>
-    <meta name="description" content="Folio — fəlsəfə, tarix, psixologiya və ədəbiyyat klassikləri."/>
-    <title>Folio Kitab Evi</title>
+    <link rel="preconnect" href="%VITE_SUPABASE_URL%" crossorigin/>
+    <!-- share:start — middleware.ts replaces this block with a book's or an author's own title, text and image. -->
+    <title>Folio · Kitab evi</title>
+    <meta name="description" content="Fəlsəfə, tarix, psixologiya və ədəbiyyat klassikləri — 60 kitab, 45 müəllif, klassik cilddə."/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="Folio"/>
+    <meta property="og:locale" content="az_AZ"/>
+    <meta property="og:title" content="Folio · Kitab evi"/>
+    <meta property="og:description" content="Fəlsəfə, tarix, psixologiya və ədəbiyyat klassikləri — 60 kitab, 45 müəllif, klassik cilddə."/>
+    <meta property="og:url" content="https://folio-mu-peach.vercel.app/"/>
+    <meta property="og:image" content="https://folio-mu-peach.vercel.app/og/default.jpg"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <!-- share:end -->
     <!-- Applies a saved light theme before the first paint, so a light-theme visitor never sees a dark flash. Dark is the default. -->
     <script>
         try {

@@ -11,6 +11,8 @@ import {preloadRoute} from "@/router/preload";
 import {BookCover} from "@/widgets/BookCover";
 import {FavoriteButton} from "@/widgets/FavoriteButton";
 import {Price} from "@/widgets/Price";
+import {Stars} from "@/widgets/Stars";
+import {useGetRatings} from "@/hooks/reviews";
 import {cn} from "@/lib/utils";
 
 type BookCardProps = {
@@ -32,6 +34,8 @@ export const BookCard = memo(({book, index = 0, className}: BookCardProps) => {
     const {ref: tiltRef, onPointerMove, onPointerLeave} = useTilt<HTMLDivElement>();
     const href = buildRoute.book(book.id);
     const isSoldOut = book.stock <= 0;
+    const {data: ratings} = useGetRatings();
+    const rating = ratings?.[book.id];
     const add = (button: HTMLElement) => addToCart(book, button.closest("article")?.querySelector<HTMLElement>(".book-cover"));
 
     return (
@@ -78,6 +82,12 @@ export const BookCard = memo(({book, index = 0, className}: BookCardProps) => {
                     {book.tag && <span className="mr-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent sm:hidden">{t(`tags.${book.tag}`)} ·</span>}
                     {pick(book.author.name)}
                 </p>
+                {rating && (
+                    <p className="col-span-2 mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <Stars value={rating.average} size={12}/>
+                        <span className="tabular">{rating.average.toFixed(1)} ({rating.count})</span>
+                    </p>
+                )}
                 <div className="col-span-2 mt-2.5 flex items-center justify-between gap-2 sm:pointer:hidden">
                     <Price book={book} className="flex-col items-start gap-0"/>
                     <button

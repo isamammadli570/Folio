@@ -1,4 +1,4 @@
-import {useRef, useState, type CSSProperties} from "react";
+import {useEffect, useRef, useState, type CSSProperties} from "react";
 import {Link, useParams} from "react-router";
 import {ArrowRight, ChevronRight, Minus, Plus, ShoppingBag, Truck} from "lucide-react";
 import {useTranslation} from "react-i18next";
@@ -8,6 +8,13 @@ import {CATEGORY_COLOR} from "@/constants/catalog";
 import {buildRoute, ROUTES} from "@/constants/routes";
 import {useGetBook, useGetBooks} from "@/hooks/books";
 import {useAddToCart} from "@/hooks/useAddToCart";
+import {useDocumentTitle} from "@/hooks/useDocumentTitle";
+import {useGetRatings} from "@/hooks/reviews";
+import {recordView} from "@/hooks/useRecentlyViewed";
+import {Reviews} from "@/pages/BookPage/widgets/Reviews";
+import {StockAlert} from "@/pages/BookPage/widgets/StockAlert";
+import {RecentlyViewed} from "@/widgets/RecentlyViewed";
+import {Stars} from "@/widgets/Stars";
 import {useLanguage} from "@/hooks/useLanguage";
 import {useTilt} from "@/hooks/useTilt";
 import {stockLevel} from "@/helpers/catalog";
@@ -48,6 +55,12 @@ export const BookPage = () => {
     const {ref: tiltRef, onPointerMove, onPointerLeave} = useTilt<HTMLDivElement>(10, 14);
     const coverRef = useRef<HTMLDivElement>(null);
     const buyRowRef = useRef<HTMLDivElement>(null);
+    useDocumentTitle(book ? `${pick(book.title)} · ${pick(book.author.name)}` : undefined);
+    const {data: ratings} = useGetRatings();
+    const bookKey = book?.id;
+    useEffect(() => {
+        if (bookKey) recordView(bookKey);
+    }, [bookKey]);
 
     if (isLoading) return <BookPageSkeleton/>;
     if (isError || !book) return <RouteErrorPage/>;
@@ -96,6 +109,14 @@ export const BookPage = () => {
                     <h1 className="mt-4 font-display text-[clamp(44px,6vw,76px)] font-medium leading-[0.98] [text-wrap:balance]">{title}</h1>
                     <Link to={buildRoute.author(book.authorId)} className="link-underline mt-4 inline-block font-serif text-xl text-muted-foreground hover:text-foreground">{authorName}</Link>
 
+                    {ratings?.[book.id] && (
+                        <a href="#reviews" className="mt-4 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+                            <Stars value={ratings[book.id].average}/>
+                            <span className="tabular">{ratings[book.id].average.toFixed(1)}</span>
+                            <span>· {t("reviews.count", {count: ratings[book.id].count})}</span>
+                        </a>
+                    )}
+
                     <div className="mt-9 flex flex-wrap items-center gap-4">
                         <Price book={book} size="lg"/>
                         <span className={cn("inline-flex items-center gap-2 text-[13px]", level === "out" ? "text-danger" : level === "low" ? "text-accent-bright" : "text-success")}>
@@ -116,6 +137,7 @@ export const BookPage = () => {
                         </Button>
                         <FavoriteButton bookId={book.id} variant="outline"/>
                     </div>
+                    {level === "out" && <StockAlert key={book.id} bookId={book.id}/>}
 
                     <p className="mt-6 flex items-center gap-2.5 text-[13px] text-muted-foreground"><Truck className="size-4 stroke-[1.5] text-accent"/>{t("book.freeShipping")} · {t("book.delivery")}</p>
 
@@ -166,6 +188,8 @@ export const BookPage = () => {
                 </div>
             </div>
 
+            <Reviews bookId={book.id}/>
+
             {others.length > 0 && (
                 <Reveal as="section" className="mt-28">
                     <p className="eyebrow">{authorName}</p>
@@ -180,6 +204,8 @@ export const BookPage = () => {
                     <BookGrid books={related}/>
                 </Reveal>
             )}
+
+            <RecentlyViewed exclude={book.id} className="mt-28"/>
 
             <StickyBuyBar book={book} anchorRef={buyRowRef} onAdd={(cover) => addFrom(cover)}/>
         </Page>

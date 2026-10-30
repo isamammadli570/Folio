@@ -9,7 +9,15 @@
         "storefront": "Go to the shop",
         "toggle": "Collapse / expand menu",
         "open": "Open menu",
-        "groups": {"overview": "Overview", "catalogue": "Catalogue", "shop": "Shop"}
+        "groups": {
+            "overview": "Overview",
+            "catalogue": "Catalogue",
+            "shop": "Shop"
+        },
+        "newsletter": "Newsletter",
+        "customers": "Customers",
+        "promos": "Promo codes",
+        "alerts": "Stock alerts"
     },
     "dashboard": {
         "title": "Welcome, {{name}}",
@@ -41,7 +49,9 @@
         "empty": "No orders yet.",
         "noMatch": "No orders match this filter.",
         "changeStatus": "Status",
-        "statusSaved": "Status updated"
+        "statusSaved": "Status updated",
+        "incoming": "New order {{number}} from {{name}} · {{total}}",
+        "open": "Open"
     },
     "books": {
         "title": "Books",
@@ -52,11 +62,22 @@
         "back": "Back to books",
         "search": "Title or author",
         "noMatch": "No books found.",
-        "columns": {"title": "Book", "category": "Section", "price": "Price", "stock": "Stock", "tag": "Tag"},
+        "columns": {
+            "title": "Book",
+            "category": "Section",
+            "price": "Price",
+            "stock": "Stock",
+            "tag": "Tag"
+        },
         "outOfStock": "Sold out",
         "left_one": "{{count}} left",
         "left_other": "{{count}} left",
-        "sections": {"text": "Text", "catalogue": "Catalogue", "sale": "Sale", "cover": "Cover"},
+        "sections": {
+            "text": "Text",
+            "catalogue": "Catalogue",
+            "sale": "Sale",
+            "cover": "Cover"
+        },
         "fields": {
             "title": "Title",
             "id": "Address (ID)",
@@ -97,7 +118,11 @@
         "featured": "On the home page",
         "bookCount_one": "{{count}} book",
         "bookCount_other": "{{count}} books",
-        "sections": {"person": "Person", "quote": "Quote", "images": "Images"},
+        "sections": {
+            "person": "Person",
+            "quote": "Quote",
+            "images": "Images"
+        },
         "fields": {
             "name": "Name",
             "id": "Address (ID)",
@@ -141,7 +166,9 @@
         "removeImage": "Remove",
         "imageHint": "WebP, JPEG or PNG, up to 3 MB. You can also drop a file here."
     },
-    "actions": {"cancel": "Cancel"},
+    "actions": {
+        "cancel": "Cancel"
+    },
     "errors": {
         "duplicateId": "A record with this address already exists",
         "inUse": "This record is in use (by orders or books) and cannot be deleted",
@@ -149,5 +176,85 @@
         "upload": "The image was not uploaded",
         "imageType": "WebP, JPEG or PNG only",
         "imageSize": "The image is larger than 3 MB"
+    },
+    "newsletter": {
+        "title": "Newsletter",
+        "subtitle": "Everyone who signed up through the footer's \"Quote of the week\" form.",
+        "total": "Subscribers",
+        "thisMonth": "This month",
+        "search": "Search email",
+        "copyAll": "Copy all",
+        "copied": "All addresses copied",
+        "empty": "No subscribers yet.",
+        "noMatch": "No matching address.",
+        "remove": "Remove from list",
+        "removeTitle": "Remove this subscriber?",
+        "removed": "Subscriber removed"
+    },
+    "customers": {
+        "title": "Customers",
+        "subtitle": "Every reader with an account, the latest buyers first. Cancelled orders are not counted.",
+        "total": "Accounts",
+        "buyers": "Have ordered",
+        "spent": "Spent in total",
+        "search": "Name, email or phone",
+        "copyAll": "Copy emails",
+        "copied": "All emails copied",
+        "empty": "No accounts yet.",
+        "noMatch": "No matching customer.",
+        "noName": "No name given",
+        "lastOrder": "Last order {{date}}",
+        "joined": "Joined {{date}}",
+        "orders_one": "{{count}} order",
+        "orders_other": "{{count}} orders"
+    },
+    "promos": {
+        "title": "Promo codes",
+        "subtitle": "Codes take a percentage off the books at checkout; delivery is not discounted.",
+        "new": "New code",
+        "fields": {
+            "code": "Code",
+            "percent": "Discount, %",
+            "expires": "Valid until",
+            "limit": "Usage limit"
+        },
+        "codeHint": "3–24 Latin letters, digits or hyphens",
+        "codeInvalid": "Use 3–24 Latin letters, digits or hyphens",
+        "percentInvalid": "A whole number from 1 to 90",
+        "optional": "Optional",
+        "create": "Create code",
+        "created": "Code created",
+        "taken": "This code already exists",
+        "empty": "No promo codes yet.",
+        "copy": "Copy code",
+        "copied": "Code copied",
+        "used_one": "Used {{count}} time",
+        "used_other": "Used {{count}} times",
+        "until": "until {{date}}",
+        "state": {
+            "active": "Active",
+            "paused": "Paused",
+            "expired": "Expired",
+            "usedUp": "Used up"
+        },
+        "pause": "Pause",
+        "resume": "Resume",
+        "delete": "Delete code",
+        "deleteTitle": "Delete {{code}}?",
+        "deleteText": "Orders already placed with it keep their discount.",
+        "deleted": "Code deleted"
+    },
+    "alerts": {
+        "title": "Stock alerts",
+        "subtitle": "Readers waiting for sold-out books. When a book is back, copy the addresses and write to them.",
+        "empty": "Nobody is waiting for a book.",
+        "waiting_one": "{{count}} reader waiting",
+        "waiting_other": "{{count}} readers waiting",
+        "back": "Back in stock · {{count}}",
+        "soldOut": "Still sold out",
+        "copy": "Copy emails",
+        "copied": "Emails copied",
+        "remove": "Remove {{email}}",
+        "removed": "Removed from the list"
     }
 }

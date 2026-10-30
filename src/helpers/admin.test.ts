@@ -4,7 +4,7 @@ import {orderStats, salesByDay, slugify, toBookRow} from "@/helpers/admin";
 
 const order = (overrides: Partial<Order>): Order => ({
     id: "o", number: "FL-1", status: "new", firstName: "", lastName: "", email: "", phone: "", deliveryMethod: "pickup",
-    city: "", address: "", note: "", paymentMethod: "cash", subtotal: 0, shipping: 0, total: 10, createdAt: "2026-10-30T10:00:00", items: [],
+    city: "", address: "", note: "", paymentMethod: "cash", subtotal: 0, shipping: 0, total: 10, discount: 0, promoCode: "", createdAt: "2026-10-30T10:00:00", items: [],
     ...overrides,
 });
 

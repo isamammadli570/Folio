@@ -60,12 +60,14 @@
         "newsletterText": "Every Monday, one line from a classic and the latest arrivals.",
         "emailPlaceholder": "your email",
         "subscribe": "Subscribe",
-        "subscribed": "Subscribed (demo, no email is sent)",
+        "subscribed": "You are on the list. This is a portfolio project — no emails go out yet",
         "invalidEmail": "Check the email address",
         "contact": "Contact",
         "address": "Old City, Baku",
         "hours": "Daily 10:00–20:00",
-        "backToTop": "Back to top"
+        "backToTop": "Back to top",
+        "alreadySubscribed": "This address is already on the list — see you on Monday",
+        "subscribeFailed": "Could not subscribe. Please try again shortly"
     },
     "actions": {
         "addToCart": "Add to cart",

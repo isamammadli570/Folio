@@ -75,6 +75,9 @@ export type Order = {
     subtotal: number;
     shipping: number;
     total: number;
+    /** Taken off the books by a promo code; 0 without one. */
+    discount: number;
+    promoCode: string;
     /** ISO timestamp. */
     createdAt: string;
     items: OrderItem[];

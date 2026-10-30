@@ -1,5 +1,6 @@
 import {isRouteErrorResponse, Link, useRouteError} from "react-router";
 import {useTranslation} from "react-i18next";
+import {useDocumentTitle} from "@/hooks/useDocumentTitle";
 import {Button} from "@/components/ui/button";
 import {ROUTES} from "@/constants/routes";
 import {ApiError} from "@/api/client";
@@ -13,6 +14,7 @@ export const RouteErrorPage = () => {
     const {t} = useTranslation();
     const error = useRouteError();
     const isNotFound = error == null || (isRouteErrorResponse(error) && error.status === 404) || (error instanceof ApiError && error.status === 404);
+    useDocumentTitle(isNotFound ? t("notFound.title") : t("errors.generic"));
 
     return (
         <Page className="flex min-h-[70dvh] flex-col items-center justify-center gap-8 text-center">

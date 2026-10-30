@@ -111,7 +111,14 @@
             "shipped": "On the way",
             "delivered": "Delivered",
             "cancelled": "Cancelled"
-        }
+        },
+        "discount": "Promo {{code}}",
+        "cancel": "Cancel order",
+        "cancelTitle": "Cancel order {{number}}?",
+        "cancelText": "The books go back on the shelf. This cannot be undone.",
+        "cancelled": "Order cancelled",
+        "cancelTooLate": "This order is already being prepared and can no longer be cancelled.",
+        "cancelFailed": "The order was not cancelled. Please try again."
     },
     "addresses": {
         "title": "Addresses",

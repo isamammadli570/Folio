@@ -3,6 +3,7 @@ import {useTranslation} from "react-i18next";
 import {Astrolabe} from "@/widgets/Astrolabe";
 import {GoldDust} from "@/widgets/GoldDust";
 import {Page} from "@/widgets/Page";
+import {useDocumentTitle} from "@/hooks/useDocumentTitle";
 
 type AuthFrameProps = {
     title: string;
@@ -15,6 +16,7 @@ type AuthFrameProps = {
 /** Sign-in pages: a reading-room panel with the astrolabe and a quotation beside a narrow form. */
 export const AuthFrame = ({title, subtitle, children, footer}: AuthFrameProps) => {
     const {t} = useTranslation("account");
+    useDocumentTitle(title);
     return (
         <Page className="flex items-start sm:min-h-[calc(100dvh-var(--header-h))] sm:items-center">
             <div className="grid grid-cols-[minmax(0,1fr)] w-full overflow-hidden border-border sm:border lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">

@@ -1,4 +1,4 @@
-import {addLine, cartTotals, countItems, isCartLines, setLineQuantity} from "@/helpers/cart";
+import {addLine, cartTotals, countItems, isCartLines, setLineQuantity, applyDiscount} from "@/helpers/cart";
 
 describe("cart lines", () => {
     it("adds new books on top and caps at stock", () => {
@@ -36,5 +36,13 @@ describe("cartTotals", () => {
 
     it("is free for an empty cart", () => {
         expect(cartTotals([], books)).toEqual({subtotal: 0, shipping: 0, total: 0, toFreeShipping: 40});
+    });
+});
+
+describe("applyDiscount", () => {
+    it("takes the percentage off the books only, to the qəpik", () => {
+        const totals = {subtotal: 33.3, shipping: 4, total: 37.3, toFreeShipping: 6.7};
+        expect(applyDiscount(totals, 10)).toMatchObject({discount: 3.33, total: 33.97, percent: 10});
+        expect(applyDiscount(totals, 0)).toMatchObject({discount: 0, total: 37.3});
     });
 });

@@ -79,3 +79,32 @@ export const uploadMedia = async (file: File, folder: MediaFolder, name: string)
     if (error) throw error;
     return supabase.storage.from("media").getPublicUrl(path).data.publicUrl;
 };
+
+export type Customer = {
+    id: string;
+    fullName: string;
+    email: string;
+    phone: string;
+    joinedAt: string;
+    orders: number;
+    spent: number;
+    lastOrderAt: string | null;
+};
+
+type CustomerRow = {id: string; full_name: string; email: string; phone: string; joined_at: string; orders: number; spent: number | string; last_order_at: string | null};
+
+/** Every account with its order count and spend (cancelled orders left out), latest buyers first. */
+export const getCustomers = async (): Promise<Customer[]> => {
+    const {data, error} = await supabase.rpc("admin_customers");
+    fail(error);
+    return ((data ?? []) as CustomerRow[]).map((row) => ({
+        id: row.id,
+        fullName: row.full_name,
+        email: row.email,
+        phone: row.phone,
+        joinedAt: row.joined_at,
+        orders: Number(row.orders),
+        spent: Number(row.spent),
+        lastOrderAt: row.last_order_at,
+    }));
+};

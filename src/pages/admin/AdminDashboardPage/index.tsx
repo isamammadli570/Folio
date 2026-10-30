@@ -38,7 +38,7 @@ export const AdminDashboardPage = () => {
 
     return (
         <section>
-            <PageTitle eyebrow={t("nav.panel")} title={t("dashboard.title", {name: name || t("nav.admin")})} description={t("dashboard.subtitle")}/>
+            <PageTitle eyebrow={t("nav.panel")} documentTitle={t("nav.panel")} title={t("dashboard.title", {name: name || t("nav.admin")})} description={t("dashboard.subtitle")}/>
 
             {isError ? <div className="mt-8"><QueryErrorState onRetry={() => void refetch()}/></div> : (
                 <>

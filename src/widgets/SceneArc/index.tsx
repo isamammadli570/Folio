@@ -15,7 +15,7 @@ type SceneArcProps = {
  */
 export const SceneArc = ({src, letter, isHidden = false}: SceneArcProps) => (
     <>
-        <div aria-hidden className="scene-arc pointer-events-none absolute left-[-16rem] top-[38%] size-[min(780px,125vw)] -translate-y-1/2 overflow-hidden rounded-full lg:left-[calc(50%-1500px)] lg:top-1/2 lg:size-[1360px]">
+        <div aria-hidden className="scene-arc pointer-events-none absolute left-[-16rem] top-[22rem] size-[min(780px,125vw)] -translate-y-1/2 overflow-hidden rounded-full lg:left-[calc(50%-1500px)] lg:top-1/2 lg:size-[1360px]">
             {src ? (
                 <img
                     src={src}
@@ -33,7 +33,7 @@ export const SceneArc = ({src, letter, isHidden = false}: SceneArcProps) => (
             <div className="absolute inset-0 bg-[radial-gradient(color-mix(in_srgb,var(--background)_45%,transparent)_1.1px,transparent_1.7px)] bg-[length:5px_5px]"/>
             <div className="absolute inset-0 bg-[linear-gradient(to_right,color-mix(in_srgb,var(--background)_35%,transparent)_45%,transparent_75%,color-mix(in_srgb,var(--background)_45%,transparent)_100%)]"/>
         </div>
-        <div aria-hidden className="pointer-events-none absolute left-[-16rem] top-[38%] size-[min(780px,125vw)] -translate-y-1/2 rounded-full border border-accent/25 lg:left-[calc(50%-1500px)] lg:top-1/2 lg:size-[1360px]"/>
+        <div aria-hidden className="pointer-events-none absolute left-[-16rem] top-[22rem] size-[min(780px,125vw)] -translate-y-1/2 rounded-full border border-accent/25 lg:left-[calc(50%-1500px)] lg:top-1/2 lg:size-[1360px]"/>
         <div aria-hidden className="pointer-events-none absolute hidden rounded-full border border-accent/15 lg:left-[calc(50%-1470px)] lg:top-1/2 lg:block lg:size-[1420px] lg:-translate-y-1/2"/>
     </>
 );

@@ -7,6 +7,7 @@ import {buildRoute, ROUTES} from "@/constants/routes";
 import {useGetAuthor, useGetAuthors} from "@/hooks/authors";
 import {useGetBooks} from "@/hooks/books";
 import {useLanguage} from "@/hooks/useLanguage";
+import {useDocumentTitle} from "@/hooks/useDocumentTitle";
 import {formatLifespan, surname} from "@/helpers/format";
 import {RouteErrorPage} from "@/router/RouteErrorPage";
 import {BookGrid, BookGridSkeleton} from "@/widgets/BookGrid";
@@ -40,6 +41,7 @@ export const AuthorPage = () => {
     const {data: author, isLoading, isError} = useGetAuthor(authorId);
     const {items: books, isLoading: booksLoading} = useGetBooks({authorId, sort: "oldest"}, Boolean(author));
     const {items: everyone} = useGetAuthors();
+    useDocumentTitle(author ? pick(author.name) : undefined);
 
     const contemporaries = useMemo(() => {
         if (!author) return [];

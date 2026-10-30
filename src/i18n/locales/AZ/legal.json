@@ -1,8 +1,10 @@
 {
+    "updated": "Son yenilənmə: {{date}}",
+    "contact": "Suallar üçün: {{email}}",
+    "agree": "Hesab yaratmaqla <terms>istifadə şərtlərini</terms> və <privacy>məxfilik siyasətini</privacy> qəbul edirsiniz.",
     "privacy": {
         "eyebrow": "Məxfilik",
         "title": "Məxfilik siyasəti",
-        "updated": "Son yenilənmə: {{date}}",
         "intro": "Folio portfolio layihəsidir: kitab mağazasının işləyən nümunəsi. Sifarişlər real göndərilmir və pul alınmır. Bu səhifə saytın hansı məlumatı, nə üçün saxladığını izah edir.",
         "sections": [
             {
@@ -11,6 +13,8 @@
                     "Hesab: ad, e-poçt və şifrə (şifrə yalnız şifrələnmiş şəkildə saxlanılır). Google ilə daxil olsanız, Google-dan yalnız adınızı, e-poçtunuzu və profil şəklinizi alırıq.",
                     "Sifarişlər: ad, soyad, e-poçt, telefon, çatdırılma ünvanı və qeyd, sifariş etdiyiniz kitablar.",
                     "Kabinet: əlavə etdiyiniz ünvanlar, səbət və seçilmiş kitablar.",
+                    "Rəylər: qiymətiniz və mətniniz, adınızla paylaşılır.",
+                    "Bülleten və stok bildirişləri: qoyduğunuz e-poçt və saytın dili, siz silinməsini istəyənədək.",
                     "Ödəniş məlumatı saxlanılmır — sayt kart məlumatı soruşmur."
                 ]
             },
@@ -45,7 +49,59 @@
                 ]
             }
         ],
-        "contact": "Suallar üçün: {{email}}",
         "link": "Məxfilik"
+    },
+    "terms": {
+        "eyebrow": "Şərtlər",
+        "title": "İstifadə şərtləri",
+        "link": "Şərtlər",
+        "intro": "Folio real kitab mağazası kimi işləyən portfolio layihəsidir. Saytdan istifadə etməklə bu şərtləri qəbul edirsiniz.",
+        "sections": [
+            {
+                "title": "Mağaza haqqında",
+                "items": [
+                    "Folio onlayn kitab mağazasının kataloqdan sifarişə qədər necə işlədiyini göstərir. Kitablar həqiqətən göndərilmir, pul alınmır.",
+                    "Qiymətlər, stok və çatdırılma müddətləri nümunədir və xəbərdarlıq edilmədən dəyişə bilər."
+                ]
+            },
+            {
+                "title": "Hesabınız",
+                "items": [
+                    "Real e-poçt yazın və parolunuzu heç kimə deməyin; hesabınızla edilənlərə siz cavabdehsiniz.",
+                    "E-poçt və parolla və ya Google ilə qeydiyyatdan keçə bilərsiniz. Bir nəfər, bir hesab.",
+                    "Sayta və ya digər oxuculara zərər vermək üçün istifadə olunan hesablar bağlana bilər."
+                ]
+            },
+            {
+                "title": "Sifarişlər",
+                "items": [
+                    "Sifariş bir müraciətdir; mağaza statusunu dəyişəndə təsdiqlənir. Status hələ \"Qəbul edildi\" olanda onu hesabınızda ləğv edə bilərsiniz.",
+                    "Promo kodlar çatdırılmadan yox, kitablardan faiz endirimi edir. Hər sifarişə bir kod; kodların vaxtı keçə və ya limiti dola bilər.",
+                    "Sifariş verərkən kitab bitərsə, sifariş verilmir və hansı kitab olduğu deyilir."
+                ]
+            },
+            {
+                "title": "Rəylər",
+                "items": [
+                    "Kitaba rəyi yalnız onu sifariş etmiş oxucu yaza bilər. Rəylər adınızla görünür.",
+                    "Ədalətli olun və kitabdan danışın: təhqir, reklam və başqalarının şəxsi məlumatları silinir.",
+                    "Rəyinizi istənilən vaxt redaktə edə və ya silə bilərsiniz."
+                ]
+            },
+            {
+                "title": "Məzmun",
+                "items": [
+                    "Kitab təsvirləri, sitatlar və müəllif bioqrafiyaları tanışlıq üçündür. Klassik mətnlər ictimai mülkiyyətdədir; üz qabıqları bu sayt üçün hazırlanıb.",
+                    "Saytın dizaynını və kodunu icazəsiz kommersiya məqsədilə köçürməyin."
+                ]
+            },
+            {
+                "title": "Dəyişikliklər və əlaqə",
+                "items": [
+                    "Bu şərtlər yenilənə bilər; yuxarıdakı tarix son versiyanı göstərir.",
+                    "Sual və ya şikayət üçün {{email}} ünvanına yazın."
+                ]
+            }
+        ]
     }
 }

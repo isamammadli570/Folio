@@ -3,7 +3,7 @@ import {Link, useNavigate, useSearchParams} from "react-router";
 import {useForm} from "react-hook-form";
 import {useMutation} from "@tanstack/react-query";
 import {ArrowRight, MailCheck} from "lucide-react";
-import {useTranslation} from "react-i18next";
+import {Trans, useTranslation} from "react-i18next";
 import {toast} from "sonner";
 import {signUp} from "@/api/auth.api";
 import {Button} from "@/components/ui/button";
@@ -77,6 +77,15 @@ export const RegisterPage = () => {
                 <Button type="submit" variant="accent" size="lg" loading={create.isPending} className="mt-2 rounded-full">
                     {t("auth.register.submit")}<ArrowRight/>
                 </Button>
+                <p className="text-center text-xs leading-relaxed text-muted-foreground">
+                    <Trans
+                        i18nKey="legal:agree"
+                        components={{
+                            terms: <Link to={ROUTES.TERMS} className="text-accent underline-offset-4 hover:underline"/>,
+                            privacy: <Link to={ROUTES.PRIVACY} className="text-accent underline-offset-4 hover:underline"/>,
+                        }}
+                    />
+                </p>
             </form>
         </AuthFrame>
     );

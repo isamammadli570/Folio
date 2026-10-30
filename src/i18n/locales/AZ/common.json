@@ -60,12 +60,14 @@
         "newsletterText": "Hər bazar ertəsi bir klassikdən bir sətir və yeni gələn kitablar.",
         "emailPlaceholder": "e-poçt ünvanınız",
         "subscribe": "Abunə ol",
-        "subscribed": "Abunə oldunuz (demo, məktub göndərilmir)",
+        "subscribed": "Siyahıya əlavə olundunuz. Bu portfolio layihəsidir — məktublar hələ göndərilmir",
         "invalidEmail": "E-poçt ünvanını yoxlayın",
         "contact": "Əlaqə",
         "address": "İçərişəhər, Bakı",
         "hours": "Hər gün 10:00–20:00",
-        "backToTop": "Yuxarı qayıt"
+        "backToTop": "Yuxarı qayıt",
+        "alreadySubscribed": "Bu ünvan artıq siyahıdadır — hər bazar ertəsi görüşərik",
+        "subscribeFailed": "Abunə alınmadı. Bir az sonra yenidən cəhd edin"
     },
     "actions": {
         "addToCart": "Səbətə at",

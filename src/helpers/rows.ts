@@ -58,6 +58,8 @@ export const mapOrderRow = (row: OrderRow): Order => ({
     subtotal: Number(row.subtotal),
     shipping: Number(row.shipping),
     total: Number(row.total),
+    discount: Number(row.discount ?? 0),
+    promoCode: row.promo_code ?? "",
     createdAt: row.created_at,
     items: row.order_items.map((item) => ({bookId: item.book_id, title: item.title, unitPrice: Number(item.unit_price), quantity: item.quantity})),
 });

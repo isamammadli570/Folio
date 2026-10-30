@@ -9,7 +9,15 @@
         "storefront": "Mağazaya keç",
         "toggle": "Menyunu yığ / aç",
         "open": "Menyunu aç",
-        "groups": {"overview": "Ümumi", "catalogue": "Kataloq", "shop": "Mağaza"}
+        "groups": {
+            "overview": "Ümumi",
+            "catalogue": "Kataloq",
+            "shop": "Mağaza"
+        },
+        "newsletter": "Bülleten",
+        "customers": "Müştərilər",
+        "promos": "Promo kodlar",
+        "alerts": "Stok bildirişləri"
     },
     "dashboard": {
         "title": "Xoş gəldiniz, {{name}}",
@@ -41,7 +49,9 @@
         "empty": "Hələ sifariş yoxdur.",
         "noMatch": "Bu filtrə uyğun sifariş yoxdur.",
         "changeStatus": "Status",
-        "statusSaved": "Status yeniləndi"
+        "statusSaved": "Status yeniləndi",
+        "incoming": "Yeni sifariş {{number}} · {{name}} · {{total}}",
+        "open": "Aç"
     },
     "books": {
         "title": "Kitablar",
@@ -52,11 +62,22 @@
         "back": "Kitablara qayıt",
         "search": "Ad və ya müəllif",
         "noMatch": "Uyğun kitab tapılmadı.",
-        "columns": {"title": "Kitab", "category": "Bölmə", "price": "Qiymət", "stock": "Anbar", "tag": "Nişan"},
+        "columns": {
+            "title": "Kitab",
+            "category": "Bölmə",
+            "price": "Qiymət",
+            "stock": "Anbar",
+            "tag": "Nişan"
+        },
         "outOfStock": "Bitib",
         "left_one": "{{count}} qalıb",
         "left_other": "{{count}} qalıb",
-        "sections": {"text": "Mətn", "catalogue": "Kataloq", "sale": "Satış", "cover": "Qapaq"},
+        "sections": {
+            "text": "Mətn",
+            "catalogue": "Kataloq",
+            "sale": "Satış",
+            "cover": "Qapaq"
+        },
         "fields": {
             "title": "Ad",
             "id": "Ünvan (ID)",
@@ -97,7 +118,11 @@
         "featured": "Ana səhifədə",
         "bookCount_one": "{{count}} kitab",
         "bookCount_other": "{{count}} kitab",
-        "sections": {"person": "Şəxs", "quote": "Sitat", "images": "Təsvirlər"},
+        "sections": {
+            "person": "Şəxs",
+            "quote": "Sitat",
+            "images": "Təsvirlər"
+        },
         "fields": {
             "name": "Ad",
             "id": "Ünvan (ID)",
@@ -141,7 +166,9 @@
         "removeImage": "Sil",
         "imageHint": "WebP, JPEG və ya PNG, 3 MB-a qədər. Faylı bura sürükləyə də bilərsiniz."
     },
-    "actions": {"cancel": "Ləğv et"},
+    "actions": {
+        "cancel": "Ləğv et"
+    },
     "errors": {
         "duplicateId": "Bu ünvanla qeyd artıq var",
         "inUse": "Bu qeyd istifadədədir (sifarişlərdə və ya kitablarda), silmək olmur",
@@ -149,5 +176,85 @@
         "upload": "Şəkil yüklənmədi",
         "imageType": "Yalnız WebP, JPEG və ya PNG",
         "imageSize": "Şəkil 3 MB-dan böyükdür"
+    },
+    "newsletter": {
+        "title": "Bülleten",
+        "subtitle": "Footer-dəki \"Həftənin sitatı\" formasından abunə olanlar.",
+        "total": "Abunəçilər",
+        "thisMonth": "Bu ay",
+        "search": "E-poçt axtar",
+        "copyAll": "Hamısını kopyala",
+        "copied": "Bütün ünvanlar kopyalandı",
+        "empty": "Hələ abunəçi yoxdur.",
+        "noMatch": "Uyğun ünvan tapılmadı.",
+        "remove": "Siyahıdan çıxar",
+        "removeTitle": "Abunəçi siyahıdan çıxarılsın?",
+        "removed": "Abunəçi çıxarıldı"
+    },
+    "customers": {
+        "title": "Müştərilər",
+        "subtitle": "Hesabı olan bütün oxucular, son alanlar yuxarıda. Ləğv edilmiş sifarişlər sayılmır.",
+        "total": "Hesablar",
+        "buyers": "Sifariş edənlər",
+        "spent": "Ümumi xərc",
+        "search": "Ad, e-poçt və ya telefon",
+        "copyAll": "E-poçtları kopyala",
+        "copied": "Bütün e-poçtlar kopyalandı",
+        "empty": "Hələ hesab yoxdur.",
+        "noMatch": "Uyğun müştəri tapılmadı.",
+        "noName": "Ad yazılmayıb",
+        "lastOrder": "Son sifariş {{date}}",
+        "joined": "Qoşulub {{date}}",
+        "orders_one": "{{count}} sifariş",
+        "orders_other": "{{count}} sifariş"
+    },
+    "promos": {
+        "title": "Promo kodlar",
+        "subtitle": "Kodlar checkout-da kitablardan faiz endirimi edir; çatdırılmaya endirim olmur.",
+        "new": "Yeni kod",
+        "fields": {
+            "code": "Kod",
+            "percent": "Endirim, %",
+            "expires": "Bitmə tarixi",
+            "limit": "İstifadə limiti"
+        },
+        "codeHint": "3–24 latın hərfi, rəqəm və ya defis",
+        "codeInvalid": "3–24 latın hərfi, rəqəm və ya defis yazın",
+        "percentInvalid": "1-dən 90-a qədər tam ədəd",
+        "optional": "İstəyə bağlı",
+        "create": "Kod yarat",
+        "created": "Kod yaradıldı",
+        "taken": "Bu kod artıq var",
+        "empty": "Hələ promo kod yoxdur.",
+        "copy": "Kodu kopyala",
+        "copied": "Kod kopyalandı",
+        "used_one": "{{count}} dəfə istifadə olunub",
+        "used_other": "{{count}} dəfə istifadə olunub",
+        "until": "{{date}} tarixinədək",
+        "state": {
+            "active": "Aktiv",
+            "paused": "Dayandırılıb",
+            "expired": "Vaxtı keçib",
+            "usedUp": "Limit dolub"
+        },
+        "pause": "Dayandır",
+        "resume": "Aktivləşdir",
+        "delete": "Kodu sil",
+        "deleteTitle": "{{code}} silinsin?",
+        "deleteText": "Bu kodla verilmiş sifarişlərin endirimi qalır.",
+        "deleted": "Kod silindi"
+    },
+    "alerts": {
+        "title": "Stok bildirişləri",
+        "subtitle": "Bitmiş kitabları gözləyən oxucular. Kitab gələndə ünvanları kopyalayıb onlara yazın.",
+        "empty": "Heç kim kitab gözləmir.",
+        "waiting_one": "{{count}} oxucu gözləyir",
+        "waiting_other": "{{count}} oxucu gözləyir",
+        "back": "Yenidən stokda · {{count}}",
+        "soldOut": "Hələ bitib",
+        "copy": "E-poçtları kopyala",
+        "copied": "E-poçtlar kopyalandı",
+        "remove": "{{email}} sil",
+        "removed": "Siyahıdan silindi"
     }
 }

@@ -8,6 +8,9 @@ type BustProps = {
     priority?: boolean;
 };
 
+/** The small copy of a bust shipped with the site (see scripts/generate-thumbs.mjs); uploaded busts have none. */
+export const bustThumb = (src: string) => (src.startsWith("/authors/") ? src.replace("/authors/", "/authors/thumbs/") : src);
+
 /** A cut-out marble bust whose foot dissolves into the dark page, so it seems to rise out of the background. */
 export const Bust = ({src, alt, className, priority = false}: BustProps) => (
     <img

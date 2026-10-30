@@ -21,6 +21,10 @@ const dashboardRoute = pageRoute(ROUTES.ADMIN, () => import("@/pages/admin/Admin
 const adminRoutes: RouteObject[] = [
     {index: true, lazy: dashboardRoute.lazy} as RouteObject,
     pageRoute(ROUTES.ADMIN_ORDERS, () => import("@/pages/admin/AdminOrdersPage"), "AdminOrdersPage"),
+    pageRoute(ROUTES.ADMIN_NEWSLETTER, () => import("@/pages/admin/AdminNewsletterPage"), "AdminNewsletterPage"),
+    pageRoute(ROUTES.ADMIN_CUSTOMERS, () => import("@/pages/admin/AdminCustomersPage"), "AdminCustomersPage"),
+    pageRoute(ROUTES.ADMIN_PROMOS, () => import("@/pages/admin/AdminPromosPage"), "AdminPromosPage"),
+    pageRoute(ROUTES.ADMIN_ALERTS, () => import("@/pages/admin/AdminAlertsPage"), "AdminAlertsPage"),
     pageRoute(ROUTES.ADMIN_BOOKS, () => import("@/pages/admin/AdminBooksPage"), "AdminBooksPage"),
     pageRoute(ROUTES.ADMIN_BOOK, () => import("@/pages/admin/AdminBookPage"), "AdminBookPage"),
     pageRoute(ROUTES.ADMIN_AUTHORS, () => import("@/pages/admin/AdminAuthorsPage"), "AdminAuthorsPage"),
@@ -36,6 +40,7 @@ const storeRoutes: RouteObject[] = [
     pageRoute(ROUTES.FAVORITES, () => import("@/pages/FavoritesPage"), "FavoritesPage"),
     pageRoute(ROUTES.CHECKOUT, () => import("@/pages/CheckoutPage"), "CheckoutPage"),
     pageRoute(ROUTES.PRIVACY, () => import("@/pages/PrivacyPage"), "PrivacyPage"),
+    pageRoute(ROUTES.TERMS, () => import("@/pages/TermsPage"), "TermsPage"),
     pageRoute(ROUTES.LOGIN, () => import("@/pages/LoginPage"), "LoginPage", {loader: requireGuest}),
     pageRoute(ROUTES.REGISTER, () => import("@/pages/RegisterPage"), "RegisterPage", {loader: requireGuest}),
     pageRoute(ROUTES.FORGOT_PASSWORD, () => import("@/pages/ForgotPasswordPage"), "ForgotPasswordPage", {loader: requireGuest}),

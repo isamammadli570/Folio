@@ -2,18 +2,32 @@ import {useState, type CSSProperties, type FormEvent} from "react";
 import {Link} from "react-router";
 import {ArrowUp, ArrowUpRight, Clock, Mail, MapPin} from "lucide-react";
 import {useTranslation} from "react-i18next";
+import {useMutation} from "@tanstack/react-query";
 import {toast} from "sonner";
+import {subscribe as subscribeToNewsletter} from "@/api/newsletter.api";
+import {useLanguage} from "@/hooks/useLanguage";
 import {NAV_GROUPS} from "@/constants/sidebar";
 import {ROUTES} from "@/constants/routes";
+import {CONTACT_EMAIL} from "@/constants/other";
 import {EMAIL_PATTERN} from "@/constants/validation";
 import {Logo} from "@/widgets/Logo";
 import {Reveal} from "@/widgets/Reveal";
 
-/** "Quote of the week" sign-up. A demo: it checks the address and thanks the visitor; nothing is sent anywhere. */
+/** "Quote of the week" sign-up: the address is saved to the newsletter list in Supabase, in the reader's language. */
 const Newsletter = () => {
     const {t} = useTranslation();
     const [email, setEmail] = useState("");
     const [error, setError] = useState(false);
+    const {language} = useLanguage();
+    const join = useMutation({
+        mutationFn: subscribeToNewsletter,
+        meta: {suppressGlobalError: true},
+        onSuccess: (result) => {
+            toast.success(t(result === "exists" ? "footer.alreadySubscribed" : "footer.subscribed"));
+            setEmail("");
+        },
+        onError: () => toast.error(t("footer.subscribeFailed")),
+    });
 
     const subscribe = (event: FormEvent) => {
         event.preventDefault();
@@ -21,8 +35,7 @@ const Newsletter = () => {
             setError(true);
             return;
         }
-        toast(t("footer.subscribed"));
-        setEmail("");
+        join.mutate({email, language});
     };
 
     return (
@@ -40,7 +53,7 @@ const Newsletter = () => {
                     aria-invalid={error || undefined}
                     className="h-11 min-w-0 flex-1 bg-transparent font-serif text-lg outline-none placeholder:text-faint-foreground"
                 />
-                <button type="submit" className="flex cursor-pointer items-center gap-1.5 py-2 pl-3 text-[12px] font-medium uppercase tracking-[0.14em] text-accent transition-colors hover:text-accent-bright">
+                <button type="submit" disabled={join.isPending} className="flex cursor-pointer items-center gap-1.5 py-2 pl-3 disabled:opacity-50 text-[12px] font-medium uppercase tracking-[0.14em] text-accent transition-colors hover:text-accent-bright">
                     {t("footer.subscribe")}
                     <ArrowUpRight className="size-4 transition-transform duration-300 group-focus-within:translate-x-0.5 group-focus-within:-translate-y-0.5"/>
                 </button>
@@ -90,7 +103,7 @@ export const Footer = () => {
                         <ul className="mt-5 space-y-3.5 text-sm text-muted-foreground">
                             <li className="flex gap-3"><MapPin className="mt-0.5 size-4 shrink-0 stroke-[1.4] text-accent"/>{t("footer.address")}</li>
                             <li className="flex gap-3"><Clock className="mt-0.5 size-4 shrink-0 stroke-[1.4] text-accent"/>{t("footer.hours")}</li>
-                            <li className="flex gap-3"><Mail className="mt-0.5 size-4 shrink-0 stroke-[1.4] text-accent"/><span className="select-all text-foreground">hello@folio.az</span></li>
+                            <li className="flex gap-3"><Mail className="mt-0.5 size-4 shrink-0 stroke-[1.4] text-accent"/><a href={`mailto:${CONTACT_EMAIL}`} className="break-all text-foreground underline-offset-4 hover:text-accent-bright hover:underline">{CONTACT_EMAIL}</a></li>
                         </ul>
                     </div>
                 </Reveal>
@@ -105,7 +118,7 @@ export const Footer = () => {
             <div className="relative border-t border-border bg-[var(--night)]">
                 <div className="px-gutter mx-auto flex max-w-[1240px] flex-col gap-4 py-6 text-xs leading-relaxed text-faint-foreground sm:flex-row sm:items-center sm:justify-between">
                     <div className="space-y-1">
-                        <p>{t("footer.rights", {year: new Date().getFullYear()})} · {t("footer.delivery")} · <Link to={ROUTES.PRIVACY} className="underline-offset-4 hover:text-accent-bright hover:underline">{t("legal:privacy.link")}</Link></p>
+                        <p>{t("footer.rights", {year: new Date().getFullYear()})} · {t("footer.delivery")} · <Link to={ROUTES.PRIVACY} className="underline-offset-4 hover:text-accent-bright hover:underline">{t("legal:privacy.link")}</Link> · <Link to={ROUTES.TERMS} className="underline-offset-4 hover:text-accent-bright hover:underline">{t("legal:terms.link")}</Link></p>
                         <p>{t("footer.note")} {t("footer.aiNote")}</p>
                     </div>
                     <button

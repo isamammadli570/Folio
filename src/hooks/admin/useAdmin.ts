@@ -5,6 +5,7 @@ import {
     deleteBook,
     getAllOrders,
     getCustomerCount,
+    getCustomers,
     getMyRole,
     saveAuthor,
     saveBook,
@@ -13,6 +14,9 @@ import {
     type MediaFolder,
 } from "@/api/admin.api";
 import type {Author, Book} from "@/api/types";
+import {getSubscribers, removeSubscriber} from "@/api/newsletter.api";
+import {getStockAlerts, removeStockAlert} from "@/api/alerts.api";
+import {createPromoCode, deletePromoCode, getPromoCodes, setPromoActive} from "@/api/promos.api";
 import {QUERY_KEYS} from "@/constants/other";
 import {useAuth} from "@/hooks/useAuth";
 import {queryErrorMeta} from "@/hooks/_shared/queryErrorMeta";
@@ -114,3 +118,80 @@ export const useUploadMedia = () =>
         mutationFn: ({file, folder, name}: {file: File; folder: MediaFolder; name: string}) => uploadMedia(file, folder, name),
         meta: {onError: () => toast.error(i18n.t("admin:errors.upload"))},
     });
+
+export const useGetSubscribers = () => {
+    const query = useQuery({queryKey: [QUERY_KEYS.SUBSCRIBERS], queryFn: getSubscribers, meta: queryErrorMeta()});
+    return {...query, items: query.data ?? []};
+};
+
+export const useRemoveSubscriber = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: removeSubscriber,
+        ...onError,
+        onSuccess: () => {
+            void queryClient.invalidateQueries({queryKey: [QUERY_KEYS.SUBSCRIBERS]});
+            toast.success(i18n.t("admin:newsletter.removed"));
+        },
+    });
+};
+
+export const useGetCustomers = () => {
+    const query = useQuery({queryKey: [QUERY_KEYS.ADMIN_CUSTOMERS], queryFn: getCustomers, meta: queryErrorMeta()});
+    return {...query, items: query.data ?? []};
+};
+
+export const useGetPromoCodes = () => {
+    const query = useQuery({queryKey: [QUERY_KEYS.PROMO_CODES], queryFn: getPromoCodes, meta: queryErrorMeta()});
+    return {...query, items: query.data ?? []};
+};
+
+export const useCreatePromoCode = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: createPromoCode,
+        meta: {onError: (error: unknown) => toast.error(i18n.t(error instanceof Error && error.message === "DUPLICATE_ID" ? "admin:promos.taken" : "admin:errors.save"))},
+        onSuccess: () => {
+            void queryClient.invalidateQueries({queryKey: [QUERY_KEYS.PROMO_CODES]});
+            toast.success(i18n.t("admin:promos.created"));
+        },
+    });
+};
+
+export const useSetPromoActive = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: setPromoActive,
+        ...onError,
+        onSuccess: () => void queryClient.invalidateQueries({queryKey: [QUERY_KEYS.PROMO_CODES]}),
+    });
+};
+
+export const useDeletePromoCode = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: deletePromoCode,
+        ...onError,
+        onSuccess: () => {
+            void queryClient.invalidateQueries({queryKey: [QUERY_KEYS.PROMO_CODES]});
+            toast.success(i18n.t("admin:promos.deleted"));
+        },
+    });
+};
+
+export const useGetStockAlerts = () => {
+    const query = useQuery({queryKey: [QUERY_KEYS.STOCK_ALERTS], queryFn: getStockAlerts, meta: queryErrorMeta()});
+    return {...query, items: query.data ?? []};
+};
+
+export const useRemoveStockAlert = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: removeStockAlert,
+        ...onError,
+        onSuccess: () => {
+            void queryClient.invalidateQueries({queryKey: [QUERY_KEYS.STOCK_ALERTS]});
+            toast.success(i18n.t("admin:alerts.removed"));
+        },
+    });
+};

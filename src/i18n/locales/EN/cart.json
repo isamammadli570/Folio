@@ -88,8 +88,8 @@
         "emptyCart": "Add books to your cart to place an order.",
         "success": {
             "title": "Your order is in",
-            "description": "Order number: {{number}}. We've sent a confirmation to {{email}}.",
-            "note": "Demo mode: no email or delivery actually happens.",
+            "description": "Order number: {{number}}. We will contact you about it at {{email}} or by phone.",
+            "note": "Demo mode: no payment is taken, no books are shipped and no confirmation email is sent.",
             "continue": "Continue shopping"
         },
         "signedInAs": "Ordering as {{email}}",
@@ -102,12 +102,22 @@
             "EMPTY_CART": "Your cart is empty.",
             "INVALID_INPUT": "Please check your details.",
             "UNKNOWN_BOOK": "One of the books in your cart is no longer in the catalogue.",
-            "default": "The order was not sent. Please try again shortly."
+            "default": "The order was not sent. Please try again shortly.",
+            "INVALID_PROMO": "The promo code no longer works, so it was removed. Check the total and place the order again."
         },
         "guestTitle": "Have an account?",
         "guestText": "Sign in and your address fills in by itself, and you can follow the order in your account.",
         "guestContinue": "Continue as a guest",
         "summaryCount_one": "{{count}} book",
-        "summaryCount_other": "{{count}} books"
+        "summaryCount_other": "{{count}} books",
+        "promo": {
+            "label": "Promo code",
+            "placeholder": "If you have one",
+            "apply": "Apply",
+            "applied": "{{code}} takes {{percent}}% off the books.",
+            "remove": "Remove the code",
+            "invalid": "This code does not work: it is unknown, expired or used up.",
+            "discount": "Promo {{code}}"
+        }
     }
 }
