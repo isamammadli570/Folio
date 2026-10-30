@@ -25,7 +25,7 @@ export const AuthorWorks = ({author}: AuthorWorksProps) => {
 
     return (
         <section className="border-y border-border bg-surface">
-            <div className="px-gutter mx-auto grid max-w-[1240px] items-center gap-8 py-9 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)] lg:gap-10">
+            <div className="px-gutter mx-auto grid grid-cols-[minmax(0,1fr)] max-w-[1240px] items-center gap-8 py-9 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)] lg:gap-10">
                 <div>
                     <p className="eyebrow">{t("works.eyebrow")}</p>
                     {author ? <h2 className="mb-3 mt-2 font-serif text-3xl leading-tight">{pick(author.name)}</h2> : <Skeleton className="mb-3 mt-2 h-8 w-40"/>}
@@ -36,11 +36,11 @@ export const AuthorWorks = ({author}: AuthorWorksProps) => {
                         </Link>
                     )}
                 </div>
-                <div className="grid gap-5 sm:grid-cols-3">
+                <div className="no-scrollbar grid grid-cols-[minmax(0,1fr)] gap-5 max-sm:bleed-x max-sm:flex max-sm:snap-x max-sm:snap-mandatory max-sm:overflow-x-auto sm:grid-cols-3">
                     {isLoading || !author
-                        ? Array.from({length: 3}, (_, index) => <Skeleton key={index} className="h-[126px]"/>)
+                        ? Array.from({length: 3}, (_, index) => <Skeleton key={index} className="h-[126px] max-sm:w-[82%] max-sm:shrink-0"/>)
                         : books.map((book, index) => (
-                            <div key={book.id} className="animate-fade-up grid grid-cols-[84px_minmax(0,1fr)] items-center gap-4" style={{animationDelay: `${index * 90}ms`} as CSSProperties}>
+                            <div key={book.id} className="animate-fade-up grid grid-cols-[84px_minmax(0,1fr)] items-center gap-4 max-sm:w-[82%] max-sm:shrink-0 max-sm:snap-start" style={{animationDelay: `${index * 90}ms`} as CSSProperties}>
                                 <Link to={buildRoute.book(book.id)} ref={(element) => { if (element) coversRef.current.set(book.id, element); }} className="block shadow-[0_12px_20px_-10px_rgb(var(--shade)/0.7)] transition-transform duration-300 hover:-translate-y-1">
                                     <BookCover book={book} author={book.author}/>
                                 </Link>

@@ -36,7 +36,7 @@ const ProfileDetails = ({profile}: {profile: Profile}) => {
         <form
             onSubmit={handleSubmit((form) => update.mutate({...profile, ...form}, {onSuccess: (saved) => reset({fullName: saved.fullName, phone: saved.phone})}))}
             noValidate
-            className="grid gap-5 border border-border p-5 sm:grid-cols-2 sm:p-8"
+            className="grid grid-cols-[minmax(0,1fr)] gap-5 border border-border p-5 sm:grid-cols-2 sm:p-8"
         >
             <FormInput label={t("auth.fields.fullName")} required autoComplete="name" error={errors.fullName?.message} {...register("fullName", {validate: (value) => value.trim().length > 0 || t("auth.validation.required")})}/>
             <FormInput label={tc("checkout.fields.phone")} type="tel" autoComplete="tel" placeholder={tc("checkout.placeholders.phone")} error={errors.phone?.message} {...register("phone", {validate: (value) => value.trim() === "+994" || value.trim() === "" || AZ_PHONE_PATTERN.test(value) || tc("checkout.validation.phone")})}/>
@@ -64,7 +64,7 @@ const PasswordChange = () => {
     });
 
     return (
-        <form onSubmit={handleSubmit(({password}) => change.mutate(password))} noValidate className="grid gap-5 border border-border p-5 sm:grid-cols-2 sm:p-8">
+        <form onSubmit={handleSubmit(({password}) => change.mutate(password))} noValidate className="grid grid-cols-[minmax(0,1fr)] gap-5 border border-border p-5 sm:grid-cols-2 sm:p-8">
             <div className="flex items-start gap-3 sm:col-span-2">
                 <KeyRound className="mt-1 size-5 stroke-[1.4] text-accent"/>
                 <div>

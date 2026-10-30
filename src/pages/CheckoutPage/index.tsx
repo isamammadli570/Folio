@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState, type ReactNode} from "react";
 import {Link} from "react-router";
 import {useForm, useWatch, type FieldPath} from "react-hook-form";
-import {AlertCircle, ArrowLeft, ArrowRight, Check, Info, PackageCheck, Store, Truck, UserRound} from "lucide-react";
+import {AlertCircle, ArrowLeft, ArrowRight, Check, Copy, Info, PackageCheck, Store, Truck, UserRound} from "lucide-react";
 import {useTranslation} from "react-i18next";
 import {Button} from "@/components/ui/button";
 import {Skeleton} from "@/components/ui/skeleton";
@@ -15,11 +15,13 @@ import {useAuth} from "@/hooks/useAuth";
 import {useLanguage} from "@/hooks/useLanguage";
 import {splitErrorCode} from "@/helpers/apiError";
 import {useCartSummary} from "@/hooks/useCartSummary";
-import {OrderSummary} from "@/pages/CheckoutPage/widgets/OrderSummary";
+import {OrderSummary, OrderSummaryBar} from "@/pages/CheckoutPage/widgets/OrderSummary";
 import {EmptyState} from "@/widgets/EmptyState";
 import {Page} from "@/widgets/Page";
 import {PageTitle} from "@/widgets/PageTitle";
 import {cn} from "@/lib/utils";
+import {copyText} from "@/lib/clipboard";
+import {SignInNudge} from "@/widgets/SignInNudge";
 
 type CheckoutForm = {
     firstName: string;
@@ -79,6 +81,7 @@ export const CheckoutPage = () => {
     const [step, setStep] = useState(0);
     const [placed, setPlaced] = useState<{number: string; email: string} | null>(null);
     const prefilled = useRef(false);
+    const [asGuest, setAsGuest] = useState(false);
 
     const {register, handleSubmit, trigger, control, reset, getValues, formState: {errors, isDirty}} = useForm<CheckoutForm>({
         mode: "onTouched",
@@ -148,6 +151,14 @@ export const CheckoutPage = () => {
                 <p className="eyebrow mt-10">{t("checkout.eyebrow")}</p>
                 <h1 className="mt-4 font-display text-[clamp(44px,6vw,72px)] font-medium leading-none">{t("checkout.success.title")}</h1>
                 <p className="mt-6 max-w-lg font-serif text-xl text-muted-foreground">{t("checkout.success.description", {number: placed.number, email: placed.email})}</p>
+                <button
+                    type="button"
+                    onClick={() => void copyText(placed.number, "common:toasts.orderCopied")}
+                    className="tabular mt-5 inline-flex cursor-pointer items-center gap-2 rounded-full border border-border-strong px-4 py-1.5 font-serif text-lg outline-none transition-colors hover:border-accent hover:text-accent-bright focus-visible:ring-2 focus-visible:ring-ring/40"
+                    title={t("common:toasts.copy")}
+                >
+                    {placed.number}<Copy className="size-4 stroke-[1.5] text-muted-foreground"/>
+                </button>
                 <p className="mt-3 text-xs text-faint-foreground">{user ? t("checkout.savedTo") : t("checkout.success.note")}</p>
                 <div className="mt-10 flex flex-wrap justify-center gap-3">
                     {user && <Button asChild variant="outline" size="lg" className="rounded-full"><Link to={ROUTES.ACCOUNT}>{t("checkout.viewOrders")}</Link></Button>}
@@ -183,28 +194,40 @@ export const CheckoutPage = () => {
         <Page>
             <PageTitle eyebrow={t("checkout.eyebrow")} title={t("checkout.title")}/>
 
-            <p className="animate-fade-in mt-6 flex items-center gap-2.5 text-sm text-muted-foreground">
-                <UserRound className="size-4 shrink-0 stroke-[1.5] text-accent"/>
-                {user ? t("checkout.signedInAs", {email: user.email}) : <span>{t("checkout.signInHint")} <Link to={`${ROUTES.LOGIN}?next=${encodeURIComponent(ROUTES.CHECKOUT)}`} className="text-accent underline-offset-4 hover:text-accent-bright hover:underline">{t("checkout.signInLink")}</Link></span>}
-            </p>
+            {user ? (
+                <p className="animate-fade-in mt-6 flex items-center gap-2.5 text-sm text-muted-foreground">
+                    <UserRound className="size-4 shrink-0 stroke-[1.5] text-accent"/>
+                    {t("checkout.signedInAs", {email: user.email})}
+                </p>
+            ) : !asGuest && step === 0 && (
+                <SignInNudge
+                    className="mt-8"
+                    icon={<UserRound/>}
+                    title={t("checkout.guestTitle")}
+                    text={t("checkout.guestText")}
+                    secondary={<Button type="button" variant="ghost" onClick={() => setAsGuest(true)}>{t("checkout.guestContinue")}</Button>}
+                />
+            )}
 
-            <ol className="mt-10 flex items-center gap-3" aria-label={t("checkout.step", {current: step + 1, total: STEPS.length})}>
+            <OrderSummaryBar rows={rows} totals={totals} className="mt-6 lg:hidden"/>
+
+            <ol className="mt-8 flex items-center gap-3 lg:mt-10" aria-label={t("checkout.step", {current: step + 1, total: STEPS.length})}>
                 {STEPS.map((id, index) => (
                     <li key={id} className="flex flex-1 items-center gap-3" aria-current={index === step ? "step" : undefined}>
                         <span className={cn("tabular flex size-8 shrink-0 items-center justify-center rounded-full border text-[13px] transition-colors duration-300", index < step ? "border-accent bg-accent text-accent-ink" : index === step ? "border-accent text-accent-bright" : "border-border-strong text-faint-foreground")}>
                             {index < step ? <Check className="size-4 stroke-[2.5]"/> : index + 1}
                         </span>
-                        <span className={cn("hidden text-sm sm:block", index === step ? "text-foreground" : "text-muted-foreground")}>{t(`checkout.steps.${id}`)}</span>
+                        <span className={cn("whitespace-nowrap text-sm", index === step ? "text-foreground" : "hidden text-muted-foreground sm:block")}>{t(`checkout.steps.${id}`)}</span>
                         {index < STEPS.length - 1 && <span className="h-px flex-1 bg-border"><span className="block h-full bg-accent transition-[width] duration-500" style={{width: index < step ? "100%" : "0%"}}/></span>}
                     </li>
                 ))}
             </ol>
 
-            <div className="mt-10 grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-14">
+            <div className="mt-10 grid grid-cols-[minmax(0,1fr)] items-start gap-10 lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-14">
                 <form onSubmit={(event) => { event.preventDefault(); if (step === STEPS.length - 1) void placeOrder(); else void next(); }} noValidate className="min-w-0">
                     <div key={step} className="animate-fade-up border border-border p-6 sm:p-8">
                         {step === 0 && (
-                            <div className="grid gap-5 sm:grid-cols-2">
+                            <div className="grid grid-cols-[minmax(0,1fr)] gap-5 sm:grid-cols-2">
                                 <FormInput label={t("checkout.fields.firstName")} required autoComplete="given-name" placeholder={t("checkout.placeholders.firstName")} error={errors.firstName?.message} {...register("firstName", required)}/>
                                 <FormInput label={t("checkout.fields.lastName")} required autoComplete="family-name" placeholder={t("checkout.placeholders.lastName")} error={errors.lastName?.message} {...register("lastName", required)}/>
                                 <FormInput label={t("checkout.fields.email")} required type="email" autoComplete="email" placeholder={t("checkout.placeholders.email")} error={errors.email?.message} {...register("email", {...required, pattern: {value: EMAIL_PATTERN, message: t("checkout.validation.email")}})}/>
@@ -216,7 +239,7 @@ export const CheckoutPage = () => {
                             <div className="flex flex-col gap-7">
                                 <fieldset>
                                     <legend className="mb-3 text-[13px] font-medium">{t("checkout.method")}</legend>
-                                    <div className="grid gap-3 sm:grid-cols-2">
+                                    <div className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2">
                                         <ChoiceCard checked={values.method === "courier"} icon={<Truck/>} title={t("checkout.methods.courier")} hint={t("checkout.methods.courierHint")}>
                                             <input type="radio" value="courier" className="sr-only" {...register("method")}/>
                                         </ChoiceCard>
@@ -226,7 +249,7 @@ export const CheckoutPage = () => {
                                     </div>
                                 </fieldset>
                                 {values.method === "courier" && (
-                                    <div className="animate-fade-up grid gap-5 sm:grid-cols-[minmax(0,0.6fr)_minmax(0,1.4fr)]">
+                                    <div className="animate-fade-up grid grid-cols-[minmax(0,1fr)] gap-5 sm:grid-cols-[minmax(0,0.6fr)_minmax(0,1.4fr)]">
                                         <FormInput label={t("checkout.fields.city")} required autoComplete="address-level2" error={errors.city?.message} {...register("city", {validate: (value, form) => form.method === "pickup" || value.trim().length > 0 || t("checkout.validation.required")})}/>
                                         <FormInput label={t("checkout.fields.address")} required autoComplete="street-address" placeholder={t("checkout.placeholders.address")} error={errors.address?.message} {...register("address", {validate: (value, form) => form.method === "pickup" || value.trim().length > 0 || t("checkout.validation.required")})}/>
                                         <FormTextarea label={t("checkout.fields.note")} placeholder={t("checkout.placeholders.note")} containerClassName="sm:col-span-2" {...register("note")}/>
@@ -234,7 +257,7 @@ export const CheckoutPage = () => {
                                 )}
                                 <fieldset>
                                     <legend className="mb-3 text-[13px] font-medium">{t("checkout.payment")}</legend>
-                                    <div className="grid gap-3 sm:grid-cols-2">
+                                    <div className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2">
                                         {(["cash", "card"] as const).map((id) => (
                                             <ChoiceCard key={id} checked={values.payment === id} icon={<span className="font-serif text-lg leading-none">₼</span>} title={t(`checkout.payments.${id}`)}>
                                                 <input type="radio" value={id} className="sr-only" {...register("payment")}/>
@@ -250,7 +273,7 @@ export const CheckoutPage = () => {
                                 <h2 className="font-serif text-2xl">{t("checkout.review")}</h2>
                                 <dl className="mt-5 divide-y divide-border border-y border-border">
                                     {review.map(([label, value], index) => (
-                                        <div key={label} className="grid gap-1 py-4 sm:grid-cols-[10rem_minmax(0,1fr)_auto] sm:items-baseline sm:gap-4">
+                                        <div key={label} className="grid grid-cols-[minmax(0,1fr)] gap-1 py-4 sm:grid-cols-[10rem_minmax(0,1fr)_auto] sm:items-baseline sm:gap-4">
                                             <dt className="text-[13px] text-muted-foreground">{label}</dt>
                                             <dd className="break-words font-serif text-[17px]">{value}</dd>
                                             <button type="button" onClick={() => setStep(index === 0 ? 0 : 1)} className="w-fit cursor-pointer text-xs text-accent hover:text-accent-bright">{t("checkout.edit")}</button>
@@ -274,7 +297,7 @@ export const CheckoutPage = () => {
                     </div>
                 </form>
 
-                <OrderSummary rows={rows} totals={totals}/>
+                <OrderSummary rows={rows} totals={totals} className="max-lg:hidden"/>
             </div>
         </Page>
     );

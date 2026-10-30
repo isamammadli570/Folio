@@ -32,7 +32,7 @@ export const Logo = ({className, compact = false}: LogoProps) => {
             </svg>
             {!compact && (
                 <>
-                    <span className="font-display text-[28px] font-semibold leading-none tracking-wide" aria-label={name}>
+                    <span className="whitespace-nowrap font-display text-[28px] font-semibold leading-none tracking-wide" aria-label={name}>
                         {[...name].map((letter, index) => (
                             <span key={index} aria-hidden className="logo__letter inline-block" style={{"--i": index} as CSSProperties}>{letter}</span>
                         ))}

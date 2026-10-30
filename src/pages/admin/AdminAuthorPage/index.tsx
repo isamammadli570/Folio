@@ -101,7 +101,7 @@ const AuthorEditor = ({author}: {author?: AuthorSummary}) => {
     });
 
     return (
-        <form onSubmit={submit} noValidate className="mt-8 grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <form onSubmit={submit} noValidate className="mt-8 grid grid-cols-[minmax(0,1fr)] items-start gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
             <div className="flex min-w-0 flex-col gap-6">
                 <Section title={t("authors.sections.person")}>
                     <LocalizedFields name="name" label={t("authors.fields.name")} register={register} errors={errors}/>
@@ -115,7 +115,7 @@ const AuthorEditor = ({author}: {author?: AuthorSummary}) => {
                             onFocus={() => { if (!values.id) setValue("id", slugify(values.name.en || values.name.az)); }}
                         />
                     )}
-                    <div className="grid gap-5 sm:grid-cols-3">
+                    <div className="grid grid-cols-[minmax(0,1fr)] gap-5 sm:grid-cols-3">
                         <FormInput label={t("authors.fields.born")} required inputMode="numeric" hint={t("books.yearHint")} error={errors.born?.message} {...register("born", year)}/>
                         <FormInput label={t("authors.fields.died")} required inputMode="numeric" error={errors.died?.message} {...register("died", {...year, validate: (value, form) => year.validate(value) === true ? toNumber(value) > toNumber(form.born) || t("authors.diedRule") : year.validate(value)})}/>
                         <FormInput label={t("authors.fields.featured")} inputMode="numeric" hint={t("authors.featuredHint")} error={errors.featured?.message} {...register("featured", {validate: (value) => value.trim() === "" || Number.isInteger(toNumber(value)) || t("form.integer")})}/>
@@ -129,7 +129,7 @@ const AuthorEditor = ({author}: {author?: AuthorSummary}) => {
                 </Section>
 
                 <Section title={t("authors.sections.quote")}>
-                    <div className="grid gap-5 sm:grid-cols-[minmax(0,1fr)_8rem]">
+                    <div className="grid grid-cols-[minmax(0,1fr)] gap-5 sm:grid-cols-[minmax(0,1fr)_8rem]">
                         <FormInput label={t("authors.fields.quote")} hint={t("authors.quoteHint")} {...register("quoteText")}/>
                         <FormInput label={t("authors.fields.quoteLang")} placeholder="grc, la, de…" {...register("quoteLang")}/>
                     </div>

@@ -1,4 +1,6 @@
 import {useSyncExternalStore} from "react";
+import {toast} from "sonner";
+import i18n from "@/i18n";
 import {createPersistentStore} from "@/lib/persistentStore";
 import {addLine, countItems, isCartLines, setLineQuantity, type CartLine} from "@/helpers/cart";
 import {STORAGE_KEYS} from "@/constants/other";
@@ -14,6 +16,14 @@ export const cartActions = {
     add: (bookId: string, stock: number, quantity = 1) => cartStore.set((lines) => addLine(lines, bookId, quantity, stock)),
     setQuantity: (bookId: string, quantity: number) => cartStore.set((lines) => setLineQuantity(lines, bookId, quantity)),
     remove: (bookId: string) => cartStore.set((lines) => setLineQuantity(lines, bookId, 0)),
+    /** Removes a book and offers to put it back, in the same place and quantity. */
+    removeWithUndo: (bookId: string, title: string) => {
+        const before = cartStore.get();
+        cartStore.set((lines) => setLineQuantity(lines, bookId, 0));
+        toast(i18n.t("common:toasts.cartRemoved", {title}), {
+            action: {label: i18n.t("common:toasts.undo"), onClick: () => cartStore.set(() => before)},
+        });
+    },
     clear: () => cartStore.set(() => []),
     /** Swaps the whole cart, e.g. for the merged one after signing in. */
     replace: (lines: CartLine[]) => cartStore.set(() => lines),

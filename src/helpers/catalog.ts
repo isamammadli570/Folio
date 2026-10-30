@@ -6,6 +6,10 @@ export type BookFilters = {
     category?: CategoryId;
     authorId?: string;
     period?: PeriodId;
+    /** Any of these sections (the catalogue page allows several). Empty or missing means all. */
+    categories?: CategoryId[];
+    /** Any of these periods. Empty or missing means all. */
+    periods?: PeriodId[];
     query?: string;
     minPrice?: number;
     maxPrice?: number;
@@ -42,6 +46,8 @@ export const filterBooks = (books: BookWithAuthor[], filters: BookFilters): Book
         (!filters.category || book.category === filters.category)
         && (!filters.authorId || book.authorId === filters.authorId)
         && (!filters.period || isInPeriod(book.year, filters.period))
+        && (!filters.categories?.length || filters.categories.includes(book.category))
+        && (!filters.periods?.length || filters.periods.some((period) => isInPeriod(book.year, period)))
         && (filters.minPrice === undefined || book.price >= filters.minPrice)
         && (filters.maxPrice === undefined || book.price <= filters.maxPrice)
         && (!filters.inStockOnly || book.stock > 0)

@@ -45,7 +45,7 @@ export const Sidebar = ({onOpenSearch, onNavigate}: SidebarProps) => {
         <div className="flex h-full min-h-0 flex-col">
             <div className="flex flex-col gap-4 p-4 pb-3">
                 <div className="flex items-center justify-between gap-3">
-                    <Logo/>
+                    <Logo className="min-w-0 [&>span:nth-child(n+3)]:hidden"/>
                     <span className="flex items-center gap-1">
                         <LanguageSwitcher/>
                         <ThemeToggle className="size-9"/>

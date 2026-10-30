@@ -16,8 +16,8 @@ type AuthFrameProps = {
 export const AuthFrame = ({title, subtitle, children, footer}: AuthFrameProps) => {
     const {t} = useTranslation("account");
     return (
-        <Page className="flex min-h-[calc(100dvh-var(--header-h))] items-center">
-            <div className="grid w-full overflow-hidden border border-border lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+        <Page className="flex items-start sm:min-h-[calc(100dvh-var(--header-h))] sm:items-center">
+            <div className="grid grid-cols-[minmax(0,1fr)] w-full overflow-hidden border-border sm:border lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
                 <aside aria-hidden className="relative hidden min-h-[560px] overflow-hidden border-r border-border bg-surface lg:block">
                     <Astrolabe className="-left-40 -top-40 w-[680px] opacity-80"/>
                     <GoldDust className="absolute inset-0" count={14} seed={11}/>
@@ -27,7 +27,7 @@ export const AuthFrame = ({title, subtitle, children, footer}: AuthFrameProps) =
                         <p className="mt-3 text-[11px] uppercase tracking-[0.22em] text-accent">{t("auth.quote.cite")}</p>
                     </div>
                 </aside>
-                <section className="animate-fade-up px-6 py-10 sm:px-12 sm:py-14">
+                <section className="animate-fade-up py-4 sm:px-12 sm:py-14">
                     <p className="eyebrow">{t("auth.eyebrow")}</p>
                     <h1 className="mt-3 font-serif text-[clamp(34px,4vw,48px)] leading-[1.05] [text-wrap:balance]">{title}</h1>
                     {subtitle && <p className="mt-3 max-w-[46ch] text-[15px] leading-relaxed text-muted-foreground">{subtitle}</p>}

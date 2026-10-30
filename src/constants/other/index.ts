@@ -20,7 +20,11 @@ export const STORAGE_KEYS = {
     FAVORITES: "folio.favorites",
     LANGUAGE: "lang",
     THEME: "folio.theme",
+    FAVORITE_HINT: "folio.favoriteHint",
 } as const;
+
+/** Set in sessionStorage while the reader is away at Google, so the site can welcome them back. */
+export const OAUTH_PENDING_KEY = "folio.oauthPending";
 
 /** Query-key roots shared between hooks. */
 export const QUERY_KEYS = {

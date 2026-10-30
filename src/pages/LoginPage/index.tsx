@@ -10,6 +10,7 @@ import {FormInput} from "@/components/form/FormInput";
 import {FormPassword} from "@/components/form/FormPassword";
 import {ROUTES, safeNext} from "@/constants/routes";
 import {EMAIL_PATTERN} from "@/constants/validation";
+import {OAUTH_PENDING_KEY} from "@/constants/other";
 import {errorCode} from "@/helpers/apiError";
 import {userIdentity} from "@/helpers/user";
 import {AuthFrame} from "@/widgets/AuthFrame";
@@ -45,7 +46,11 @@ export const LoginPage = () => {
         >
             <GoogleButton next={safeNext(next)}/>
             <div className="h-5"/>
-            <form onSubmit={handleSubmit((form) => login.mutate(form))} noValidate className="flex flex-col gap-5">
+            <form onSubmit={handleSubmit((form) => {
+                // A Google attempt that was abandoned must not add a second welcome to this one.
+                try { sessionStorage.removeItem(OAUTH_PENDING_KEY); } catch { /* no storage, nothing to clear */ }
+                login.mutate(form);
+            })} noValidate className="flex flex-col gap-5">
                 <FormInput label={t("auth.fields.email")} required type="email" autoComplete="email" placeholder={t("auth.placeholders.email")} error={errors.email?.message} {...register("email", {...required, pattern: {value: EMAIL_PATTERN, message: t("auth.validation.email")}})}/>
                 <div>
                     <FormPassword label={t("auth.fields.password")} required autoComplete="current-password" placeholder={t("auth.placeholders.password")} error={errors.password?.message} {...register("password", required)}/>

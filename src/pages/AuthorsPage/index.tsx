@@ -29,7 +29,7 @@ export const AuthorsPage = () => {
         <Page>
             <PageTitle eyebrow={t("eyebrow")} title={t("title")} description={t("description")}/>
 
-            <div role="group" aria-label={t("common:nav.categories")} className="mt-10 flex flex-wrap gap-2">
+            <div role="group" aria-label={t("common:nav.categories")} className="no-scrollbar mt-8 flex gap-2 max-sm:bleed-x max-sm:overflow-x-auto sm:mt-10 sm:flex-wrap [&>*]:shrink-0">
                 {(["all", ...CATEGORY_IDS] as Filter[]).map((id) => (
                     <button
                         key={id}

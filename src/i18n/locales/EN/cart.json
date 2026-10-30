@@ -93,8 +93,6 @@
             "continue": "Continue shopping"
         },
         "signedInAs": "Ordering as {{email}}",
-        "signInHint": "To track your orders,",
-        "signInLink": "sign in",
         "savedNote": "The order is saved to the database and appears in your account. Payment is a demo — no money is taken.",
         "placing": "Placing…",
         "savedTo": "You can follow it in your account.",
@@ -105,6 +103,11 @@
             "INVALID_INPUT": "Please check your details.",
             "UNKNOWN_BOOK": "One of the books in your cart is no longer in the catalogue.",
             "default": "The order was not sent. Please try again shortly."
-        }
+        },
+        "guestTitle": "Have an account?",
+        "guestText": "Sign in and your address fills in by itself, and you can follow the order in your account.",
+        "guestContinue": "Continue as a guest",
+        "summaryCount_one": "{{count}} book",
+        "summaryCount_other": "{{count}} books"
     }
 }

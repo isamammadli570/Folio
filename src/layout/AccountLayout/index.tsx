@@ -33,7 +33,7 @@ export const AccountLayout = () => {
     const badges: Record<string, number> = {[ROUTES.ACCOUNT]: orders.length, [ROUTES.FAVORITES]: favoriteIds.length};
 
     return (
-        <Page className="grid items-start gap-8 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-14">
+        <Page className="grid grid-cols-[minmax(0,1fr)] items-start gap-8 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-14">
             <aside className="lg:sticky lg:top-[calc(var(--header-h)+2rem)]">
                 <div className="flex items-center gap-3.5 border-b border-border pb-6">
                     <UserAvatar identity={identity} className="size-12 text-lg"/>

@@ -42,7 +42,7 @@ export const AdminDashboardPage = () => {
 
             {isError ? <div className="mt-8"><QueryErrorState onRetry={() => void refetch()}/></div> : (
                 <>
-                    <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                    <div className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-4 sm:grid-cols-2 xl:grid-cols-4">
                         {isLoading ? [0, 1, 2, 3].map((key) => <Skeleton key={key} className="h-32 rounded-xl"/>) : (
                             <>
                                 <StatCard index={0} icon={<Coins/>} label={t("dashboard.revenue")} value={formatPrice(stats.revenue, language)} hint={t("dashboard.average", {value: formatPrice(stats.average, language)})}/>
@@ -55,7 +55,7 @@ export const AdminDashboardPage = () => {
 
                     <div className="mt-4">{isLoading ? <Skeleton className="h-72 rounded-xl"/> : <SalesChart days={days}/>}</div>
 
-                    <div className="mt-4 grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+                    <div className="mt-4 grid grid-cols-[minmax(0,1fr)] gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
                         <div className="rounded-xl border border-border bg-surface">
                             <div className="flex items-center justify-between gap-3 border-b border-border px-5 py-4">
                                 <p className="text-[10.5px] font-medium uppercase tracking-[0.2em] text-muted-foreground">{t("dashboard.recentOrders")}</p>

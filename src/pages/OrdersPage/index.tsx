@@ -67,7 +67,7 @@ const OrderCard = ({order, books, index}: {order: Order; books: BookWithAuthor[]
 
             <div className={cn("grid transition-[grid-template-rows] duration-300 ease-out", open ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
                 <div className="overflow-hidden">
-                    <div className="grid gap-8 border-t border-border p-5 sm:p-6 md:grid-cols-[minmax(0,1fr)_16rem]">
+                    <div className="grid grid-cols-[minmax(0,1fr)] gap-8 border-t border-border p-5 sm:p-6 md:grid-cols-[minmax(0,1fr)_16rem]">
                         <ul className="divide-y divide-border">
                             {order.items.map((item) => (
                                 <li key={item.bookId} className="flex items-baseline justify-between gap-4 py-3 first:pt-0">

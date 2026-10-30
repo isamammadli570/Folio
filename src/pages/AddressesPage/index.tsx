@@ -32,7 +32,7 @@ const AddressForm = ({address, isFirst, onDone}: AddressFormProps) => {
         <form
             onSubmit={handleSubmit((input) => save.mutate({input, addressId: address?.id}, {onSuccess: onDone}))}
             noValidate
-            className="animate-fade-up grid gap-5 border border-accent/50 bg-accent-soft/30 p-5 sm:grid-cols-2 sm:p-6"
+            className="animate-fade-up grid grid-cols-[minmax(0,1fr)] gap-5 border border-accent/50 bg-accent-soft/30 p-5 sm:grid-cols-2 sm:p-6"
         >
             <p className="font-serif text-xl sm:col-span-2">{address ? t("addresses.edit") : t("addresses.new")}</p>
             <FormInput label={t("addresses.fields.label")} placeholder={t("addresses.placeholders.label")} {...register("label")}/>
@@ -110,7 +110,7 @@ export const AddressesPage = () => {
             />
             <div className="mt-10">
                 {isLoading ? (
-                    <div className="grid gap-4 sm:grid-cols-2">{[0, 1].map((key) => <Skeleton key={key} className="h-40"/>)}</div>
+                    <div className="grid grid-cols-[minmax(0,1fr)] gap-4 sm:grid-cols-2">{[0, 1].map((key) => <Skeleton key={key} className="h-40"/>)}</div>
                 ) : isError ? (
                     <QueryErrorState onRetry={() => void refetch()}/>
                 ) : (
@@ -127,7 +127,7 @@ export const AddressesPage = () => {
                                 <span className="font-serif text-lg text-foreground">{t("addresses.add")}</span>
                             </button>
                         ) : (
-                            <ul className="grid gap-4 sm:grid-cols-2">
+                            <ul className="grid grid-cols-[minmax(0,1fr)] gap-4 sm:grid-cols-2">
                                 {addresses.map((address, index) =>
                                     editing === address.id ? (
                                         <li key={address.id} className="sm:col-span-2"><AddressForm address={address} isFirst={false} onDone={close}/></li>

@@ -18,7 +18,7 @@ type HeaderProps = {
     onOpenSearch: () => void;
 };
 
-const iconButton = "relative flex size-10 cursor-pointer items-center justify-center rounded-full border border-border text-foreground outline-none transition-[border-color,background-color,color] duration-200 hover:border-accent hover:bg-accent-soft focus-visible:ring-2 focus-visible:ring-ring/60 [&_svg]:size-[18px] [&_svg]:stroke-[1.5]";
+const iconButton = "relative flex size-10 shrink-0 cursor-pointer max-[380px]:size-9 items-center justify-center rounded-full border border-border text-foreground outline-none transition-[border-color,background-color,color] duration-200 hover:border-accent hover:bg-accent-soft focus-visible:ring-2 focus-visible:ring-ring/60 [&_svg]:size-[18px] [&_svg]:stroke-[1.5]";
 
 const Count = ({value}: {value: number}) =>
     value > 0 ? (
@@ -36,13 +36,13 @@ export const Header = ({onOpenMenu, onOpenSearch}: HeaderProps) => {
         <>
             <div aria-hidden className="fixed inset-x-0 top-0 z-40 h-[env(safe-area-inset-top)] bg-background"/>
             <header className="sticky top-[env(safe-area-inset-top)] z-40 border-b border-border bg-background/75 backdrop-blur-xl">
-                <div className="px-gutter mx-auto flex h-[var(--header-h)] max-w-[1240px] items-center gap-4">
+                <div className="px-gutter mx-auto flex h-[var(--header-h)] max-w-[1240px] items-center gap-2 sm:gap-4">
                     <button type="button" onClick={onOpenMenu} aria-label={t("header.openMenu")} className={cn(iconButton, "lg:hidden")}>
                         <Menu/>
                     </button>
 
                     <Link to={ROUTES.HOME} aria-label={t("nav.home")} className="rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring/60">
-                        <Logo className="max-sm:[&>span:nth-child(n+3)]:hidden"/>
+                        <Logo className="max-sm:gap-2.5 max-sm:[&>span:nth-child(n+3)]:hidden max-[380px]:gap-2 max-[380px]:[&>span:nth-child(2)]:text-[24px] max-[380px]:[&_svg]:size-9"/>
                     </Link>
 
                     <nav aria-label={t("nav.books")} className="ml-6 hidden flex-1 items-center gap-9 font-serif text-[18px] lg:flex">
@@ -62,7 +62,7 @@ export const Header = ({onOpenMenu, onOpenSearch}: HeaderProps) => {
                         })}
                     </nav>
 
-                    <div className="ml-auto flex items-center gap-2">
+                    <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
                         <button
                             type="button"
                             onClick={onOpenSearch}

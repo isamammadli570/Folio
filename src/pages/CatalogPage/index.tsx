@@ -36,8 +36,8 @@ export const CatalogPage = () => {
     const [filtersOpen, setFiltersOpen] = useState(false);
 
     const {items, isLoading, isError, refetch, isPlaceholderData} = useGetBooks({
-        category: params.category,
-        period: params.period,
+        categories: params.categories,
+        periods: params.periods,
         sort: params.sort,
         query: params.query,
         maxPrice: params.maxPrice,
@@ -59,7 +59,7 @@ export const CatalogPage = () => {
     const filterKey = JSON.stringify(params);
     const visible = paging.key === filterKey ? paging.count : CATALOG_PAGE_SIZE;
 
-    const title = params.category ? t(`common:categories.${params.category}`) : t("title");
+    const title = params.categories.length > 0 ? params.categories.map((id) => t(`common:categories.${id}`)).join(" · ") : t("title");
     const shown = items.slice(0, visible);
     const hasFilters = activeFilterCount > 0 || params.query.length > 0;
 
@@ -71,7 +71,7 @@ export const CatalogPage = () => {
                 description={isLoading ? undefined : t("results", {count: items.length})}
             />
 
-            <div className="mt-10 grid gap-10 lg:grid-cols-[15.5rem_minmax(0,1fr)] lg:gap-14">
+            <div className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-10 lg:grid-cols-[15.5rem_minmax(0,1fr)] lg:gap-14">
                 <aside className="hidden lg:block">
                     <div className="sticky top-[calc(var(--header-h)+2rem)]">
                         <CatalogFilters params={params} onChange={update}/>

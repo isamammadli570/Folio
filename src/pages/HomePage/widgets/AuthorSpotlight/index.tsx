@@ -99,8 +99,8 @@ export const AuthorSpotlight = ({authors, isLoading, index, onIndexChange}: Auth
             <Astrolabe className="-right-48 -top-48 w-[min(680px,95vw)] max-lg:opacity-60"/>
             <GoldDust className="absolute bottom-0 right-0 h-3/5 w-3/5" count={22}/>
 
-            <div className="px-gutter relative mx-auto grid max-w-[1240px] items-center gap-10 pb-12 pt-20 [grid-template-areas:'medal'_'info'_'bio'] md:pb-16 md:pt-24 lg:h-[800px] lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.25fr)_minmax(0,1.15fr)] lg:gap-6 lg:[grid-template-areas:'bio_medal_info']">
-                <div className={cn("transition-[opacity,transform,filter] duration-500 [grid-area:bio] lg:max-w-[300px] lg:self-end lg:pb-6", isLeaving && "-translate-x-3 opacity-0 blur-sm")}>
+            <div className="px-gutter relative mx-auto grid grid-cols-[minmax(0,1fr)] max-w-[1240px] items-center gap-4 pb-10 pt-6 [grid-template-areas:'medal'_'info'_'bio'] md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] md:gap-x-8 md:gap-y-6 md:pb-16 md:pt-14 md:[grid-template-areas:'medal_info'_'bio_info'] lg:h-[800px] lg:pt-24 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.25fr)_minmax(0,1.15fr)] lg:gap-6 lg:[grid-template-areas:'bio_medal_info']">
+                <div className={cn("transition-[opacity,transform,filter] duration-500 [grid-area:bio] max-md:hidden md:self-start lg:max-w-[300px] lg:self-end lg:pb-6", isLeaving && "-translate-x-3 opacity-0 blur-sm")}>
                     {author ? (
                         <>
                             <p className="eyebrow mb-4 [text-shadow:0_1px_10px_var(--text-halo)]">{formatLifespan(author.born, author.died, t, author.approx)}</p>
@@ -109,7 +109,7 @@ export const AuthorSpotlight = ({authors, isLoading, index, onIndexChange}: Auth
                     ) : isLoading && <><Skeleton className="mb-4 h-3 w-32"/><Skeleton className="h-24"/></>}
                 </div>
 
-                <div className="relative mx-auto aspect-[4/5] w-[min(440px,80vw)] [grid-area:medal] lg:-mb-16 lg:w-full lg:max-w-[500px] [perspective:1400px]">
+                <div className="relative mx-auto aspect-[4/5] w-[min(440px,72vw)] [grid-area:medal] max-md:-mb-8 md:w-full md:max-w-[360px] lg:max-w-[500px] lg:-mb-16 lg:w-full lg:max-w-[500px] [perspective:1400px]">
                     <div aria-hidden className="absolute inset-x-[8%] top-[6%] aspect-square rounded-full bg-[radial-gradient(circle,color-mix(in_srgb,var(--accent)_16%,transparent),transparent_65%)] blur-2xl"/>
                     <svg viewBox="0 0 500 500" aria-hidden className="animate-spin-slow absolute left-[2%] top-[-2%] w-[96%] opacity-80">
                         <defs><path id="spotlight-ring" d="M250,250 m-232,0 a232,232 0 1,1 464,0 a232,232 0 1,1 -464,0"/></defs>
@@ -133,20 +133,20 @@ export const AuthorSpotlight = ({authors, isLoading, index, onIndexChange}: Auth
                         {author ? (
                             <>
                                 <p className="text-[11px] font-medium uppercase tracking-[0.26em] text-muted-foreground">{pick(author.movement)}</p>
-                                <h1 className="mb-6 mt-2.5 font-display text-[clamp(52px,6.4vw,88px)] font-medium leading-[0.95] tracking-[-0.01em] [text-wrap:balance]">
+                                <h1 className="mb-4 mt-2 font-display text-[clamp(46px,6.4vw,88px)] md:mb-6 md:mt-2.5 font-medium leading-[0.95] tracking-[-0.01em] [text-wrap:balance]">
                                     <Link to={buildRoute.author(author.id)} className="outline-none transition-colors hover:text-accent-bright focus-visible:text-accent-bright">{name}</Link>
                                 </h1>
                                 {author.quote && (
                                     <figure>
-                                        <blockquote lang={author.quote.lang} className="font-serif text-[clamp(21px,2vw,26px)] leading-snug">“{author.quote.text}”</blockquote>
-                                        {author.quote.lang !== language && <figcaption className="mt-4 font-serif text-[17px] italic text-muted-foreground">({pick(author.quote.translation)})</figcaption>}
+                                        <blockquote lang={author.quote.lang} className="font-serif text-[clamp(19px,2vw,26px)] leading-snug">“{author.quote.text}”</blockquote>
+                                        {author.quote.lang !== language && <figcaption className="mt-3 font-serif text-[16px] italic text-muted-foreground md:mt-4 md:text-[17px]">({pick(author.quote.translation)})</figcaption>}
                                     </figure>
                                 )}
                             </>
                         ) : isLoading && <><Skeleton className="h-3 w-28"/><Skeleton className="mt-4 h-20 w-4/5"/><Skeleton className="mt-6 h-16"/></>}
                     </div>
 
-                    <div className="mt-10 flex items-center gap-3">
+                    <div className="mt-7 flex items-center gap-3 md:mt-10">
                         <button type="button" onClick={() => go(index - 1)} aria-label={t("spotlight.prev")} className="flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full border border-muted-foreground/60 outline-none transition-all duration-300 hover:scale-110 hover:border-accent hover:text-accent-bright focus-visible:ring-2 focus-visible:ring-ring/60">
                             <ChevronLeft className="size-4"/>
                         </button>

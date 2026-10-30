@@ -21,7 +21,9 @@ type BookCardProps = {
 
 /**
  * A book on the shelf: the cover leans towards the pointer and lifts, "Add to cart" rises from its foot, the heart sits
- * in the corner. Title, author and price sit under it on one grid so neighbouring cards line up.
+ * in the corner. Title, author and price sit under it on one grid so neighbouring cards line up. On phones nothing
+ * covers the cover: the title takes the full width and a round cart button sits beside the price. Touch tablets get
+ * the same, since they have no hover to reveal the button on the cover.
  */
 export const BookCard = memo(({book, index = 0, className}: BookCardProps) => {
     const {t} = useTranslation();
@@ -30,6 +32,7 @@ export const BookCard = memo(({book, index = 0, className}: BookCardProps) => {
     const {ref: tiltRef, onPointerMove, onPointerLeave} = useTilt<HTMLDivElement>();
     const href = buildRoute.book(book.id);
     const isSoldOut = book.stock <= 0;
+    const add = (button: HTMLElement) => addToCart(book, button.closest("article")?.querySelector<HTMLElement>(".book-cover"));
 
     return (
         <article className={cn("group/book", className)} style={{"--i": index} as CSSProperties}>
@@ -55,27 +58,38 @@ export const BookCard = memo(({book, index = 0, className}: BookCardProps) => {
                 <button
                     type="button"
                     disabled={isSoldOut}
-                    onClick={(event) => addToCart(book, event.currentTarget.parentElement?.querySelector<HTMLElement>(".book-cover"))}
+                    onClick={(event) => add(event.currentTarget)}
                     className={cn(
-                        "absolute inset-x-[9%] bottom-[6%] z-[1] flex cursor-pointer items-center justify-center gap-2 rounded-sm px-3 py-2.5 text-[13px] font-medium shadow-[0_10px_20px_-8px_rgb(var(--shade)/0.6)] outline-none transition-[opacity,transform,background-color] duration-300",
-                        "max-sm:inset-x-auto max-sm:bottom-2.5 max-sm:right-2.5 max-sm:size-9 max-sm:rounded-full max-sm:p-0",
+                        "absolute inset-x-[9%] bottom-[6%] z-[1] flex max-sm:hidden touch:hidden cursor-pointer items-center justify-center gap-2 rounded-sm px-3 py-2.5 text-[13px] font-medium shadow-[0_10px_20px_-8px_rgb(var(--shade)/0.6)] outline-none transition-[opacity,transform,background-color] duration-300",
                         "bg-primary text-primary-foreground hover:bg-accent-bright focus-visible:ring-2 focus-visible:ring-ring/70",
                         "disabled:cursor-default disabled:bg-surface-raised disabled:text-muted-foreground",
                         "[@media(hover:hover)]:translate-y-2.5 [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover/book:translate-y-0 [@media(hover:hover)]:group-hover/book:opacity-100 [@media(hover:hover)]:focus-visible:translate-y-0 [@media(hover:hover)]:focus-visible:opacity-100",
                     )}
                 >
-                    {isSoldOut ? <span className="max-sm:sr-only">{t("actions.outOfStock")}</span> : <><Plus className="size-4 stroke-[1.8]"/><span className="max-sm:sr-only">{t("actions.addToCart")}</span></>}
+                    {isSoldOut ? t("actions.outOfStock") : <><Plus className="size-4 stroke-[1.8]"/>{t("actions.addToCart")}</>}
                 </button>
             </div>
-            <div className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-3">
-                <Link to={href} className="min-w-0 font-serif text-[19px] leading-snug outline-none hover:text-accent-bright focus-visible:underline">
+            <div className="mt-3 grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-3 sm:mt-4">
+                <Link to={href} className="min-w-0 font-serif text-[17px] leading-snug outline-none hover:text-accent-bright focus-visible:underline max-sm:col-span-2 touch:col-span-2 sm:text-[19px]">
                     <h3 className="line-clamp-2 font-medium">{pick(book.title)}</h3>
                 </Link>
-                <Price book={book} className="flex-col items-end gap-0"/>
+                <Price book={book} className="flex-col items-end gap-0 max-sm:hidden touch:hidden"/>
                 <p className="col-span-2 mt-1 truncate text-[13px] text-muted-foreground">
                     {book.tag && <span className="mr-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-accent sm:hidden">{t(`tags.${book.tag}`)} ·</span>}
                     {pick(book.author.name)}
                 </p>
+                <div className="col-span-2 mt-2.5 flex items-center justify-between gap-2 sm:pointer:hidden">
+                    <Price book={book} className="flex-col items-start gap-0"/>
+                    <button
+                        type="button"
+                        disabled={isSoldOut}
+                        onClick={(event) => add(event.currentTarget)}
+                        aria-label={isSoldOut ? t("actions.outOfStock") : t("actions.addToCart")}
+                        className="flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-accent/50 text-accent-bright outline-none transition-[background-color,transform] active:scale-90 active:bg-accent-soft focus-visible:ring-2 focus-visible:ring-ring/60 disabled:cursor-default disabled:border-border disabled:text-faint-foreground"
+                    >
+                        <Plus className="size-4 stroke-[1.8]"/>
+                    </button>
+                </div>
             </div>
         </article>
     );

@@ -8,6 +8,7 @@ import {ErrorBoundary} from "@/widgets/ErrorBoundary";
 import {Toaster} from "@/components/ui/sonner";
 import {TooltipProvider} from "@/components/ui/tooltip";
 import {router} from "@/router";
+import {AppSignals} from "@/widgets/AppSignals";
 
 const syncDocumentLanguage = (language: string): void => {
     document.documentElement.lang = language.split("-")[0];
@@ -24,6 +25,7 @@ createRoot(document.getElementById("root") as HTMLElement).render(
                     <RouterProvider router={router}/>
                 </TooltipProvider>
                 <Toaster/>
+                <AppSignals/>
             </QueryProvider>
         </ErrorBoundary>
     </StrictMode>,

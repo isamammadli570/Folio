@@ -38,7 +38,7 @@ const OrderRow = ({order}: {order: Order}) => {
 
             <div className={cn("grid transition-[grid-template-rows] duration-300 ease-out", isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
                 <div className="overflow-hidden">
-                    <div className="grid gap-6 bg-surface/60 px-5 pb-5 pt-2 md:grid-cols-[minmax(0,1fr)_17rem]">
+                    <div className="grid grid-cols-[minmax(0,1fr)] gap-6 bg-surface/60 px-5 pb-5 pt-2 md:grid-cols-[minmax(0,1fr)_17rem]">
                         <div className="min-w-0">
                             <p className="text-[10.5px] font-medium uppercase tracking-[0.2em] text-muted-foreground">{t("account:orders.items", {count})}</p>
                             <ul className="mt-2 divide-y divide-border">

@@ -61,7 +61,7 @@ export const Footer = () => {
     return (
         <footer className="relative isolate overflow-hidden border-t border-border bg-[var(--night)]">
             <div className="px-gutter relative mx-auto max-w-[1240px]">
-                <Reveal className="grid gap-10 border-b border-border py-14 md:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] md:items-end md:gap-16 md:py-16">
+                <Reveal className="grid grid-cols-[minmax(0,1fr)] gap-10 border-b border-border py-14 md:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] md:items-end md:gap-16 md:py-16">
                     <div className="space-y-5">
                         <Link to={ROUTES.HOME} className="inline-block outline-none"><Logo/></Link>
                         <p className="max-w-md font-serif text-lg leading-relaxed text-muted-foreground">{t("footer.about")}</p>

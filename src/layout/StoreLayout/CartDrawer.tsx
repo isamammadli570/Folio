@@ -65,11 +65,11 @@ export const CartDrawer = () => {
                                 </div>
                                 <div className="flex flex-col items-end gap-2">
                                     <div className="flex items-center rounded-full border border-border">
-                                        <button type="button" aria-label={t("decrease")} onClick={() => cartActions.setQuantity(book.id, quantity - 1)} className="flex size-8 cursor-pointer items-center justify-center rounded-full hover:text-accent-bright"><Minus className="size-3.5"/></button>
+                                        <button type="button" aria-label={t("decrease")} onClick={() => (quantity > 1 ? cartActions.setQuantity(book.id, quantity - 1) : cartActions.removeWithUndo(book.id, pick(book.title)))} className="flex size-8 cursor-pointer items-center justify-center rounded-full hover:text-accent-bright"><Minus className="size-3.5"/></button>
                                         <span className="tabular min-w-5 text-center text-[13px]">{quantity}</span>
                                         <button type="button" aria-label={t("increase")} disabled={quantity >= book.stock} onClick={() => cartActions.setQuantity(book.id, quantity + 1)} className="flex size-8 cursor-pointer items-center justify-center rounded-full hover:text-accent-bright disabled:cursor-default disabled:opacity-35"><Plus className="size-3.5"/></button>
                                     </div>
-                                    <button type="button" onClick={() => cartActions.remove(book.id)} aria-label={t("remove")} className="cursor-pointer p-1 text-faint-foreground transition-colors hover:text-danger"><Trash2 className="size-3.5"/></button>
+                                    <button type="button" onClick={() => cartActions.removeWithUndo(book.id, pick(book.title))} aria-label={t("remove")} className="cursor-pointer p-1 text-faint-foreground transition-colors hover:text-danger"><Trash2 className="size-3.5"/></button>
                                 </div>
                             </li>
                         ))}

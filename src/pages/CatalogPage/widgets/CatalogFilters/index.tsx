@@ -5,7 +5,7 @@ import {CATEGORY_COLOR, CATEGORY_IDS, PERIOD_IDS} from "@/constants/catalog";
 import {useGetCategoryCounts, useGetPriceRange} from "@/hooks/books";
 import {useLanguage} from "@/hooks/useLanguage";
 import {formatPrice} from "@/helpers/format";
-import type {CatalogParams} from "@/pages/CatalogPage/useCatalogParams";
+import {toggleIn, type CatalogParams} from "@/pages/CatalogPage/useCatalogParams";
 import {cn} from "@/lib/utils";
 
 type CatalogFiltersProps = {
@@ -26,7 +26,10 @@ const optionClass = (isActive: boolean) =>
         isActive ? "bg-accent-soft text-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground",
     );
 
-/** Section, period, price ceiling and stock; every change applies at once and is written to the URL. */
+/**
+ * Sections, periods, price ceiling and stock; every change applies at once and is written to the URL. Sections and
+ * periods take several choices each ("Antiquity" and "Middle Ages" together); "All" clears the sections.
+ */
 export const CatalogFilters = ({params, onChange}: CatalogFiltersProps) => {
     const {t} = useTranslation(["catalog", "common"]);
     const {language} = useLanguage();
@@ -39,35 +42,42 @@ export const CatalogFilters = ({params, onChange}: CatalogFiltersProps) => {
         <div className="flex flex-col gap-6">
             <Group title={t("filters.category")}>
                 <div className="flex flex-col gap-0.5">
-                    <button type="button" aria-pressed={!params.category} onClick={() => onChange({category: undefined})} className={optionClass(!params.category)}>
+                    <button type="button" aria-pressed={params.categories.length === 0} onClick={() => onChange({categories: []})} className={optionClass(params.categories.length === 0)}>
                         <span className="size-2.5 rotate-45 border border-accent/70"/>
                         <span className="flex-1">{t("filters.all")}</span>
                     </button>
-                    {CATEGORY_IDS.map((id) => (
-                        <button key={id} type="button" aria-pressed={params.category === id} onClick={() => onChange({category: id})} className={optionClass(params.category === id)}>
-                            <span className="size-2.5 rounded-[1px] brightness-[1.8]" style={{background: CATEGORY_COLOR[id]} as CSSProperties}/>
-                            <span className="flex-1">{t(`common:categories.${id}`)}</span>
-                            {counts && <span className="tabular font-sans text-xs text-faint-foreground">{counts[id]}</span>}
-                        </button>
-                    ))}
+                    {CATEGORY_IDS.map((id) => {
+                        const isActive = params.categories.includes(id);
+                        return (
+                            <button key={id} type="button" aria-pressed={isActive} onClick={() => onChange({categories: toggleIn(params.categories, id)})} className={optionClass(isActive)}>
+                                <span className="relative flex size-4 shrink-0 items-center justify-center rounded-[3px] border" style={{borderColor: CATEGORY_COLOR[id], background: isActive ? CATEGORY_COLOR[id] : "transparent"} as CSSProperties}>
+                                    <span aria-hidden className="absolute inset-0 rounded-[2px] brightness-[1.8]" style={{background: isActive ? "transparent" : CATEGORY_COLOR[id], opacity: isActive ? 0 : 0.35} as CSSProperties}/>
+                                    {isActive && <Check className="animate-icon-pop relative size-3 stroke-[3] text-[#f1eee6]"/>}
+                                </span>
+                                <span className="flex-1">{t(`common:categories.${id}`)}</span>
+                                {counts && <span className="tabular font-sans text-xs text-faint-foreground">{counts[id]}</span>}
+                            </button>
+                        );
+                    })}
                 </div>
             </Group>
 
             <Group title={t("filters.period")}>
                 <div className="flex flex-wrap gap-2">
                     {PERIOD_IDS.map((id) => {
-                        const isActive = params.period === id;
+                        const isActive = params.periods.includes(id);
                         return (
                             <button
                                 key={id}
                                 type="button"
                                 aria-pressed={isActive}
-                                onClick={() => onChange({period: isActive ? undefined : id})}
+                                onClick={() => onChange({periods: toggleIn(params.periods, id)})}
                                 className={cn(
-                                    "cursor-pointer rounded-full border px-3.5 py-1.5 text-[13px] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50",
+                                    "inline-flex cursor-pointer items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-[13px] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring/50",
                                     isActive ? "border-accent bg-accent text-accent-ink" : "border-border-strong text-muted-foreground hover:border-accent hover:text-foreground",
                                 )}
                             >
+                                {isActive && <Check className="animate-icon-pop size-3.5 stroke-[2.5]"/>}
                                 {t(`filters.periods.${id}`)}
                             </button>
                         );

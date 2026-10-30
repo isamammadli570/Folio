@@ -69,7 +69,7 @@ export const AuthorPage = () => {
                         <span aria-current="page" className="text-foreground">{name}</span>
                     </nav>
 
-                    <div className="grid items-end gap-10 pt-8 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] md:gap-14 lg:min-h-[640px]">
+                    <div className="grid grid-cols-[minmax(0,1fr)] items-end gap-10 pt-8 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] md:gap-14 lg:min-h-[640px]">
                         <div className="relative mx-auto aspect-[4/5] w-[min(460px,82vw)] md:order-none md:w-full md:max-w-[480px]">
                             <div aria-hidden className="absolute inset-x-[8%] top-[6%] aspect-square rounded-full bg-[radial-gradient(circle,color-mix(in_srgb,var(--accent)_16%,transparent),transparent_65%)] blur-2xl"/>
                             {isLoading || !author ? <Skeleton className="mx-auto mt-[10%] aspect-square w-[80%] rounded-full"/> : author.portrait ? (

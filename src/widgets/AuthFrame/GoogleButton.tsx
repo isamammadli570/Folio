@@ -3,6 +3,7 @@ import {useTranslation} from "react-i18next";
 import {signInWithGoogle} from "@/api/auth.api";
 import {Button} from "@/components/ui/button";
 import {errorCode} from "@/helpers/apiError";
+import {OAUTH_PENDING_KEY} from "@/constants/other";
 import {FormAlert} from "@/widgets/AuthFrame/FormAlert";
 
 type GoogleButtonProps = {
@@ -27,7 +28,14 @@ export const GoogleButton = ({next}: GoogleButtonProps) => {
 
     return (
         <div className="flex flex-col gap-5">
-            <Button type="button" variant="outline" size="lg" loading={google.isPending || google.isSuccess} onClick={() => google.mutate(next)} className="rounded-full">
+            <Button type="button" variant="outline" size="lg" loading={google.isPending || google.isSuccess} onClick={() => {
+                try {
+                    sessionStorage.setItem(OAUTH_PENDING_KEY, "1");
+                } catch {
+                    // Without storage the welcome toast is skipped; signing in still works.
+                }
+                google.mutate(next);
+            }} className="rounded-full">
                 <GoogleMark/>
                 {t("auth.google")}
             </Button>

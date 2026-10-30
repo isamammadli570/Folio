@@ -34,19 +34,19 @@ export const FeaturedShelf = () => {
 
     return (
         <section className="px-gutter mx-auto max-w-[1240px] pb-10 pt-24">
-            <Reveal className="mb-11 flex flex-wrap items-end justify-between gap-6">
+            <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-6 sm:mb-11">
                 <div>
                     <p className="eyebrow">{t("shelf.eyebrow")}</p>
                     <h2 className="mt-3 font-serif text-[clamp(36px,4.4vw,56px)] leading-[1.05]">{t("shelf.title")}</h2>
                 </div>
-                <div ref={tabsRef} role="group" aria-label={t("common:nav.categories")} className="relative flex flex-wrap gap-x-6 gap-y-2 border-b border-border pb-2.5">
+                <div ref={tabsRef} role="group" aria-label={t("common:nav.categories")} className="no-scrollbar relative flex gap-x-6 gap-y-2 border-b border-border pb-2.5 max-sm:bleed-x max-sm:w-[calc(100%+2*max(1rem,env(safe-area-inset-left)))] max-sm:overflow-x-auto sm:flex-wrap">
                     {TABS.map((id) => (
                         <button
                             key={id}
                             type="button"
                             aria-pressed={tab === id}
                             onClick={() => setTab(id)}
-                            className={cn("cursor-pointer font-serif text-[17px] outline-none transition-colors focus-visible:text-foreground", tab === id ? "text-foreground" : "text-muted-foreground hover:text-foreground")}
+                            className={cn("shrink-0 cursor-pointer whitespace-nowrap font-serif text-[17px] outline-none transition-colors focus-visible:text-foreground", tab === id ? "text-foreground" : "text-muted-foreground hover:text-foreground")}
                         >
                             {id === "all" ? t("shelf.all") : t(`common:categories.${id}`)}
                         </button>

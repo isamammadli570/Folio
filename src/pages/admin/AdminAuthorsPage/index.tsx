@@ -41,11 +41,11 @@ export const AdminAuthorsPage = () => {
             </div>
 
             <div className="mt-4">
-                {isLoading ? <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{[0, 1, 2, 3, 4, 5].map((key) => <Skeleton key={key} className="h-24 rounded-xl"/>)}</div>
+                {isLoading ? <div className="grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2 xl:grid-cols-3">{[0, 1, 2, 3, 4, 5].map((key) => <Skeleton key={key} className="h-24 rounded-xl"/>)}</div>
                     : isError ? <QueryErrorState onRetry={() => void refetch()}/>
                     : visible.length === 0 ? <EmptyState title={t("authors.noMatch")}/>
                     : (
-                        <ul className="stagger grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                        <ul className="stagger grid grid-cols-[minmax(0,1fr)] gap-3 sm:grid-cols-2 xl:grid-cols-3">
                             {visible.map((author, index) => {
                                 const name = pick(author.name);
                                 return (

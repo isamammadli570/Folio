@@ -28,7 +28,7 @@ import {cn} from "@/lib/utils";
 const BookPageSkeleton = () => (
     <Page>
         <Skeleton className="h-3 w-48"/>
-        <div className="mt-10 grid gap-12 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+        <div className="mt-10 grid grid-cols-[minmax(0,1fr)] gap-12 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
             <Skeleton className="mx-auto aspect-[2/3] w-full max-w-[420px]"/>
             <div className="space-y-5"><Skeleton className="h-3 w-24"/><Skeleton className="h-16 w-4/5"/><Skeleton className="h-5 w-40"/><Skeleton className="mt-8 h-10 w-36"/><Skeleton className="h-12 w-full max-w-sm"/></div>
         </div>
@@ -80,12 +80,12 @@ export const BookPage = () => {
                 <span aria-current="page" className="truncate text-foreground">{title}</span>
             </nav>
 
-            <div className="mt-10 grid items-start gap-12 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
+            <div className="mt-6 grid grid-cols-[minmax(0,1fr)] items-start gap-8 md:mt-10 md:gap-12 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
                 <div className="relative md:sticky md:top-[calc(var(--header-h)+2rem)]" onPointerMove={onPointerMove} onPointerLeave={onPointerLeave}>
                     <div aria-hidden className="absolute inset-x-[8%] -bottom-6 h-10 rounded-[50%] bg-[rgb(var(--shade)/0.6)] blur-2xl"/>
                     <div aria-hidden className="absolute inset-[-12%] -z-10 rounded-full opacity-50 blur-3xl" style={{background: `radial-gradient(circle, color-mix(in srgb, ${CATEGORY_COLOR[book.category]} 70%, var(--accent)), transparent 65%)`} as CSSProperties}/>
                     {/* No filter on this wrapper: a filter here would flatten the 3D book in some browsers. */}
-                    <div ref={tiltRef} className="mx-auto w-full max-w-[380px] py-6">
+                    <div ref={tiltRef} className="mx-auto w-[min(250px,64vw)] py-4 md:w-full md:max-w-[380px] md:py-6">
                         <Book3D ref={coverRef} book={book} author={book.author}/>
                     </div>
                     <p className="mt-6 text-center text-[11px] text-faint-foreground max-md:hidden [@media(hover:none)]:hidden">{t("book.rotateHint")}</p>
@@ -140,15 +140,17 @@ export const BookPage = () => {
                         marks={[{year: book.year, approx: book.approxYear, label: title}]}
                     />
 
-                    <section className="mt-12 grid grid-cols-[88px_minmax(0,1fr)] gap-6 border border-border bg-surface p-6 sm:grid-cols-[112px_minmax(0,1fr)]">
-                        <Link to={buildRoute.author(book.authorId)} aria-label={authorName}>
+                    <section className="mt-12 grid grid-cols-[72px_minmax(0,1fr)] items-center gap-x-5 gap-y-4 border border-border bg-surface p-5 sm:grid-cols-[112px_minmax(0,1fr)] sm:items-start sm:gap-6 sm:p-6">
+                        <Link to={buildRoute.author(book.authorId)} aria-label={authorName} className="sm:row-span-2 sm:self-start">
                             <Medallion letter={surname(authorName)[0]} portrait={book.author.portrait} alt={authorName} className="w-full"/>
                         </Link>
                         <div className="min-w-0">
                             <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-accent">{t("book.aboutAuthor")}</p>
                             <h2 className="mt-1.5 font-serif text-2xl">{authorName}</h2>
                             <p className="mt-0.5 text-xs text-muted-foreground">{formatLifespan(book.author.born, book.author.died, t, book.author.approx)} · {pick(book.author.movement)}</p>
-                            <p className="mt-3 font-serif text-[17px] leading-relaxed text-muted-foreground">{pick(book.author.bio)}</p>
+                        </div>
+                        <div className="col-span-2 min-w-0 sm:col-span-1 sm:col-start-2">
+                            <p className="font-serif text-[17px] leading-relaxed text-muted-foreground">{pick(book.author.bio)}</p>
                             {book.author.quote && (
                                 <blockquote className="mt-4 border-l border-accent/60 pl-4 font-serif italic">
                                     <span lang={book.author.quote.lang}>“{book.author.quote.text}”</span>

@@ -1,6 +1,6 @@
 import {useMemo, type CSSProperties, type ReactNode} from "react";
 import {Link} from "react-router";
-import {Heart, ShoppingBag} from "lucide-react";
+import {Heart, MonitorSmartphone, ShoppingBag} from "lucide-react";
 import {useTranslation} from "react-i18next";
 import {toast} from "sonner";
 import type {BookWithAuthor} from "@/api/types";
@@ -17,6 +17,7 @@ import {BookGrid, BookGridSkeleton} from "@/widgets/BookGrid";
 import {Page} from "@/widgets/Page";
 import {PageTitle} from "@/widgets/PageTitle";
 import {Reveal} from "@/widgets/Reveal";
+import {SignInNudge} from "@/widgets/SignInNudge";
 
 type StatProps = {
     label: string;
@@ -100,6 +101,8 @@ export const FavoritesPage = () => {
                     </Button>
                 )}
             />
+
+            <SignInNudge className="mt-8" icon={<MonitorSmartphone/>} title={t("common:nudge.shelfTitle")} text={t("common:nudge.shelfText")}/>
 
             {isLoading ? <BookGridSkeleton className="mt-14" count={Math.min(ids.length, 8)}/> : (
                 <>

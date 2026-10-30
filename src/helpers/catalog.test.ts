@@ -45,6 +45,12 @@ describe("filterBooks", () => {
         expect(filterBooks(books, {inStockOnly: true}).map((b) => b.id)).toEqual(["b", "c"]);
         expect(filterBooks(books, {period: "ancient"}).map((b) => b.id)).toEqual(["a"]);
     });
+
+    it("matches any of several periods or sections", () => {
+        expect(filterBooks(books, {periods: ["ancient", "contemporary"]}).map((b) => b.id)).toEqual(["a", "c"]);
+        expect(filterBooks(books, {categories: ["philosophy", "literature"]}).map((b) => b.id)).toEqual(["b", "c"]);
+        expect(filterBooks(books, {periods: [], categories: []}).map((b) => b.id)).toEqual(["a", "b", "c"]);
+    });
 });
 
 describe("isInPeriod", () => {

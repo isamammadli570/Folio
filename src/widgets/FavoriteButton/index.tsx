@@ -1,6 +1,10 @@
+import {useNavigate} from "react-router";
 import {Heart} from "lucide-react";
+import {toast} from "sonner";
 import {useTranslation} from "react-i18next";
-import {favoriteActions, useFavorites} from "@/hooks/useFavorites";
+import {ROUTES} from "@/constants/routes";
+import {favoriteActions, favoritesSource, useFavorites} from "@/hooks/useFavorites";
+import {useSignInNudge} from "@/hooks/useSignInNudge";
 import {cn} from "@/lib/utils";
 
 type FavoriteButtonProps = {
@@ -14,6 +18,8 @@ type FavoriteButtonProps = {
 export const FavoriteButton = ({bookId, className, variant = "overlay"}: FavoriteButtonProps) => {
     const {t} = useTranslation();
     const {isFavorite} = useFavorites();
+    const {afterFavorite} = useSignInNudge();
+    const navigate = useNavigate();
     const active = isFavorite(bookId);
     const label = t(active ? "actions.removeFavorite" : "actions.addFavorite");
 
@@ -26,7 +32,13 @@ export const FavoriteButton = ({bookId, className, variant = "overlay"}: Favorit
             onClick={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
+                const before = favoritesSource.get();
                 favoriteActions.toggle(bookId);
+                if (active) {
+                    toast(t("toasts.favoriteRemoved"), {action: {label: t("toasts.undo"), onClick: () => favoriteActions.replace(before)}});
+                } else if (!afterFavorite()) {
+                    toast(t("toasts.favoriteAdded"), {action: {label: t("toasts.viewShelf"), onClick: () => navigate(ROUTES.FAVORITES)}});
+                }
             }}
             className={cn(
                 "flex cursor-pointer items-center justify-center rounded-full outline-none transition-[background-color,border-color,color,transform] duration-200 focus-visible:ring-2 focus-visible:ring-ring/60 active:scale-90",

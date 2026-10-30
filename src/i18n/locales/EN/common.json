@@ -106,5 +106,28 @@
         "catalog": "Browse the catalogue"
     },
     "loading": "Loading",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "nudge": {
+        "favoriteTitle": "Added to your shelf",
+        "favoriteText": "For now your shelf lives only in this browser. Sign in to have it on every device.",
+        "signIn": "Sign in",
+        "shelfTitle": "This shelf is saved only in this browser",
+        "shelfText": "Sign in and your books follow you to your phone and computer. Nothing is lost."
+    },
+    "toasts": {
+        "undo": "Undo",
+        "cartRemoved": "“{{title}}” removed from your cart",
+        "favoriteAdded": "Added to your shelf",
+        "favoriteRemoved": "Removed from your shelf",
+        "viewShelf": "View shelf",
+        "stockLimit_one": "Only {{count}} copy of “{{title}}” is in stock — it is already in your cart",
+        "stockLimit_other": "Only {{count}} copies of “{{title}}” are in stock — all of them are already in your cart",
+        "soldOut": "“{{title}}” is out of stock right now",
+        "offline": "You are offline. Your cart and shelf are safe",
+        "online": "Back online",
+        "copy": "Copy",
+        "copied": "Copied",
+        "orderCopied": "Order number copied",
+        "copyFailed": "Could not copy"
+    }
 }

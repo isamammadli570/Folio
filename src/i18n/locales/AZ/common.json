@@ -106,5 +106,28 @@
         "catalog": "Kataloqa keç"
     },
     "loading": "Yüklənir",
-    "skipToContent": "Məzmuna keç"
+    "skipToContent": "Məzmuna keç",
+    "nudge": {
+        "favoriteTitle": "Rəfə əlavə olundu",
+        "favoriteText": "Rəfiniz hələlik yalnız bu brauzerdədir. Daxil olun — bütün cihazlarda sizinlə olsun.",
+        "signIn": "Daxil ol",
+        "shelfTitle": "Bu rəf yalnız bu brauzerdə saxlanılır",
+        "shelfText": "Daxil olun — seçdiyiniz kitablar telefonda da, kompüterdə də sizinlə olsun. Heç nə itməyəcək."
+    },
+    "toasts": {
+        "undo": "Geri qaytar",
+        "cartRemoved": "«{{title}}» səbətdən çıxarıldı",
+        "favoriteAdded": "Rəfə əlavə olundu",
+        "favoriteRemoved": "Rəfdən çıxarıldı",
+        "viewShelf": "Rəfə bax",
+        "stockLimit_one": "«{{title}}» kitabından anbarda {{count}} nüsxə var — o artıq səbətinizdədir",
+        "stockLimit_other": "«{{title}}» kitabından anbarda {{count}} nüsxə var — hamısı artıq səbətinizdədir",
+        "soldOut": "«{{title}}» hazırda anbarda yoxdur",
+        "offline": "İnternet bağlantısı kəsildi. Səbət və rəf yerində qalır",
+        "online": "Bağlantı bərpa olundu",
+        "copy": "Kopyala",
+        "copied": "Kopyalandı",
+        "orderCopied": "Sifariş nömrəsi kopyalandı",
+        "copyFailed": "Kopyalamaq alınmadı"
+    }
 }

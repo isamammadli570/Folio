@@ -9,6 +9,9 @@
 @import "@fontsource/eb-garamond/400-italic.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
+/* Touch screens (phones, tablets) versus devices with a hovering pointer. */
+@custom-variant touch (@media (hover: none));
+@custom-variant pointer (@media (hover: hover));
 
 /* ───────────────────────────── Design tokens ─────────────────────────────
    A dark museum hall: near-black surfaces with an olive-sepia cast (never red), ivory ink, and one pale champagne
@@ -193,6 +196,16 @@
 }
 @utility animate-spin-slow {
     animation: spin 60s linear infinite;
+}
+/* A row that scrolls sideways edge to edge on phones: it bleeds through the page gutter and hides its scrollbar. */
+@utility bleed-x {
+    margin-inline: calc(-1 * max(1rem, env(safe-area-inset-left)));
+    padding-inline: max(1rem, env(safe-area-inset-left));
+    scroll-padding-inline: max(1rem, env(safe-area-inset-left));
+}
+@utility no-scrollbar {
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
 }
 @utility animate-grow-bar {
     animation: grow-bar 700ms var(--ease-out) both;

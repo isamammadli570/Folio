@@ -113,7 +113,7 @@ const BookEditor = ({book}: {book?: Book}) => {
     });
 
     return (
-        <form onSubmit={submit} noValidate className="mt-8 grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <form onSubmit={submit} noValidate className="mt-8 grid grid-cols-[minmax(0,1fr)] items-start gap-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
             <div className="flex min-w-0 flex-col gap-6">
                 <Section title={t("books.sections.text")}>
                     <LocalizedFields
@@ -138,7 +138,7 @@ const BookEditor = ({book}: {book?: Book}) => {
                 </Section>
 
                 <Section title={t("books.sections.catalogue")}>
-                    <div className="grid gap-5 sm:grid-cols-2">
+                    <div className="grid grid-cols-[minmax(0,1fr)] gap-5 sm:grid-cols-2">
                         <label className="flex flex-col gap-1.5 text-[13px] font-medium">
                             <span>{t("books.fields.author")}<span className="ml-0.5 text-accent" aria-hidden>*</span></span>
                             <select className={selectClass} {...register("authorId", required)}>
@@ -174,7 +174,7 @@ const BookEditor = ({book}: {book?: Book}) => {
                 </Section>
 
                 <Section title={t("books.sections.sale")}>
-                    <div className="grid gap-5 sm:grid-cols-3">
+                    <div className="grid grid-cols-[minmax(0,1fr)] gap-5 sm:grid-cols-3">
                         <FormInput label={t("books.fields.price")} required inputMode="decimal" error={errors.price?.message} {...register("price", number((value) => value > 0, t("form.positive")))}/>
                         <FormInput
                             label={t("books.fields.oldPrice")}
