@@ -11,18 +11,20 @@ type SceneArcProps = {
 /**
  * The half-circle on the left of an author hero: a disc far taller than the section, so only its right arc shows,
  * reaching in behind the bust. Inside, the scene in sepia under a fine dot screen, with a double hairline on its rim.
- * Its parent must be `relative` and `overflow-hidden`.
+ * Its parent must be `relative` and `overflow-hidden`. The picture is keyed by its address: a reused `<img>` would
+ * show the previous scene for a frame while the new one is swapped in.
  */
 export const SceneArc = ({src, letter, isHidden = false}: SceneArcProps) => (
     <>
         <div aria-hidden className="scene-arc pointer-events-none absolute left-[-16rem] top-[22rem] size-[min(780px,125vw)] -translate-y-1/2 overflow-hidden rounded-full lg:left-[calc(50%-1500px)] lg:top-1/2 lg:size-[1360px]">
             {src ? (
                 <img
+                    key={src}
                     src={src}
                     alt=""
                     draggable={false}
                     className={cn(
-                        "absolute inset-0 size-full object-cover opacity-45 transition-opacity duration-500 [filter:sepia(0.35)_contrast(1.05)]",
+                        "absolute inset-0 size-full object-cover opacity-45 transition-opacity duration-500 [animation:scene-in_500ms_var(--ease-out)] [filter:sepia(0.35)_contrast(1.05)]",
                         "lg:inset-auto lg:right-0 lg:top-1/2 lg:h-[800px] lg:w-[min(820px,62vw)] lg:-translate-y-1/2 lg:opacity-80",
                         isHidden && "opacity-0 lg:opacity-0",
                     )}

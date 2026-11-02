@@ -16,6 +16,23 @@ import {Bust, bustThumb} from "@/widgets/Bust";
 import {Medallion} from "@/widgets/Medallion";
 import {cn} from "@/lib/utils";
 
+/** One decode per picture for the whole visit, so going back to an author is instant. */
+const warmed = new Map<string, Promise<void>>();
+const warm = (src?: string): Promise<void> => {
+    if (!src) return Promise.resolve();
+    let ready = warmed.get(src);
+    if (!ready) {
+        const image = new Image();
+        image.src = src;
+        ready = image.decode().catch(() => undefined);
+        warmed.set(src, ready);
+    }
+    return ready;
+};
+
+/** Longest wait for the next author's pictures on a slow line; after that the swap happens anyway. */
+const SWAP_TIMEOUT_MS = 1500;
+
 type AuthorSpotlightProps = {
     authors: AuthorSummary[];
     isLoading: boolean;
@@ -39,13 +56,30 @@ export const AuthorSpotlight = ({authors, isLoading, index, onIndexChange}: Auth
     const author = authors[shown];
 
     // The bust drifts out sideways and blurs while the text fades; halfway the next author is swapped in and everything
-    // settles back. Driven by a timer and CSS transitions, so a hidden tab or a fast double click never strands it.
+    // settles back. The swap waits until the next scene and bust are decoded, so the old picture never flashes back in
+    // under the new name. Driven by timers and CSS transitions, so a hidden tab or a fast double click never strands it.
     const isLeaving = index !== shown;
     useEffect(() => {
         if (index === shown) return;
-        const timer = window.setTimeout(() => setShown(index), reducedMotion ? 0 : 420);
-        return () => window.clearTimeout(timer);
-    }, [index, reducedMotion, shown]);
+        let isCancelled = false;
+        const next = authors[index];
+        const delay = (ms: number) => new Promise((resolve) => window.setTimeout(resolve, ms));
+        const ready = Promise.race([Promise.all([warm(next?.scene), warm(next?.portrait)]), delay(SWAP_TIMEOUT_MS)]);
+        void Promise.all([ready, delay(reducedMotion ? 0 : 420)]).then(() => {
+            if (!isCancelled) setShown(index);
+        });
+        return () => { isCancelled = true; };
+    }, [authors, index, reducedMotion, shown]);
+
+    // Warm the neighbours while this author is on show, so the next swap rarely has to wait at all.
+    useEffect(() => {
+        if (authors.length < 2) return;
+        for (const step of [1, -1]) {
+            const neighbour = authors[(shown + step + authors.length) % authors.length];
+            void warm(neighbour.scene);
+            void warm(neighbour.portrait);
+        }
+    }, [authors, shown]);
 
     // Keep the active thumbnail in view by scrolling the strip itself, never the page.
     useEffect(() => {
@@ -119,7 +153,7 @@ export const AuthorSpotlight = ({authors, isLoading, index, onIndexChange}: Auth
                     </svg>
                     <div ref={coinRef} className={cn("absolute inset-0 drop-shadow-[0_24px_40px_rgb(var(--shade)/0.55)] transition-[transform,opacity,filter,translate] duration-500 ease-[var(--ease-out)] [transform:rotateY(var(--ry,0deg))_rotateX(var(--rx,0deg))]", isLeaving && "-translate-x-8 opacity-0 blur-md")}>
                         {!author ? <Skeleton className="mx-auto mt-[10%] aspect-square w-[80%] rounded-full"/> : author.portrait ? (
-                            <Bust src={author.portrait} alt={name} priority className="animate-[hover-float_9s_ease-in-out_infinite] absolute inset-x-0 bottom-0 mx-auto h-full w-full"/>
+                            <Bust key={author.portrait} src={author.portrait} alt={name} priority className="animate-[hover-float_9s_ease-in-out_infinite] absolute inset-x-0 bottom-0 mx-auto h-full w-full"/>
                         ) : (
                             <Medallion size="lg" letter={letter} alt={name} className="mx-auto mt-[10%] w-[80%]"/>
                         )}

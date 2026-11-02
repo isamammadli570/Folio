@@ -218,6 +218,10 @@
     from { opacity: 0; transform: translateY(14px); }
     to { opacity: 1; transform: translateY(0); }
 }
+/* Fades a picture in to whatever opacity its own classes give it. */
+@keyframes scene-in {
+    from { opacity: 0; }
+}
 @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
