@@ -53,6 +53,9 @@ export const QUERY_KEYS = {
 /** Where readers write about their data; the same address Google shows on its sign-in consent screen. */
 export const CONTACT_EMAIL = "isamammadlee@gmail.com";
 
+/** Who made the site, signed in the footer and linked to their GitHub profile. */
+export const MAKER = {name: "İsa M.", url: "https://github.com/isamammadli570"} as const;
+
 /** When the privacy policy last changed (ISO date). */
 export const PRIVACY_UPDATED = "2026-10-30T12:00:00";
 

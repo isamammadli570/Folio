@@ -67,7 +67,8 @@
         "hours": "Daily 10:00–20:00",
         "backToTop": "Back to top",
         "alreadySubscribed": "This address is already on the list — see you on Monday",
-        "subscribeFailed": "Could not subscribe. Please try again shortly"
+        "subscribeFailed": "Could not subscribe. Please try again shortly",
+        "madeBy": "Designed and built by"
     },
     "actions": {
         "addToCart": "Add to cart",

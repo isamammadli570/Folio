@@ -8,7 +8,7 @@ import {subscribe as subscribeToNewsletter} from "@/api/newsletter.api";
 import {useLanguage} from "@/hooks/useLanguage";
 import {NAV_GROUPS} from "@/constants/sidebar";
 import {ROUTES} from "@/constants/routes";
-import {CONTACT_EMAIL} from "@/constants/other";
+import {CONTACT_EMAIL, MAKER} from "@/constants/other";
 import {EMAIL_PATTERN} from "@/constants/validation";
 import {Logo} from "@/widgets/Logo";
 import {Reveal} from "@/widgets/Reveal";
@@ -120,6 +120,13 @@ export const Footer = () => {
                     <div className="space-y-1">
                         <p>{t("footer.rights", {year: new Date().getFullYear()})} · {t("footer.delivery")} · <Link to={ROUTES.PRIVACY} className="underline-offset-4 hover:text-accent-bright hover:underline">{t("legal:privacy.link")}</Link> · <Link to={ROUTES.TERMS} className="underline-offset-4 hover:text-accent-bright hover:underline">{t("legal:terms.link")}</Link></p>
                         <p>{t("footer.note")} {t("footer.aiNote")}</p>
+                        <p>
+                            {t("footer.madeBy")}{" "}
+                            <a href={MAKER.url} target="_blank" rel="noreferrer" className="group/maker inline-flex items-baseline gap-0.5 font-serif text-[13px] text-muted-foreground underline-offset-4 transition-colors hover:text-accent-bright hover:underline">
+                                {MAKER.name}
+                                <ArrowUpRight className="size-3 self-center transition-transform duration-200 group-hover/maker:-translate-y-px group-hover/maker:translate-x-px"/>
+                            </a>
+                        </p>
                     </div>
                     <button
                         type="button"

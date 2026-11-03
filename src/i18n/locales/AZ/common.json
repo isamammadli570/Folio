@@ -67,7 +67,8 @@
         "hours": "Hər gün 10:00–20:00",
         "backToTop": "Yuxarı qayıt",
         "alreadySubscribed": "Bu ünvan artıq siyahıdadır — hər bazar ertəsi görüşərik",
-        "subscribeFailed": "Abunə alınmadı. Bir az sonra yenidən cəhd edin"
+        "subscribeFailed": "Abunə alınmadı. Bir az sonra yenidən cəhd edin",
+        "madeBy": "Dizayn və kod —"
     },
     "actions": {
         "addToCart": "Səbətə at",
