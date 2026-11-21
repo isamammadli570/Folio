@@ -4,36 +4,37 @@ import azCatalog from "./locales/AZ/catalog.json";
 import azAuthors from "./locales/AZ/authors.json";
 import azCart from "./locales/AZ/cart.json";
 import azAccount from "./locales/AZ/account.json";
-import azAdmin from "./locales/AZ/admin.json";
 import azLegal from "./locales/AZ/legal.json";
-import enCommon from "./locales/EN/common.json";
-import enHome from "./locales/EN/home.json";
-import enCatalog from "./locales/EN/catalog.json";
-import enAuthors from "./locales/EN/authors.json";
-import enCart from "./locales/EN/cart.json";
-import enAccount from "./locales/EN/account.json";
-import enAdmin from "./locales/EN/admin.json";
-import enLegal from "./locales/EN/legal.json";
-import ruCommon from "./locales/RU/common.json";
-import ruHome from "./locales/RU/home.json";
-import ruCatalog from "./locales/RU/catalog.json";
-import ruAuthors from "./locales/RU/authors.json";
-import ruCart from "./locales/RU/cart.json";
-import ruAccount from "./locales/RU/account.json";
-import ruAdmin from "./locales/RU/admin.json";
-import ruLegal from "./locales/RU/legal.json";
 
 export const SUPPORTED_LANGUAGES = ["az", "en", "ru"] as const;
 export type Language = (typeof SUPPORTED_LANGUAGES)[number];
 
 export const NAMESPACES = ["common", "home", "catalog", "authors", "cart", "account", "admin", "legal"] as const;
+export type Namespace = (typeof NAMESPACES)[number];
+
+/** What the storefront needs on every page; the admin namespace is read only inside the admin panel. */
+export const STORE_NAMESPACES = ["common", "home", "catalog", "authors", "cart", "account", "legal"] as const satisfies readonly Namespace[];
 
 export const LANGUAGE_LABELS: Record<Language, string> = {az: "Azərbaycan", en: "English", ru: "Русский"};
 
 export const isLanguage = (value: string): value is Language => (SUPPORTED_LANGUAGES as readonly string[]).includes(value);
 
-export const RESOURCES = {
-    az: {common: azCommon, home: azHome, catalog: azCatalog, authors: azAuthors, cart: azCart, account: azAccount, admin: azAdmin, legal: azLegal},
-    en: {common: enCommon, home: enHome, catalog: enCatalog, authors: enAuthors, cart: enCart, account: enAccount, admin: enAdmin, legal: enLegal},
-    ru: {common: ruCommon, home: ruHome, catalog: ruCatalog, authors: ruAuthors, cart: ruCart, account: ruAccount, admin: ruAdmin, legal: ruLegal},
+/**
+ * Azerbaijani, the house language most visitors read, ships inside the main bundle so the first page needs no extra
+ * request. Every other language, and the admin texts, arrive on demand (see `loadNamespace`).
+ */
+export const BUNDLED_RESOURCES = {
+    az: {common: azCommon, home: azHome, catalog: azCatalog, authors: azAuthors, cart: azCart, account: azAccount, legal: azLegal},
 } as const;
+
+// Each file becomes its own small chunk, fetched only when a visitor reads that language or opens the admin panel.
+const LOADERS = import.meta.glob<{default: Record<string, unknown>}>([
+    "./locales/*/*.json",
+    "!./locales/AZ/{common,home,catalog,authors,cart,account,legal}.json",
+]);
+
+export const loadNamespace = async (language: string, namespace: string): Promise<Record<string, unknown>> => {
+    const loader = LOADERS[`./locales/${language.toUpperCase()}/${namespace}.json`];
+    if (!loader) throw new Error(`No translations for ${language}/${namespace}`);
+    return (await loader()).default;
+};

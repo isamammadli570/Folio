@@ -90,7 +90,7 @@ export const SearchDialog = ({open, onOpenChange}: SearchDialogProps) => {
                                 <p className="px-3 pb-1 pt-2 text-[10.5px] font-medium uppercase tracking-[0.2em] text-faint-foreground">{t("search.books")}</p>
                                 {books.map((book) => (
                                     <Link key={book.id} to={buildRoute.book(book.id)} onClick={close} className="grid grid-cols-[36px_minmax(0,1fr)_auto] items-center gap-3 rounded-lg px-3 py-2 outline-none hover:bg-muted focus-visible:bg-muted">
-                                        <BookCover book={book} author={book.author}/>
+                                        <BookCover book={book} author={book.author} sizes="64px"/>
                                         <span className="min-w-0">
                                             <span className="block truncate font-serif text-[17px]">{pick(book.title)}</span>
                                             <span className="block truncate text-xs text-muted-foreground">{pick(book.author.name)}</span>

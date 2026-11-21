@@ -5,6 +5,7 @@ import {pageRoute} from "@/router/preload";
 import {requireAdmin, requireGuest, requireUser} from "@/router/guards";
 import {ROUTES} from "@/constants/routes";
 import {Loading} from "@/widgets/Loading";
+import i18n from "@/i18n";
 
 // The orders list is the account index; registering it under /account lets hovering an account link warm its chunk.
 const ordersRoute = pageRoute(ROUTES.ACCOUNT, () => import("@/pages/OrdersPage"), "OrdersPage");
@@ -59,7 +60,11 @@ export const router = createBrowserRouter([
         id: "admin",
         path: ROUTES.ADMIN,
         loader: requireAdmin,
-        lazy: async () => ({Component: (await import("@/layout/AdminLayout")).AdminLayout}),
+        // The admin texts are not in the main bundle; they load together with the panel, so its first paint is translated.
+        lazy: async () => {
+            const [layout] = await Promise.all([import("@/layout/AdminLayout"), i18n.loadNamespaces("admin")]);
+            return {Component: layout.AdminLayout};
+        },
         errorElement: <RouteErrorPage/>,
         hydrateFallbackElement: <Loading/>,
         children: adminRoutes.map((route) => ({...route, errorElement: <RouteErrorPage/>})),

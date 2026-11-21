@@ -1,4 +1,4 @@
-import type {User} from "@supabase/supabase-js";
+import type {User} from "@supabase/auth-js";
 
 export type UserIdentity = {name: string; email: string; initials: string; avatar: string};
 

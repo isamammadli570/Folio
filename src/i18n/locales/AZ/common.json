@@ -21,6 +21,7 @@
     "bookCount_one": "{{count}} kitab",
     "bookCount_other": "{{count}} kitab",
     "header": {
+        "adminPanel": "İdarə paneli",
         "search": "Axtar",
         "openMenu": "Menyunu aç",
         "cart": "Səbət",

@@ -3,7 +3,16 @@ import {Tooltip as TooltipPrimitive} from "radix-ui";
 import {cn} from "@/lib/utils";
 
 const TooltipProvider = TooltipPrimitive.Provider;
-const Tooltip = TooltipPrimitive.Root;
+
+/** Brings its own provider, so the tooltip code loads only with the screens that use it (not with every page). */
+function Tooltip(props: ComponentProps<typeof TooltipPrimitive.Root>) {
+    return (
+        <TooltipPrimitive.Provider delayDuration={300}>
+            <TooltipPrimitive.Root {...props}/>
+        </TooltipPrimitive.Provider>
+    );
+}
+
 const TooltipTrigger = TooltipPrimitive.Trigger;
 
 function TooltipContent({className, sideOffset = 6, ...props}: ComponentProps<typeof TooltipPrimitive.Content>) {

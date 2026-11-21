@@ -8,8 +8,11 @@ type BustProps = {
     priority?: boolean;
 };
 
-/** The small copy of a bust shipped with the site (see scripts/generate-thumbs.mjs); uploaded busts have none. */
+/** The small copy (160px tall) of a bust shipped with the site (see scripts/generate-thumbs.mjs); uploaded busts have none. */
 export const bustThumb = (src: string) => (src.startsWith("/authors/") ? src.replace("/authors/", "/authors/thumbs/") : src);
+
+/** The medium copy (400px tall), for medallions in lists and cards. */
+export const bustMedium = (src: string) => (src.startsWith("/authors/") ? src.replace("/authors/", "/authors/md/") : src);
 
 /** A cut-out marble bust whose foot dissolves into the dark page, so it seems to rise out of the background. */
 export const Bust = ({src, alt, className, priority = false}: BustProps) => (
@@ -18,6 +21,7 @@ export const Bust = ({src, alt, className, priority = false}: BustProps) => (
         alt={alt}
         draggable={false}
         loading={priority ? "eager" : "lazy"}
+        decoding={priority ? "auto" : "async"}
         fetchPriority={priority ? "high" : "auto"}
         className={cn("bust pointer-events-none select-none object-contain object-bottom", className)}
     />

@@ -55,7 +55,7 @@ const OrderCard = ({order, books, index}: {order: Order; books: BookWithAuthor[]
                 <span className="flex -space-x-5">
                     {covers.map((book, coverIndex) => (
                         <span key={book.id} className="w-11 shadow-[0_6px_14px_-6px_rgb(var(--shade)/0.8)]" style={{zIndex: covers.length - coverIndex, transform: `rotate(${(coverIndex - 1) * 4}deg)`}}>
-                            <BookCover book={book} author={book.author}/>
+                            <BookCover book={book} author={book.author} sizes="64px"/>
                         </span>
                     ))}
                 </span>

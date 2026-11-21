@@ -21,6 +21,7 @@ import {preloadRoute} from "@/router/preload";
 import {cn} from "@/lib/utils";
 import {userIdentity} from "@/helpers/user";
 import {UserAvatar} from "@/widgets/UserAvatar";
+import {AccountButton} from "@/layout/StoreLayout/AccountButton";
 
 type AccountMenuProps = {
     /** The header's round icon-button classes, so the trigger matches its neighbours. */
@@ -32,7 +33,7 @@ type AccountMenuProps = {
  * language and signing out. Keeps the header down to search, favourites, cart and this.
  */
 export const AccountMenu = ({buttonClassName}: AccountMenuProps) => {
-    const {t, i18n} = useTranslation(["common", "account", "admin"]);
+    const {t, i18n} = useTranslation(["common", "account"]);
     const {language} = useLanguage();
     const {user} = useAuth();
     const {isAdmin} = useIsAdmin();
@@ -51,10 +52,7 @@ export const AccountMenu = ({buttonClassName}: AccountMenuProps) => {
     return (
         <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
-                <button type="button" aria-label={t(user ? "header.account" : "header.signIn")} className={cn(buttonClassName, user && "border-accent/60 data-[state=open]:border-accent data-[state=open]:bg-accent-soft")}>
-                    {user ? <UserAvatar identity={identity} className="size-full border-0 text-[15px]"/> : <UserRound/>}
-                    {user && <span aria-hidden className="absolute -bottom-0.5 -right-0.5 size-2.5 rounded-full border-2 border-background bg-accent"/>}
-                </button>
+                <AccountButton className={buttonClassName}/>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent align="end" sideOffset={10} className="w-72 p-0">
@@ -74,7 +72,7 @@ export const AccountMenu = ({buttonClassName}: AccountMenuProps) => {
                             {link(ROUTES.ACCOUNT, <Package/>, t("account:nav.orders"))}
                             {link(ROUTES.ACCOUNT_ADDRESSES, <MapPin/>, t("account:nav.addresses"))}
                             {link(ROUTES.ACCOUNT_PROFILE, <UserRound/>, t("account:nav.profile"))}
-                            {isAdmin && link(ROUTES.ADMIN, <LayoutDashboard/>, t("admin:nav.panel"), "mt-1 bg-accent-soft/60 font-medium text-accent-bright [&_svg]:text-accent-bright data-[highlighted]:bg-accent-soft")}
+                            {isAdmin && link(ROUTES.ADMIN, <LayoutDashboard/>, t("header.adminPanel"), "mt-1 bg-accent-soft/60 font-medium text-accent-bright [&_svg]:text-accent-bright data-[highlighted]:bg-accent-soft")}
                         </>
                     ) : (
                         <>

@@ -1,3 +1,4 @@
+import {Suspense} from "react";
 import {Link, useLocation} from "react-router";
 import {Heart, Menu, Search, ShoppingBag} from "lucide-react";
 import {useTranslation} from "react-i18next";
@@ -8,7 +9,8 @@ import {cartActions, useCart} from "@/hooks/useCart";
 import {useFavorites} from "@/hooks/useFavorites";
 import {preloadRoute} from "@/router/preload";
 import {Logo} from "@/widgets/Logo";
-import {AccountMenu} from "@/layout/StoreLayout/AccountMenu";
+import {AccountButton} from "@/layout/StoreLayout/AccountButton";
+import {AccountMenu} from "@/layout/StoreLayout/overlays";
 import {CART_TARGET_ATTRIBUTE} from "@/lib/flyTo";
 import {MOD_KEY} from "@/lib/platform";
 import {cn} from "@/lib/utils";
@@ -35,7 +37,7 @@ export const Header = ({onOpenMenu, onOpenSearch}: HeaderProps) => {
     return (
         <>
             <div aria-hidden className="fixed inset-x-0 top-0 z-40 h-[env(safe-area-inset-top)] bg-background"/>
-            <header className="sticky top-[env(safe-area-inset-top)] z-40 border-b border-border bg-background/75 backdrop-blur-xl">
+            <header className="sticky top-[env(safe-area-inset-top)] z-40 border-b border-border bg-background/80 backdrop-blur-md">
                 <div className="px-gutter mx-auto flex h-[var(--header-h)] max-w-[1240px] items-center gap-2 sm:gap-4">
                     <button type="button" onClick={onOpenMenu} aria-label={t("header.openMenu")} className={cn(iconButton, "lg:hidden")}>
                         <Menu/>
@@ -89,7 +91,9 @@ export const Header = ({onOpenMenu, onOpenSearch}: HeaderProps) => {
                             <ShoppingBag/>
                             <Count value={count}/>
                         </button>
-                        <AccountMenu buttonClassName={iconButton}/>
+                        <Suspense fallback={<AccountButton className={iconButton} onPointerEnter={() => void AccountMenu.preload()}/>}>
+                            <AccountMenu buttonClassName={iconButton}/>
+                        </Suspense>
                     </div>
                 </div>
             </header>

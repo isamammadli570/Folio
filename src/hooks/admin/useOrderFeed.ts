@@ -2,7 +2,7 @@ import {useEffect} from "react";
 import {useNavigate} from "react-router";
 import {useQueryClient} from "@tanstack/react-query";
 import {toast} from "sonner";
-import {supabase} from "@/api/supabase";
+import type {RealtimeChannel} from "@supabase/realtime-js";
 import {QUERY_KEYS} from "@/constants/other";
 import {ROUTES} from "@/constants/routes";
 import {formatPrice} from "@/helpers/format";
@@ -22,17 +22,27 @@ export const useOrderFeed = (enabled: boolean) => {
 
     useEffect(() => {
         if (!enabled) return;
-        const channel = supabase
-            .channel("admin-orders")
-            .on("postgres_changes", {event: "INSERT", schema: "public", table: "orders"}, ({new: order}) => {
-                const row = order as NewOrder;
-                void queryClient.invalidateQueries({queryKey: [QUERY_KEYS.ADMIN_ORDERS]});
-                void queryClient.invalidateQueries({queryKey: [QUERY_KEYS.ADMIN_CUSTOMERS]});
-                toast.success(i18n.t("admin:orders.incoming", {number: row.number, name: row.first_name, total: formatPrice(Number(row.total), language)}), {
-                    action: {label: i18n.t("admin:orders.open"), onClick: () => navigate(ROUTES.ADMIN_ORDERS)},
-                });
-            })
-            .subscribe();
-        return () => void supabase.removeChannel(channel);
+        let isCancelled = false;
+        let channel: RealtimeChannel | null = null;
+        // Realtime is loaded with the panel's first render, not with the storefront.
+        void import("@/api/supabaseAdmin").then(({realtime}) => {
+            if (isCancelled) return;
+            channel = realtime
+                .channel("admin-orders")
+                .on("postgres_changes", {event: "INSERT", schema: "public", table: "orders"}, ({new: order}) => {
+                    const row = order as NewOrder;
+                    void queryClient.invalidateQueries({queryKey: [QUERY_KEYS.ADMIN_ORDERS]});
+                    void queryClient.invalidateQueries({queryKey: [QUERY_KEYS.ADMIN_CUSTOMERS]});
+                    toast.success(i18n.t("admin:orders.incoming", {number: row.number, name: row.first_name, total: formatPrice(Number(row.total), language)}), {
+                        action: {label: i18n.t("admin:orders.open"), onClick: () => navigate(ROUTES.ADMIN_ORDERS)},
+                    });
+                })
+                .subscribe();
+        });
+        return () => {
+            isCancelled = true;
+            const current = channel;
+            if (current) void import("@/api/supabaseAdmin").then(({realtime}) => realtime.removeChannel(current));
+        };
     }, [enabled, queryClient, navigate, language]);
 };

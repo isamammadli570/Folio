@@ -1,5 +1,6 @@
 import {Fragment, useEffect, useState, type CSSProperties} from "react";
 import {useTranslation} from "react-i18next";
+import {usePauseOffscreen} from "@/hooks/usePauseOffscreen";
 import {usePrefersReducedMotion} from "@/hooks/usePrefersReducedMotion";
 import {GoldDust} from "@/widgets/GoldDust";
 import {Reveal} from "@/widgets/Reveal";
@@ -20,6 +21,7 @@ export const QuoteBand = () => {
     const quotes = t("quotes.items", {returnObjects: true}) as Quote[];
     const [index, setIndex] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
+    const sectionRef = usePauseOffscreen<HTMLElement>();
     const quote = quotes[index % quotes.length];
 
     useEffect(() => {
@@ -30,6 +32,7 @@ export const QuoteBand = () => {
 
     return (
         <section
+            ref={sectionRef}
             className="relative isolate mt-24 overflow-hidden bg-[var(--night)]"
             onPointerEnter={() => setIsPaused(true)}
             onPointerLeave={() => setIsPaused(false)}

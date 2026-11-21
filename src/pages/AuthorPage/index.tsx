@@ -8,6 +8,7 @@ import {useGetAuthor, useGetAuthors} from "@/hooks/authors";
 import {useGetBooks} from "@/hooks/books";
 import {useLanguage} from "@/hooks/useLanguage";
 import {useDocumentTitle} from "@/hooks/useDocumentTitle";
+import {usePauseOffscreen} from "@/hooks/usePauseOffscreen";
 import {formatLifespan, surname} from "@/helpers/format";
 import {RouteErrorPage} from "@/router/RouteErrorPage";
 import {BookGrid, BookGridSkeleton} from "@/widgets/BookGrid";
@@ -42,6 +43,7 @@ export const AuthorPage = () => {
     const {items: books, isLoading: booksLoading} = useGetBooks({authorId, sort: "oldest"}, Boolean(author));
     const {items: everyone} = useGetAuthors();
     useDocumentTitle(author ? pick(author.name) : undefined);
+    const heroRef = usePauseOffscreen<HTMLElement>();
 
     const contemporaries = useMemo(() => {
         if (!author) return [];
@@ -59,7 +61,7 @@ export const AuthorPage = () => {
 
     return (
         <div className="page-enter">
-            <section className="relative isolate overflow-hidden border-b border-border bg-[radial-gradient(60%_70%_at_18%_45%,var(--hero-glow),transparent_70%),radial-gradient(50%_60%_at_55%_55%,var(--hero-glow-soft),transparent_70%)]">
+            <section ref={heroRef} className="relative isolate overflow-hidden border-b border-border bg-[radial-gradient(60%_70%_at_18%_45%,var(--hero-glow),transparent_70%),radial-gradient(50%_60%_at_55%_55%,var(--hero-glow-soft),transparent_70%)]">
                 <SceneArc src={author?.scene} letter={letter}/>
                 <Astrolabe className="-right-48 -top-48 w-[min(680px,95vw)] max-lg:opacity-60"/>
                 <GoldDust className="absolute bottom-0 right-0 h-3/5 w-3/5" count={16} seed={11}/>

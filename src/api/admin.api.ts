@@ -21,7 +21,7 @@ export const getMyRole = async (): Promise<"admin" | "customer" | null> => {
 
 /** Creates or replaces a book. A new one goes to the end of the catalogue. */
 export const saveBook = async (book: Book, isNew: boolean) => {
-    const {books} = await getCatalogue();
+    const {books} = await getCatalogue({fresh: true});
     const index = books.findIndex((item) => item.id === book.id);
     if (isNew && index !== -1) throw new Error("DUPLICATE_ID");
     const {error} = await supabase.from("books").upsert(toBookRow(book, index === -1 ? books.length : index));
@@ -37,7 +37,7 @@ export const deleteBook = async (bookId: string) => {
 };
 
 export const saveAuthor = async (author: Author, isNew: boolean) => {
-    const {authors} = await getCatalogue();
+    const {authors} = await getCatalogue({fresh: true});
     const index = authors.findIndex((item) => item.id === author.id);
     if (isNew && index !== -1) throw new Error("DUPLICATE_ID");
     const {error} = await supabase.from("authors").upsert(toAuthorRow(author, index === -1 ? authors.length : index));
@@ -75,9 +75,11 @@ export type MediaFolder = "covers" | "authors" | "scenes";
 export const uploadMedia = async (file: File, folder: MediaFolder, name: string): Promise<string> => {
     const extension = file.type === "image/png" ? "png" : file.type === "image/jpeg" ? "jpg" : "webp";
     const path = `${folder}/${name}-${Date.now().toString(36)}.${extension}`;
-    const {error} = await supabase.storage.from("media").upload(path, file, {contentType: file.type, cacheControl: "31536000"});
+    // Storage is loaded on first upload, so the storefront (which shares this module through useIsAdmin) never carries it.
+    const {storage} = await import("@/api/supabaseAdmin");
+    const {error} = await storage.from("media").upload(path, file, {contentType: file.type, cacheControl: "31536000"});
     if (error) throw error;
-    return supabase.storage.from("media").getPublicUrl(path).data.publicUrl;
+    return storage.from("media").getPublicUrl(path).data.publicUrl;
 };
 
 export type Customer = {

@@ -1,5 +1,5 @@
 import {unwrap} from "@/api/client";
-import {supabase} from "@/api/supabase";
+import {publicDb, supabase} from "@/api/supabase";
 
 export type Review = {id: string; bookId: string; userId: string; authorName: string; rating: number; body: string; createdAt: string};
 
@@ -26,7 +26,7 @@ export const getReviews = async (bookId: string): Promise<Review[]> => {
 
 /** Average and count per book, for the stars on cards; one small query for the whole catalogue. */
 export const getRatings = async (): Promise<Record<string, Rating>> => {
-    const response = await supabase.from("reviews").select("book_id, rating").returns<{book_id: string; rating: number}[]>();
+    const response = await publicDb.from("reviews").select("book_id, rating").returns<{book_id: string; rating: number}[]>();
     const sums = new Map<string, {total: number; count: number}>();
     unwrap(response).forEach(({book_id: bookId, rating}) => {
         const entry = sums.get(bookId) ?? {total: 0, count: 0};

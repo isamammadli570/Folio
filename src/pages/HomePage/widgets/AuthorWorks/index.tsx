@@ -42,7 +42,7 @@ export const AuthorWorks = ({author}: AuthorWorksProps) => {
                         : books.map((book, index) => (
                             <div key={book.id} className="animate-fade-up grid grid-cols-[84px_minmax(0,1fr)] items-center gap-4 max-sm:w-[82%] max-sm:shrink-0 max-sm:snap-start" style={{animationDelay: `${index * 90}ms`} as CSSProperties}>
                                 <Link to={buildRoute.book(book.id)} ref={(element) => { if (element) coversRef.current.set(book.id, element); }} className="block shadow-[0_12px_20px_-10px_rgb(var(--shade)/0.7)] transition-transform duration-300 hover:-translate-y-1">
-                                    <BookCover book={book} author={book.author}/>
+                                    <BookCover book={book} author={book.author} sizes="64px"/>
                                 </Link>
                                 <div className="min-w-0">
                                     <Link to={buildRoute.book(book.id)} className="line-clamp-2 font-serif text-[19px] font-medium leading-tight hover:text-accent-bright">{pick(book.title)}</Link>

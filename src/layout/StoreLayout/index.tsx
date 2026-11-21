@@ -1,14 +1,13 @@
-import {useState} from "react";
+import {Suspense, useState} from "react";
 import {Outlet, ScrollRestoration, useLocation} from "react-router";
 import {useTranslation} from "react-i18next";
 import {Header} from "@/layout/StoreLayout/Header";
+import {AccountMenu, CartDrawer, MenuSheet, SearchDialog} from "@/layout/StoreLayout/overlays";
 import {Footer} from "@/layout/StoreLayout/Footer";
-import {CartDrawer} from "@/layout/StoreLayout/CartDrawer";
-import {SearchDialog} from "@/layout/StoreLayout/SearchDialog";
-import {Sidebar} from "@/layout/StoreLayout/Sidebar";
 import {useHotkey} from "@/hooks/useHotkey";
 import {useShelfSync} from "@/hooks/useShelfSync";
-import {Sheet} from "@/widgets/Sheet";
+import {useCartDrawer} from "@/hooks/useCart";
+import {useOpenedOnce, usePreloadWhenIdle} from "@/lib/lazy";
 
 /** The storefront shell: header, the page, footer, and the overlays every page can open (menu, search, cart). */
 export const StoreLayout = () => {
@@ -22,6 +21,11 @@ export const StoreLayout = () => {
 
     useHotkey("k", () => setSearchOpen(true));
     useShelfSync();
+    usePreloadWhenIdle(AccountMenu, SearchDialog, CartDrawer, MenuSheet);
+    const cartOpen = useCartDrawer();
+    const hasMenu = useOpenedOnce(menuOpen);
+    const hasSearch = useOpenedOnce(searchOpen);
+    const hasCart = useOpenedOnce(cartOpen);
 
     return (
         <div className="flex min-h-dvh flex-col">
@@ -32,11 +36,11 @@ export const StoreLayout = () => {
             </main>
             <Footer/>
 
-            <Sheet open={menuOpen} onOpenChange={setMenuOpen} title={t("header.openMenu")} side="left">
-                <Sidebar onNavigate={() => setMenuOpen(false)} onOpenSearch={() => { setMenuOpen(false); setSearchOpen(true); }}/>
-            </Sheet>
-            <SearchDialog open={searchOpen} onOpenChange={setSearchOpen}/>
-            <CartDrawer/>
+            <Suspense>
+                {hasMenu && <MenuSheet open={menuOpen} onOpenChange={setMenuOpen} onOpenSearch={() => { setMenuOpen(false); setSearchOpen(true); }}/>}
+                {hasSearch && <SearchDialog open={searchOpen} onOpenChange={setSearchOpen}/>}
+                {hasCart && <CartDrawer/>}
+            </Suspense>
             <ScrollRestoration/>
         </div>
     );

@@ -8,6 +8,12 @@ import {CoverFrame, Fleuron} from "@/widgets/BookCover/CoverFrame";
 import {OrnamentIcon} from "@/widgets/BookCover/ornaments";
 import {cn} from "@/lib/utils";
 
+/** Shipped paintings have a 260px copy beside the 480px original (scripts/generate-thumbs.mjs); uploads have only one size. */
+const coverSrcSet = (src: string) => (src.startsWith("/covers/") ? `${src.replace("/covers/", "/covers/thumbs/")} 260w, ${src} 480w` : undefined);
+
+/** How wide the painting's plate shows in a grid card (72% of the cover): four columns on desktop, two on phones. */
+const GRID_SIZES = "(min-width: 1280px) 210px, (min-width: 768px) 22vw, 34vw";
+
 /** Long titles and long words are set smaller, so no word has to break across lines. */
 const titleLength = (title: string): "long" | "longer" | undefined => {
     const longestWord = Math.max(...title.split(/\s+/).map((word) => word.length));
@@ -22,6 +28,8 @@ type BookCoverProps = {
     className?: string;
     /** Above the fold: load the painting eagerly. */
     priority?: boolean;
+    /** The plate's displayed width, as an `<img sizes>` value; defaults to a grid card. */
+    sizes?: string;
 };
 
 /**
@@ -30,7 +38,7 @@ type BookCoverProps = {
  * in an arched window; the others carry their emblem in a gilt roundel. The lettering is drawn, not part of an image,
  * so it stays sharp at any size and follows the language.
  */
-export const BookCover = memo(({book, author, className, priority = false}: BookCoverProps) => {
+export const BookCover = memo(({book, author, className, priority = false, sizes = GRID_SIZES}: BookCoverProps) => {
     const {t} = useTranslation();
     const {language, pick} = useLanguage();
     const title = pick(book.title);
@@ -44,7 +52,7 @@ export const BookCover = memo(({book, author, className, priority = false}: Book
                 {art ? (
                     <>
                         <span className="book-cover__window">
-                            <img src={art} alt="" loading={priority ? "eager" : "lazy"} decoding="async" draggable={false}/>
+                            <img src={art} srcSet={coverSrcSet(art)} sizes={sizes} alt="" loading={priority ? "eager" : "lazy"} fetchPriority={priority ? "high" : "auto"} decoding="async" draggable={false}/>
                         </span>
                         <span className="book-cover__title foil" data-length={titleLength(title)}>{title}</span>
                     </>
