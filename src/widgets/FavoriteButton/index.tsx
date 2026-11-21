@@ -43,7 +43,7 @@ export const FavoriteButton = ({bookId, className, variant = "overlay"}: Favorit
             className={cn(
                 "flex cursor-pointer items-center justify-center rounded-full outline-none transition-[background-color,border-color,color,transform] duration-200 focus-visible:ring-2 focus-visible:ring-ring/60 active:scale-90",
                 variant === "overlay"
-                    ? "size-9 bg-background/70 text-foreground backdrop-blur-sm hover:bg-background/90"
+                    ? "size-9 bg-background/80 text-foreground hover:bg-background/95"
                     : "size-12 border border-border-strong hover:border-accent hover:text-accent-bright",
                 active && "text-accent-bright",
                 className,

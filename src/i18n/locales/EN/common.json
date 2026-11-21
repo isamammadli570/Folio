@@ -21,6 +21,7 @@
     "bookCount_one": "{{count}} book",
     "bookCount_other": "{{count}} books",
     "header": {
+        "adminPanel": "Admin panel",
         "search": "Search",
         "openMenu": "Open menu",
         "cart": "Cart",

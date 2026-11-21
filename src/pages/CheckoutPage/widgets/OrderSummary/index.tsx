@@ -27,7 +27,7 @@ export const OrderSummary = ({rows, totals, promoCode, className}: OrderSummaryP
                 {rows.map(({book, quantity}) => (
                     <li key={book.id} className="grid grid-cols-[44px_minmax(0,1fr)_auto] items-center gap-4 py-3.5">
                         <div className="relative">
-                            <BookCover book={book} author={book.author}/>
+                            <BookCover book={book} author={book.author} sizes="64px"/>
                             <span className="tabular absolute -right-2 -top-2 flex size-5 items-center justify-center rounded-full bg-accent text-[10.5px] font-semibold text-accent-ink">{quantity}</span>
                         </div>
                         <div className="min-w-0">
@@ -61,7 +61,7 @@ export const OrderSummaryBar = ({rows, totals, promoCode, className}: OrderSumma
         <details className={cn("group border border-border bg-surface", className)}>
             <summary className="flex cursor-pointer list-none items-center gap-3 px-4 py-3.5 outline-none focus-visible:ring-2 focus-visible:ring-ring/40 [&::-webkit-details-marker]:hidden">
                 <span className="flex -space-x-3">
-                    {rows.slice(0, 3).map(({book}) => <span key={book.id} className="w-7 shadow-[0_4px_10px_-4px_rgb(var(--shade)/0.7)]"><BookCover book={book} author={book.author}/></span>)}
+                    {rows.slice(0, 3).map(({book}) => <span key={book.id} className="w-7 shadow-[0_4px_10px_-4px_rgb(var(--shade)/0.7)]"><BookCover book={book} author={book.author} sizes="64px"/></span>)}
                 </span>
                 <span className="min-w-0 flex-1">
                     <span className="block font-serif text-[17px] leading-tight">{t("checkout.summary")}</span>

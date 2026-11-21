@@ -36,12 +36,12 @@ export const StickyBuyBar = ({book, anchorRef, onAdd}: StickyBuyBarProps) => {
             aria-hidden={!isShown}
             inert={!isShown}
             className={cn(
-                "fixed inset-x-0 bottom-0 z-30 border-t border-border-strong bg-background/85 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl transition-[translate,opacity] duration-500 ease-[var(--ease-out)]",
+                "fixed inset-x-0 bottom-0 z-30 border-t border-border-strong bg-background/90 pb-[env(safe-area-inset-bottom)] backdrop-blur-md transition-[translate,opacity] duration-500 ease-[var(--ease-out)]",
                 isShown ? "translate-y-0 opacity-100" : "translate-y-full opacity-0",
             )}
         >
             <div className="px-gutter mx-auto flex max-w-[1240px] items-center gap-4 py-3">
-                <div className="sticky-cover w-9 shrink-0"><BookCover book={book} author={book.author}/></div>
+                <div className="sticky-cover w-9 shrink-0"><BookCover book={book} author={book.author} sizes="64px"/></div>
                 <div className="min-w-0 flex-1">
                     <p className="truncate font-serif text-[17px] leading-tight">{pick(book.title)}</p>
                     <p className="truncate text-xs text-muted-foreground">{pick(book.author.name)}</p>

@@ -71,7 +71,7 @@ export const AdminBooksPage = () => {
                                         onPointerEnter={() => preloadRoute(buildRoute.adminBook(book.id))}
                                         className="grid grid-cols-[2.75rem_minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1 px-5 py-2.5 outline-none transition-colors hover:bg-accent-soft/40 focus-visible:bg-accent-soft/40 md:grid-cols-[3rem_minmax(0,1fr)_9rem_6rem_5rem_6rem] md:gap-4"
                                     >
-                                        <span className="row-span-2 md:row-span-1"><BookCover book={book} author={book.author}/></span>
+                                        <span className="row-span-2 md:row-span-1"><BookCover book={book} author={book.author} sizes="64px"/></span>
                                         <span className="min-w-0">
                                             <span className="block truncate font-serif text-[17px] leading-tight">{pick(book.title)}</span>
                                             <span className="block truncate text-xs text-muted-foreground">{pick(book.author.name)} · {book.year < 0 ? `${-book.year} BC` : book.year}</span>

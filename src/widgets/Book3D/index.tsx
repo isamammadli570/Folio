@@ -26,7 +26,7 @@ export const Book3D = forwardRef<HTMLDivElement, Book3DProps>(({book, author, cl
         <div className={cn("book3d", className)} style={{"--depth": `${depth}cqi`, "--cloth": CATEGORY_COLOR[book.category]} as CSSProperties}>
             <div className="book3d__body">
                 <div ref={ref} className="book3d__front">
-                    <BookCover book={book} author={author} priority/>
+                    <BookCover book={book} author={author} priority sizes="(min-width: 768px) 280px, 46vw"/>
                 </div>
                 <div aria-hidden className="book3d__spine">
                     <span className="book3d__band"/>

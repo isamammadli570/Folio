@@ -1,4 +1,4 @@
-import {AuthError} from "@supabase/supabase-js";
+import {AuthError} from "@supabase/auth-js";
 import {ApiError} from "@/api/client";
 import {supabase} from "@/api/supabase";
 import {ROUTES} from "@/constants/routes";

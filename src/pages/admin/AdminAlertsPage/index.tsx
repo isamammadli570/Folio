@@ -50,7 +50,7 @@ export const AdminAlertsPage = () => {
                         return (
                             <article key={bookId} className="rounded-xl border border-border bg-surface p-5">
                                 <div className="flex flex-wrap items-center gap-4">
-                                    {book && <span className="w-11 shrink-0"><BookCover book={book} author={book.author}/></span>}
+                                    {book && <span className="w-11 shrink-0"><BookCover book={book} author={book.author} sizes="64px"/></span>}
                                     <div className="min-w-0 flex-1">
                                         <Link to={buildRoute.adminBook(bookId)} className="block truncate font-serif text-xl hover:text-accent-bright">{book ? pick(book.title) : bookId}</Link>
                                         <p className="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">

@@ -1,5 +1,5 @@
 import {describe, expect, it} from "vitest";
-import type {User} from "@supabase/supabase-js";
+import type {User} from "@supabase/auth-js";
 import {userIdentity} from "@/helpers/user";
 
 const user = (meta: Record<string, unknown>, email = "isa@example.com") => ({email, user_metadata: meta}) as unknown as User;

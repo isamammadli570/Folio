@@ -34,7 +34,7 @@ export const RecentlyViewed = ({exclude, className}: RecentlyViewedProps) => {
                     <li key={book.id} className="w-28 shrink-0 snap-start sm:w-32">
                         <Link to={buildRoute.book(book.id)} onPointerEnter={() => preloadRoute(buildRoute.book(book.id))} className="group block outline-none">
                             <span className="block shadow-[0_12px_20px_-10px_rgb(var(--shade)/0.7)] transition-transform duration-300 group-hover:-translate-y-1 group-focus-visible:ring-2 group-focus-visible:ring-ring/60">
-                                <BookCover book={book} author={book.author}/>
+                                <BookCover book={book} author={book.author} sizes="64px"/>
                             </span>
                             <span className="mt-2.5 block truncate font-serif text-[15px] group-hover:text-accent-bright">{pick(book.title)}</span>
                             <span className="block truncate text-xs text-muted-foreground">{pick(book.author.name)}</span>

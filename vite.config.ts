@@ -5,6 +5,8 @@ import * as path from "node:path";
 
 // https://vite.dev/config/
 export default defineConfig({
+    // Names this build; data the browser saved under another build's name is never read back (see api/client).
+    define: {__BUILD_ID__: JSON.stringify(Date.now().toString(36))},
     plugins: [react(), tailwindcss()],
     resolve: {
         alias: {"@": path.resolve(__dirname, "./src")},

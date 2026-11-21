@@ -4,7 +4,8 @@ import type {AuthorSummary} from "@/api/authors.api";
 import {buildRoute} from "@/constants/routes";
 import {useLanguage} from "@/hooks/useLanguage";
 import {surname} from "@/helpers/format";
-import {Bust} from "@/widgets/Bust";
+import {usePauseOffscreen} from "@/hooks/usePauseOffscreen";
+import {Bust, bustThumb} from "@/widgets/Bust";
 import {Medallion} from "@/widgets/Medallion";
 import {cn} from "@/lib/utils";
 
@@ -27,7 +28,7 @@ const Row = ({authors, reverse = false, outlined = false}: RowProps) => {
         const content = (
             <>
                 <span className="flex size-12 shrink-0 items-end justify-center">
-                    {author.portrait ? <Bust src={author.portrait} alt="" className="h-12 w-auto opacity-80 transition-opacity duration-300 group-hover/name:opacity-100"/> : <Medallion letter={surname(name)[0]} className="w-9 opacity-70"/>}
+                    {author.portrait ? <Bust src={bustThumb(author.portrait)} alt="" className="h-12 w-auto opacity-80 transition-opacity duration-300 group-hover/name:opacity-100"/> : <Medallion letter={surname(name)[0]} className="w-9 opacity-70"/>}
                 </span>
                 <span
                     className={cn(
@@ -64,11 +65,12 @@ const Row = ({authors, reverse = false, outlined = false}: RowProps) => {
  */
 export const AuthorMarquee = ({authors}: AuthorMarqueeProps) => {
     const {t} = useTranslation();
+    const sectionRef = usePauseOffscreen<HTMLElement>();
     if (authors.length === 0) return <div className="h-[180px] border-y border-border bg-surface"/>;
 
     const half = Math.ceil(authors.length / 2);
     return (
-        <section aria-label={t("nav.authors")} className="relative border-y border-border bg-surface py-6">
+        <section ref={sectionRef} aria-label={t("nav.authors")} className="relative border-y border-border bg-surface py-6">
             <Row authors={authors.slice(0, half)}/>
             <div aria-hidden className="mx-auto my-2 h-px max-w-[1240px] bg-gradient-to-r from-transparent via-border-strong to-transparent"/>
             <Row authors={authors.slice(half)} reverse outlined/>

@@ -1,6 +1,7 @@
 import {forwardRef, useMemo} from "react";
 import {marbleTexture} from "@/lib/marble";
 import {cn} from "@/lib/utils";
+import {bustMedium} from "@/widgets/Bust";
 
 type MedallionProps = {
     /** The carved letter, usually the first letter of the surname. */
@@ -31,7 +32,7 @@ export const Medallion = forwardRef<HTMLDivElement, MedallionProps>(({letter, po
             </div>
             {portrait && (
                 <div className="medallion__bust">
-                    <img src={portrait} alt={alt ?? ""} loading={size === "lg" ? "eager" : "lazy"} draggable={false}/>
+                    <img src={size === "lg" ? portrait : bustMedium(portrait)} alt={alt ?? ""} loading={size === "lg" ? "eager" : "lazy"} decoding="async" draggable={false}/>
                 </div>
             )}
         </div>

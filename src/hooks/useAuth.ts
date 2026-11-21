@@ -1,5 +1,5 @@
 import {useSyncExternalStore} from "react";
-import type {Session, User} from "@supabase/supabase-js";
+import type {Session, User} from "@supabase/auth-js";
 import {supabase} from "@/api/supabase";
 
 type AuthState = {session: Session | null; user: User | null; isReady: boolean};

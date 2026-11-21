@@ -1,6 +1,7 @@
 import type {BookWithAuthor} from "@/api/types";
 import {Skeleton} from "@/components/ui/skeleton";
 import {BookCard} from "@/widgets/BookCard";
+import {CATALOG_PAGE_SIZE} from "@/constants/other";
 import {cn} from "@/lib/utils";
 
 const GRID = "grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-7 sm:gap-y-14 md:grid-cols-3 xl:grid-cols-4";
@@ -13,7 +14,7 @@ type BookGridProps = {
 /** Books on a responsive shelf, entering one after another. */
 export const BookGrid = ({books, className}: BookGridProps) => (
     <div className={cn(GRID, "stagger", className)}>
-        {books.map((book, index) => <BookCard key={book.id} book={book} index={index}/>)}
+        {books.map((book, index) => <BookCard key={book.id} book={book} index={index % CATALOG_PAGE_SIZE}/>)}
     </div>
 );
 

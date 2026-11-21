@@ -1,7 +1,9 @@
-import {useState, type ReactNode} from "react";
+import type {ReactNode} from "react";
 import {MutationCache, QueryCache, QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {toast} from "sonner";
 import i18n from "@/i18n";
+import {onCatalogueRefresh} from "@/api/client";
+import {QUERY_KEYS} from "@/constants/other";
 
 type CacheMeta = {suppressGlobalError?: boolean; onError?: (error: unknown) => void} | undefined;
 
@@ -36,7 +38,15 @@ const createQueryClient = (): QueryClient =>
         },
     });
 
+/** One client for the app, created at start so data can be requested before React renders (see main.tsx). */
+export const queryClient = createQueryClient();
+
+// A returning visitor's pages were drawn from the saved catalogue; when the fresh one lands, every catalogue read re-runs.
+const CATALOGUE_KEYS = [QUERY_KEYS.BOOKS, QUERY_KEYS.BOOK, QUERY_KEYS.AUTHORS, QUERY_KEYS.AUTHOR, QUERY_KEYS.CATEGORY_COUNTS];
+onCatalogueRefresh(() => {
+    for (const key of CATALOGUE_KEYS) void queryClient.invalidateQueries({queryKey: [key]});
+});
+
 export default function QueryProvider({children}: {children: ReactNode}) {
-    const [queryClient] = useState(createQueryClient);
     return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
 }

@@ -56,7 +56,7 @@ export const CartDrawer = () => {
                         {rows.map(({book, quantity}) => (
                             <li key={book.id} className="animate-fade-up grid grid-cols-[56px_minmax(0,1fr)_auto] items-center gap-4 border-b border-border py-4">
                                 <Link to={buildRoute.book(book.id)} onClick={close} className="block shadow-[0_12px_20px_-10px_rgb(var(--shade)/0.7)]">
-                                    <BookCover book={book} author={book.author}/>
+                                    <BookCover book={book} author={book.author} sizes="64px"/>
                                 </Link>
                                 <div className="min-w-0">
                                     <Link to={buildRoute.book(book.id)} onClick={close} className="line-clamp-2 font-serif text-[17px] font-medium leading-tight hover:text-accent-bright">{pick(book.title)}</Link>

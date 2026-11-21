@@ -23,6 +23,7 @@
     "bookCount_many": "{{count}} книг",
     "bookCount_other": "{{count}} книги",
     "header": {
+        "adminPanel": "Панель управления",
         "search": "Поиск",
         "openMenu": "Открыть меню",
         "cart": "Корзина",

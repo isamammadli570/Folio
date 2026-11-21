@@ -86,7 +86,7 @@ export const AdminDashboardPage = () => {
                                     {lowStock.slice(0, 6).map((book) => (
                                         <li key={book.id}>
                                             <Link to={buildRoute.adminBook(book.id)} className="flex items-center gap-3 px-5 py-2.5 transition-colors hover:bg-accent-soft/50">
-                                                <span className="w-8 shrink-0"><BookCover book={book} author={book.author}/></span>
+                                                <span className="w-8 shrink-0"><BookCover book={book} author={book.author} sizes="64px"/></span>
                                                 <span className="min-w-0 flex-1 truncate font-serif text-[16px]">{pick(book.title)}</span>
                                                 <span className={book.stock === 0 ? "text-xs font-medium text-danger" : "tabular text-xs text-muted-foreground"}>{book.stock === 0 ? t("books.outOfStock") : t("books.left", {count: book.stock})}</span>
                                             </Link>

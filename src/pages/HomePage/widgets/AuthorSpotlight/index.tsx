@@ -7,6 +7,7 @@ import {Skeleton} from "@/components/ui/skeleton";
 import {buildRoute} from "@/constants/routes";
 import {SPOTLIGHT_INTERVAL_MS} from "@/constants/other";
 import {useLanguage} from "@/hooks/useLanguage";
+import {usePauseOffscreen} from "@/hooks/usePauseOffscreen";
 import {usePrefersReducedMotion} from "@/hooks/usePrefersReducedMotion";
 import {formatLifespan, surname, upper} from "@/helpers/format";
 import {Astrolabe} from "@/widgets/Astrolabe";
@@ -14,6 +15,7 @@ import {GoldDust} from "@/widgets/GoldDust";
 import {SceneArc} from "@/widgets/SceneArc";
 import {Bust, bustThumb} from "@/widgets/Bust";
 import {Medallion} from "@/widgets/Medallion";
+import {whenIdle} from "@/lib/lazy";
 import {cn} from "@/lib/utils";
 
 /** One decode per picture for the whole visit, so going back to an author is instant. */
@@ -53,6 +55,7 @@ export const AuthorSpotlight = ({authors, isLoading, index, onIndexChange}: Auth
     const [isPaused, setIsPaused] = useState(false);
     const coinRef = useRef<HTMLDivElement>(null);
     const stripRef = useRef<HTMLDivElement>(null);
+    const sectionRef = usePauseOffscreen<HTMLElement>();
     const author = authors[shown];
 
     // The bust drifts out sideways and blurs while the text fades; halfway the next author is swapped in and everything
@@ -71,14 +74,27 @@ export const AuthorSpotlight = ({authors, isLoading, index, onIndexChange}: Auth
         return () => { isCancelled = true; };
     }, [authors, index, reducedMotion, shown]);
 
-    // Warm the neighbours while this author is on show, so the next swap rarely has to wait at all.
+    // Warm the neighbours while this author is on show, so the next swap rarely has to wait at all. Only once this
+    // author's own pictures are in and the page is idle: on the first visit they must not compete with the hero image.
     useEffect(() => {
         if (authors.length < 2) return;
-        for (const step of [1, -1]) {
-            const neighbour = authors[(shown + step + authors.length) % authors.length];
-            void warm(neighbour.scene);
-            void warm(neighbour.portrait);
-        }
+        let isCancelled = false;
+        let cancelIdle = () => undefined as void;
+        const current = authors[shown];
+        void Promise.all([warm(current?.portrait), warm(current?.scene)]).then(() => {
+            if (isCancelled) return;
+            cancelIdle = whenIdle(() => {
+                for (const step of [1, -1]) {
+                    const neighbour = authors[(shown + step + authors.length) % authors.length];
+                    void warm(neighbour.portrait);
+                    void warm(neighbour.scene);
+                }
+            });
+        });
+        return () => {
+            isCancelled = true;
+            cancelIdle();
+        };
     }, [authors, shown]);
 
     // Keep the active thumbnail in view by scrolling the strip itself, never the page.
@@ -113,6 +129,7 @@ export const AuthorSpotlight = ({authors, isLoading, index, onIndexChange}: Auth
 
     return (
         <section
+            ref={sectionRef}
             aria-roledescription="carousel"
             aria-label={t("spotlight.label")}
             onKeyDown={onKeyDown}
@@ -151,11 +168,19 @@ export const AuthorSpotlight = ({authors, isLoading, index, onIndexChange}: Auth
                             <textPath href="#spotlight-ring">{author ? `${upper(name, language)} · ${formatLifespan(author.born, author.died, t)} · ${upper(pick(author.movement), language)} · ${upper(t("common:brand.name"), language)} ·` : ""}</textPath>
                         </text>
                     </svg>
-                    <div ref={coinRef} className={cn("absolute inset-0 drop-shadow-[0_24px_40px_rgb(var(--shade)/0.55)] transition-[transform,opacity,filter,translate] duration-500 ease-[var(--ease-out)] [transform:rotateY(var(--ry,0deg))_rotateX(var(--rx,0deg))]", isLeaving && "-translate-x-8 opacity-0 blur-md")}>
+                    <div ref={coinRef} className={cn("absolute inset-0 transition-[transform,opacity,filter,translate] duration-500 ease-[var(--ease-out)] [transform:rotateY(var(--ry,0deg))_rotateX(var(--rx,0deg))]", isLeaving && "-translate-x-8 opacity-0 blur-md")}>
                         {!author ? <Skeleton className="mx-auto mt-[10%] aspect-square w-[80%] rounded-full"/> : author.portrait ? (
-                            <Bust key={author.portrait} src={author.portrait} alt={name} priority className="animate-[hover-float_9s_ease-in-out_infinite] absolute inset-x-0 bottom-0 mx-auto h-full w-full"/>
+                            // The float moves a layer that already holds the shadowed bust, so the shadow is drawn once
+                            // instead of being recomputed on every frame of the endless float.
+                            <div key={author.portrait} className="absolute inset-0 animate-[hover-float_9s_ease-in-out_infinite] will-change-transform">
+                                <div className="absolute inset-0 drop-shadow-[0_24px_40px_rgb(var(--shade)/0.55)]">
+                                    <Bust src={author.portrait} alt={name} priority className="absolute inset-x-0 bottom-0 mx-auto h-full w-full"/>
+                                </div>
+                            </div>
                         ) : (
-                            <Medallion size="lg" letter={letter} alt={name} className="mx-auto mt-[10%] w-[80%]"/>
+                            <div className="absolute inset-0 drop-shadow-[0_24px_40px_rgb(var(--shade)/0.55)]">
+                                <Medallion size="lg" letter={letter} alt={name} className="mx-auto mt-[10%] w-[80%]"/>
+                            </div>
                         )}
                     </div>
                 </div>
